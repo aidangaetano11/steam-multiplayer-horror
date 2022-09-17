@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - OfficeKey
+  - ItemTest
+  - GameManager
   layers:
   - Default
   - TransparentFX
@@ -11,13 +14,13 @@ TagManager:
   - 
   - Water
   - UI
-  - Player
   - Ground
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Unwalkable
+  - Player
+  - PostProcessing
+  - Monster
+  - Interactable
+  - NightVision
   - 
   - 
   - 
