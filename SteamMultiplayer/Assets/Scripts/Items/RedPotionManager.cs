@@ -11,12 +11,13 @@ public class RedPotionManager : NetworkBehaviour
         inventoryManager = InventoryManager.FindObjectOfType<InventoryManager>();      //finds itemmanager script 
     }
 
-    [Command(requiresAuthority = false)]
-    public void CmdPickupRedPotion()
-    {
-        inventoryManager.Inventory.Add(redPotionPrefab);   //adds picked up item to inventory 
-        inventoryManager.pickedUpItems++;     //adds count to inventory manager script
-        gameObject.SetActive(false);
-        NetworkServer.UnSpawn(gameObject);     //unspawns it from server
-    }
+    //[Command(requiresAuthority = false)]
+    //public void CmdPickupRedPotion(Transform handPos)
+    //{
+    //    inventoryManager.Inventory.Add(redPotionPrefab);   //adds picked up item to inventory 
+    //    gameObject.transform.position = handPos.position;
+    //    //inventoryManager.pickedUpItems++;     //adds count to inventory manager script
+    //    //gameObject.SetActive(false);
+    //    //NetworkServer.UnSpawn(gameObject);     //unspawns it from server
+    //}
 }

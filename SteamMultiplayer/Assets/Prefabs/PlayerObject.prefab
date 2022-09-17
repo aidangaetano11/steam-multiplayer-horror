@@ -415,6 +415,7 @@ MonoBehaviour:
   itemSpawning: {fileID: 0}
   dropPoint: {fileID: 9039592142314951447}
   dropForce: 5
+  dropUpForce: 5
   hand: {fileID: 330198849153914473}
   currentItemInHand: {fileID: 0}
   currentPrefab: {fileID: 0}

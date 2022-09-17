@@ -26,18 +26,12 @@ public class Interactor : NetworkBehaviour
     [Header("Other Variables")]
     public Transform dropPoint;
     public float dropForce;
+    public float dropUpForce;
 
     [Header("Hand Variables")]
     public Transform hand;
     public GameObject currentItemInHand;
-    public GameObject currentPrefab;
 
-
-    [Header("Real Item Prefabs")]
-    public GameObject redPotion;
-
-    [Header("Hand Item Prefabs")]
-    public GameObject redPotionHand;
 
     public void Start()
     {
@@ -81,20 +75,7 @@ public class Interactor : NetworkBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.F)) 
                     {
-                        hit.collider.GetComponent<RedPotionManager>().CmdPickupRedPotion();  //adds red potion to inventory and calls function in prefab script
-                        if (isClient)
-                        {
-                            Debug.Log("CLIENT");
-                            currentItemInHand = Instantiate(redPotionHand, hand);
-                            currentPrefab = redPotion;
-                        }
-                        else 
-                        {
-                            Debug.Log("HOST?");
-                            currentItemInHand = Instantiate(redPotionHand, hand);
-                            currentPrefab = redPotion;
-                        }
-                        
+                        currentItemInHand = hit.collider.gameObject;                      
                     }
                 }
 
@@ -128,28 +109,31 @@ public class Interactor : NetworkBehaviour
 
     public void ItemInHand(GameObject itemToHold) 
     {
-        bool itemIsInHand = false;
         if (itemToHold != null) 
         {
             itemToHold.transform.position = hand.position;
-            itemIsInHand = true;
-        }
+            Collider col = itemToHold.GetComponent<Collider>();
+            Rigidbody rb = itemToHold.GetComponent<Rigidbody>();
+            col.enabled = false;
+            rb.isKinematic = true;
 
-        if (itemIsInHand) 
-        {
-            if (hasAuthority) 
+            if (hasAuthority)
             {
-                if (Input.GetKeyDown(KeyCode.G))
+                if (Input.GetKeyDown(KeyCode.G))    //Drop item in hand
                 {
                     Debug.Log("Dropped item: " + currentItemInHand.name);
-                    Destroy(currentItemInHand);
-                    itemSpawning.SpawnDroppedPrefab(currentPrefab, dropPoint.position, dropPoint, dropForce);
+                    DropItem(rb, col);
                     currentItemInHand = null;
-                    currentPrefab = null;
-                    itemIsInHand = false;
                 }
-            }            
+            }
         }
+    }
+
+    public void DropItem(Rigidbody rb, Collider col) 
+    {
+        rb.isKinematic = false;
+        rb.AddForce(dropPoint.forward * dropForce + Vector3.up * dropUpForce, ForceMode.Impulse);
+        col.enabled = true;
     }
 
 
