@@ -76,7 +76,7 @@ public class Interactor : NetworkBehaviour
                     if (Input.GetKeyDown(KeyCode.F)) 
                     {
                         currentItemInHand = hit.collider.gameObject;
-                        if (isClient) { CmdChangeItemInHand(hit); }                                                                            
+                        CmdChangeItemInHand(hit);                                                                         
                     }
                 }
 
