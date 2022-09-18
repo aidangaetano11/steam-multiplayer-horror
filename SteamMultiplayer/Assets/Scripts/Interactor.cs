@@ -75,7 +75,8 @@ public class Interactor : NetworkBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.F)) 
                     {
-                        currentItemInHand = hit.collider.gameObject;                      
+                        currentItemInHand = hit.collider.gameObject;
+                        if (isClient) { CmdChangeItemInHand(hit); }                                                                            
                     }
                 }
 
@@ -106,6 +107,13 @@ public class Interactor : NetworkBehaviour
 
         CmdItemInHand(currentItemInHand);
     }
+
+    [Command (requiresAuthority = false)]
+    public void CmdChangeItemInHand(RaycastHit hit) 
+    {
+        currentItemInHand = hit.collider.gameObject;
+    }
+
 
     [Command (requiresAuthority = false)]
     public void CmdItemInHand(GameObject itemToHold) 
