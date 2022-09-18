@@ -398,8 +398,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fee85eafabe6c8249bbef4cfe372f586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
+  syncMode: 1
+  syncInterval: 0
   interactRange: 2
   interactMask:
     serializedVersion: 2
@@ -418,9 +418,6 @@ MonoBehaviour:
   dropUpForce: 5
   hand: {fileID: 330198849153914473}
   currentItemInHand: {fileID: 0}
-  currentPrefab: {fileID: 0}
-  redPotion: {fileID: 4253060336477021176, guid: d87fc64e32effe64aa126461240ccbdd, type: 3}
-  redPotionHand: {fileID: 3034473432476154886, guid: 619021c019e6c7f4bb64e2b96cbeae0a, type: 3}
 --- !u!1 &1063648044466518101
 GameObject:
   m_ObjectHideFlags: 0

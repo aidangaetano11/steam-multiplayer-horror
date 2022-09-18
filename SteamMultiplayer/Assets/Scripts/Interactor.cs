@@ -30,8 +30,8 @@ public class Interactor : NetworkBehaviour
 
     [Header("Hand Variables")]
     public Transform hand;
-
-    [SyncVar]
+    
+    [SyncVar] 
     public GameObject currentItemInHand;
 
 
