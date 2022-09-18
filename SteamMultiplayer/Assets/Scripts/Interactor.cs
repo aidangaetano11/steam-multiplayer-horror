@@ -104,10 +104,11 @@ public class Interactor : NetworkBehaviour
             }
         }
 
-        ItemInHand(currentItemInHand);
+        CmdItemInHand(currentItemInHand);
     }
 
-    public void ItemInHand(GameObject itemToHold) 
+    [Command (requiresAuthority = false)]
+    public void CmdItemInHand(GameObject itemToHold) 
     {
         if (itemToHold != null) 
         {
