@@ -31,7 +31,6 @@ public class Interactor : NetworkBehaviour
     [Header("Hand Variables")]
     public Transform hand;
     
-    [SyncVar] 
     public GameObject currentItemInHand;
 
 
@@ -78,7 +77,7 @@ public class Interactor : NetworkBehaviour
                     if (Input.GetKeyDown(KeyCode.F)) 
                     {
                         currentItemInHand = hit.collider.gameObject;
-                        CmdChangeItemInHand(hit);                                                                         
+                        //CmdChangeItemInHand(hit);                                                                         
                     }
                 }
 
