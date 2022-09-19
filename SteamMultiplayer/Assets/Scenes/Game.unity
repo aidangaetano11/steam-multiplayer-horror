@@ -21275,7 +21275,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 230274429}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.110001, y: 0.25, z: 10.549999}
+  m_LocalPosition: {x: -6.7, y: 0.25, z: 10.549999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -70040,111 +70040,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  maxSpawnedItems: 3
+  maxSpawnedItems: 0
   ItemSpawnPoints:
-  - {fileID: 1329294188}
-  - {fileID: 64620219}
-  - {fileID: 2014422564}
-  - {fileID: 1117694037}
-  - {fileID: 40049949}
-  - {fileID: 636867556}
-  - {fileID: 20169354}
-  - {fileID: 137294156}
-  - {fileID: 1122810795}
-  - {fileID: 2017168192}
-  - {fileID: 274935522}
-  - {fileID: 828336871}
-  - {fileID: 1627083457}
-  - {fileID: 1036697414}
-  - {fileID: 388417396}
-  - {fileID: 33161721}
-  - {fileID: 77974639}
-  - {fileID: 1219222569}
-  - {fileID: 267598026}
-  - {fileID: 621206838}
-  - {fileID: 1016990617}
-  - {fileID: 84427510}
-  - {fileID: 1328332403}
-  - {fileID: 738631919}
-  - {fileID: 1089557498}
-  - {fileID: 442446559}
-  - {fileID: 1874982705}
-  - {fileID: 550864596}
-  - {fileID: 1682425467}
-  - {fileID: 1639090998}
-  - {fileID: 1514394284}
-  - {fileID: 1996382681}
-  - {fileID: 1645702281}
-  - {fileID: 636566545}
-  - {fileID: 533436658}
-  - {fileID: 1020227028}
-  - {fileID: 1757915901}
-  - {fileID: 449756124}
-  - {fileID: 1653089775}
-  - {fileID: 950898226}
-  - {fileID: 1215779224}
-  - {fileID: 526187609}
-  - {fileID: 1713867530}
-  - {fileID: 851991637}
-  - {fileID: 208364279}
-  - {fileID: 298654189}
-  - {fileID: 879495935}
-  - {fileID: 1414351374}
-  - {fileID: 2079116002}
-  - {fileID: 1653141919}
-  - {fileID: 819598178}
-  - {fileID: 520487185}
-  - {fileID: 1244297973}
-  - {fileID: 1812293305}
-  - {fileID: 18138585}
-  - {fileID: 1862644733}
-  - {fileID: 1365116863}
-  - {fileID: 1824536478}
-  - {fileID: 106763345}
-  - {fileID: 1488767795}
-  - {fileID: 672314918}
-  - {fileID: 1624327379}
-  - {fileID: 1650957087}
-  - {fileID: 154086948}
-  - {fileID: 1906779529}
-  - {fileID: 2093997928}
-  - {fileID: 878444320}
-  - {fileID: 23012843}
-  - {fileID: 946253943}
-  - {fileID: 164115082}
-  - {fileID: 1999127350}
-  - {fileID: 487887507}
-  - {fileID: 2071551179}
-  - {fileID: 1125622073}
-  - {fileID: 2117241986}
-  - {fileID: 655897198}
-  - {fileID: 1695267764}
-  - {fileID: 1301152470}
-  - {fileID: 305756487}
-  - {fileID: 1177590844}
-  - {fileID: 910417371}
-  - {fileID: 1856387526}
-  - {fileID: 991815692}
-  - {fileID: 1902128238}
-  - {fileID: 903724048}
-  - {fileID: 99221638}
-  - {fileID: 1017038136}
-  - {fileID: 1644486583}
-  - {fileID: 1859902349}
-  - {fileID: 1051787183}
-  - {fileID: 2090093076}
-  - {fileID: 1019613868}
-  - {fileID: 930932989}
-  - {fileID: 1287771364}
   - {fileID: 230274430}
-  - {fileID: 2015262182}
-  - {fileID: 903468021}
-  - {fileID: 2012662241}
-  - {fileID: 4111767}
-  - {fileID: 1607100135}
-  - {fileID: 1490937079}
-  - {fileID: 2054141596}
-  - {fileID: 1597591695}
   KeySpawnPoints:
   - {fileID: 370628984}
   - {fileID: 181071513}
