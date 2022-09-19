@@ -115,8 +115,6 @@ public class Interactor : NetworkBehaviour
     public void CmdMoveObjectInHand(GameObject itemtoHold) 
     {
         DebugText.text = "(Command) Local Player Picked up object";
-        NetworkTransform itemtoHoldNetwork = itemtoHold.GetComponent<NetworkTransform>();
-        itemtoHoldNetwork.enabled = false;
         itemtoHold.transform.position = hand.position;
     }
 
