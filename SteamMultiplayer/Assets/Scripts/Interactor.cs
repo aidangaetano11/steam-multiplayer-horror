@@ -132,7 +132,7 @@ public class Interactor : NetworkBehaviour
                 CmdMoveObjectInHand(itemToHold);
             }
             
-            //itemToHold.transform.position = hand.position;
+            itemToHold.transform.position = hand.position;
             Collider col = itemToHold.GetComponent<Collider>();
             Rigidbody rb = itemToHold.GetComponent<Rigidbody>();
             col.enabled = false;
