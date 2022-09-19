@@ -129,10 +129,10 @@ public class Interactor : NetworkBehaviour
             if (hasAuthority) 
             { 
                 DebugText.text = "Local Player Picked up object";
-                //CmdMoveObjectInHand(itemToHold);
+                CmdMoveObjectInHand(itemToHold);
             }
             
-            itemToHold.transform.position = hand.position;
+            //itemToHold.transform.position = hand.position;
             Collider col = itemToHold.GetComponent<Collider>();
             Rigidbody rb = itemToHold.GetComponent<Rigidbody>();
             col.enabled = false;
