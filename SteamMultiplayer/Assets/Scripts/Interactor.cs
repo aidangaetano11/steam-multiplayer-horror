@@ -114,7 +114,7 @@ public class Interactor : NetworkBehaviour
     [Command]
     public void CmdMoveObjectInHand(GameObject itemtoHold) 
     {
-        DebugText.text = "(Command) Non Local Player Picked up object";
+        DebugText.text = "(Command) Local Player Picked up object";
         itemtoHold.transform.position = hand.position;
     }
 
