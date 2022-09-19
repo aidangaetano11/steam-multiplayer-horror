@@ -174,7 +174,7 @@ MonoBehaviour:
   bufferTimeMultiplier: 1
   bufferSizeLimit: 64
   catchupThreshold: 8
-  catchupMultiplier: 0.05
+  catchupMultiplier: 1
   onlySyncOnChange: 1
   bufferResetMultiplier: 5
   positionSensitivity: 0.01
