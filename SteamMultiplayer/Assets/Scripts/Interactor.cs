@@ -108,19 +108,19 @@ public class Interactor : NetworkBehaviour
             }
         }
 
-        CmdItemInHand(currentItemInHand);
+        ItemInHand(currentItemInHand);
     }
 
     [Command (requiresAuthority = false)]
-    public void CmdChangeItemInHand(RaycastHit hit) 
+    public void ChangeItemInHand(RaycastHit hit) 
     {
         DebugText.text = "(Command) Non Local Player Picked up object";
         currentItemInHand = hit.collider.gameObject;
     }
 
 
-    [Command (requiresAuthority = false)]
-    public void CmdItemInHand(GameObject itemToHold) 
+    //[Command (requiresAuthority = false)]
+    public void ItemInHand(GameObject itemToHold) 
     {
         if (itemToHold != null) 
         {
