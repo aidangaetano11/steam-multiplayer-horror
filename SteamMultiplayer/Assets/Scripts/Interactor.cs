@@ -79,7 +79,6 @@ public class Interactor : NetworkBehaviour
                     if (Input.GetKeyDown(KeyCode.F)) 
                     {
                         currentItemInHand = hit.collider.gameObject;
-                        CmdChangeItemInHand(hit);
                         //if (!isLocalPlayer) { CmdChangeItemInHand(hit); }                                                                                                
                     }
                 }
@@ -125,22 +124,23 @@ public class Interactor : NetworkBehaviour
     {
         if (itemToHold != null) 
         {
-            DebugText.text = "Non Local Player Picked up object";
+            if (hasAuthority) { DebugText.text = "Non Local Player Picked up object"; }
+            
             itemToHold.transform.position = hand.position;
             Collider col = itemToHold.GetComponent<Collider>();
             Rigidbody rb = itemToHold.GetComponent<Rigidbody>();
             col.enabled = false;
             rb.isKinematic = true;
 
-            //if (hasAuthority)
-            //{
+            if (hasAuthority)
+            {
                 if (Input.GetKeyDown(KeyCode.G))    //Drop item in hand
                 {
                     Debug.Log("Dropped item: " + currentItemInHand.name);
                     DropItem(rb, col);
                     currentItemInHand = null;
                 }
-            //}
+            }
         }
     }
 
