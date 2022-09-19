@@ -171,7 +171,7 @@ MonoBehaviour:
   interpolatePosition: 1
   interpolateRotation: 1
   interpolateScale: 0
-  bufferTimeMultiplier: 0
+  bufferTimeMultiplier: 3
   bufferSizeLimit: 64
   catchupThreshold: 8
   catchupMultiplier: 1
