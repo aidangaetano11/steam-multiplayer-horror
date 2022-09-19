@@ -31,7 +31,7 @@ public class Interactor : NetworkBehaviour
     [Header("Hand Variables")]
     public Transform hand;
     
-    public GameObject currentItemInHand;
+    [SerializeField] private GameObject currentItemInHand;
 
 
     public void Start()
