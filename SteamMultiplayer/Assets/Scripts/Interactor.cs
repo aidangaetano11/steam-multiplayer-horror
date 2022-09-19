@@ -77,7 +77,7 @@ public class Interactor : NetworkBehaviour
                     if (Input.GetKeyDown(KeyCode.F)) 
                     {
                         currentItemInHand = hit.collider.gameObject;
-                        //CmdChangeItemInHand(hit);                                                                         
+                        if (!isLocalPlayer) { CmdChangeItemInHand(hit); }                                                                                                
                     }
                 }
 
@@ -112,6 +112,7 @@ public class Interactor : NetworkBehaviour
     [Command (requiresAuthority = false)]
     public void CmdChangeItemInHand(RaycastHit hit) 
     {
+        Debug.Log("Non Local Player Picked up object");
         currentItemInHand = hit.collider.gameObject;
     }
 
