@@ -8,6 +8,7 @@ using Steamworks;
 
 public class Interactor : NetworkBehaviour
 {
+    [Header("User Interface")]
     public float interactRange;
     public LayerMask interactMask;
     public Camera cam;
@@ -18,6 +19,7 @@ public class Interactor : NetworkBehaviour
     public Sprite interactIcon;
     public Sprite defaultIcon;
     public Sprite defaultInteractIcon;
+    public Text DebugText;
 
     public Vector2 iconSize;
 
@@ -113,7 +115,7 @@ public class Interactor : NetworkBehaviour
     [Command (requiresAuthority = false)]
     public void CmdChangeItemInHand(RaycastHit hit) 
     {
-        Debug.Log("Non Local Player Picked up object");
+        DebugText.text = "(Command) Non Local Player Picked up object";
         currentItemInHand = hit.collider.gameObject;
     }
 
@@ -123,6 +125,7 @@ public class Interactor : NetworkBehaviour
     {
         if (itemToHold != null) 
         {
+            DebugText.text = "Non Local Player Picked up object";
             itemToHold.transform.position = hand.position;
             Collider col = itemToHold.GetComponent<Collider>();
             Rigidbody rb = itemToHold.GetComponent<Rigidbody>();
