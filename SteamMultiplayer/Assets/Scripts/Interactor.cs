@@ -128,15 +128,15 @@ public class Interactor : NetworkBehaviour
             col.enabled = false;
             rb.isKinematic = true;
 
-            if (hasAuthority)
-            {
+            //if (hasAuthority)
+            //{
                 if (Input.GetKeyDown(KeyCode.G))    //Drop item in hand
                 {
                     Debug.Log("Dropped item: " + currentItemInHand.name);
                     DropItem(rb, col);
                     currentItemInHand = null;
                 }
-            }
+            //}
         }
     }
 
