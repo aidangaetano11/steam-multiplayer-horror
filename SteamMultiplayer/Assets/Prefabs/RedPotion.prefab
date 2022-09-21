@@ -128,10 +128,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9595bcadf28fff64497afcc625a4f70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
   inventoryManager: {fileID: 0}
-  redPotionPrefab: {fileID: 4253060336477021176}
+  itemPrefab: {fileID: 4253060336477021176}
+  itemModel: {fileID: 3034473432476154886, guid: 619021c019e6c7f4bb64e2b96cbeae0a, type: 3}
 --- !u!114 &1209238253014006773
 MonoBehaviour:
   m_ObjectHideFlags: 0

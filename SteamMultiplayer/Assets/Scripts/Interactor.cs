@@ -35,7 +35,6 @@ public class Interactor : NetworkBehaviour
     
     [SerializeField] private GameObject currentItemInHand;
 
-
     public void Start()
     {
         
@@ -74,11 +73,11 @@ public class Interactor : NetworkBehaviour
                 }
 
                 //Handles red potion interactable
-                if (hit.collider.GetComponent<RedPotionManager>() != false) 
+                if (hit.collider.GetComponent<ItemManager>() != false) 
                 {
                     if (Input.GetKeyDown(KeyCode.F)) 
                     {
-                        currentItemInHand = hit.collider.gameObject;                                                                                               
+                        HandleItem(hit);
                     }
                 }
 
@@ -106,47 +105,37 @@ public class Interactor : NetworkBehaviour
                 }
             }
         }
-
-        ItemInHand(currentItemInHand);
     }
 
-    [Command]
-    public void CmdMoveObjectInHand(GameObject itemtoHold) 
+    [Command (requiresAuthority = false)]
+    public void CmdItemInHand(GameObject handItem, GameObject worldItem) 
     {
-        DebugText.text = "(Command) Local Player Picked up object";
-        itemtoHold.transform.position = hand.position;
+        DebugText.text = "Command is being ran.";
+        Instantiate(handItem, hand.transform.position, Quaternion.identity, hand);
+        worldItem.SetActive(false);
     }
 
-
-
-
-    //[Command (requiresAuthority = false)]
-    public void ItemInHand(GameObject itemToHold) 
+    public void HandleItem(RaycastHit hit) 
     {
-        if (itemToHold != null) 
+        ItemManager itemManager = hit.collider.gameObject.GetComponent<ItemManager>();
+
+        GameObject item = hit.collider.gameObject;
+        currentItemInHand = itemManager.itemModel;
+
+        ItemInHand(item, itemManager);
+    }
+
+    public void ItemInHand(GameObject worldPrefab,ItemManager itemManager) 
+    {         
+        GameObject itemPrefab = itemManager.itemPrefab;
+        GameObject itemModel = itemManager.itemModel;
+
+        GameObject item = Instantiate(itemModel, hand.transform.position, Quaternion.identity, hand);
+        if (hasAuthority) 
         {
-            if (hasAuthority) 
-            { 
-                DebugText.text = "Local Player Picked up object";
-                CmdMoveObjectInHand(itemToHold);
-            }
-            
-            itemToHold.transform.position = hand.position;
-            Collider col = itemToHold.GetComponent<Collider>();
-            Rigidbody rb = itemToHold.GetComponent<Rigidbody>();
-            col.enabled = false;
-            rb.isKinematic = true;
-
-            if (hasAuthority)
-            {
-                if (Input.GetKeyDown(KeyCode.G))    //Drop item in hand
-                {
-                    Debug.Log("Dropped item: " + currentItemInHand.name);
-                    DropItem(rb, col);
-                    currentItemInHand = null;
-                }
-            }
+            CmdItemInHand(item, worldPrefab);
         }
+        worldPrefab.SetActive(false);
     }
 
     public void DropItem(Rigidbody rb, Collider col) 

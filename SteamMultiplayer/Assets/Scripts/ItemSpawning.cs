@@ -61,15 +61,6 @@ public class ItemSpawning : NetworkBehaviour
             ItemSpawnPoints.Remove(ItemSpawnPoints[randomRedSpawn]);
         }
     }
-    [Command (requiresAuthority = false)]
-    public void CmdSpawnDroppedPrefab(GameObject currentPrefab, Vector3 spawnPoint, Transform playerDirection, float dropForce)
-    {
-        GameObject itemToDrop = Instantiate(currentPrefab, spawnPoint, Quaternion.identity);
-        NetworkServer.Spawn(itemToDrop);
-        itemToDrop.gameObject.SetActive(false);
-        Rigidbody rb = itemToDrop.GetComponent<Rigidbody>();
-        rb.AddForce(playerDirection.forward * dropForce + Vector3.up * 5, ForceMode.Impulse);
-    }
 
     public void ChooseRandomKeySpawnPoint() 
     {      
