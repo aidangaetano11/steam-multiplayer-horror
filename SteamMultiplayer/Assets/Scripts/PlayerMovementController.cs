@@ -54,6 +54,13 @@ public class PlayerMovementController : NetworkBehaviour
     Rigidbody rb;
 
     public Light flashlight;
+    [SyncVar (hook=nameof(OnChangeFlashlight))]
+    public bool flashlightEnabled;
+
+    public void OnChangeFlashlight(bool oldValue, bool newValue)
+    {
+        flashlight.enabled = newValue;
+    }
 
     private void Start()
     {
@@ -194,16 +201,30 @@ public class PlayerMovementController : NetworkBehaviour
 
     public void HandleFlashlight() 
     {
-        if (hasAuthority) 
+        if (!isLocalPlayer) return;
+
+        if (Input.GetKeyDown(KeyCode.T)) 
         {
-            if (Input.GetKeyUp(KeyCode.T))
+            if (isServer)
             {
-                if (flashlight.enabled)
-                    flashlight.enabled = false;
-                else if (!flashlight.enabled)
-                    flashlight.enabled = true;
+                if (flashlightEnabled)
+                {
+                    flashlightEnabled = false;
+                }
+                else
+                {
+                    flashlightEnabled = true;
+                }
             }
-        }        
+            else CmdHandleFlashlight();
+        }
+        
+    }
+
+    [Command]
+    public void CmdHandleFlashlight() 
+    {
+        HandleFlashlight();
     }
 
     private void GroundCheck() 

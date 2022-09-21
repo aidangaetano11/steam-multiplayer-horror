@@ -297,6 +297,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: ba8cfba535599584eab70e696d94f6c3, type: 2}
   - {fileID: 2100000, guid: f503ca26b44f27d4b9f4a01813cf9d84, type: 2}
   flashlight: {fileID: 0}
+  flashlightEnabled: 1
 --- !u!114 &247777681444402785
 MonoBehaviour:
   m_ObjectHideFlags: 0
