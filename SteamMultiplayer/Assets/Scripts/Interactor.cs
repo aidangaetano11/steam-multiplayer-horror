@@ -131,10 +131,7 @@ public class Interactor : NetworkBehaviour
         GameObject itemModel = itemManager.itemModel;
 
         GameObject item = Instantiate(itemModel, hand.transform.position, Quaternion.identity, hand);
-        if (hasAuthority) 
-        {
-            CmdItemInHand(item, worldPrefab);
-        }
+        CmdItemInHand(item, worldPrefab);
         worldPrefab.SetActive(false);
     }
 
