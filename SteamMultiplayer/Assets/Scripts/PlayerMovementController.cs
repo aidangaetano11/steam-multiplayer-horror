@@ -201,7 +201,7 @@ public class PlayerMovementController : NetworkBehaviour
 
     public void HandleFlashlight() 
     {
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.T) && isLocalPlayer)
         {
             if (isServer)
             {
