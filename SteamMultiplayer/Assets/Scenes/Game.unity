@@ -70041,8 +70041,12 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   maxSpawnedItems: 0
+  maxSpawnedRedPotions: 3
   ItemSpawnPoints:
   - {fileID: 230274430}
+  - {fileID: 2015262182}
+  - {fileID: 1117694037}
+  - {fileID: 2014422564}
   KeySpawnPoints:
   - {fileID: 370628984}
   - {fileID: 181071513}

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class ItemSpawning : NetworkBehaviour
 {
     public int maxSpawnedItems = 3;
+    public int maxSpawnedRedPotions = 3;
 
     [Header("Spawnpoint Lists")]
     public List<Transform> ItemSpawnPoints = new List<Transform>();
@@ -52,14 +53,17 @@ public class ItemSpawning : NetworkBehaviour
             }           
         }
 
-        if (RedPotionPrefab != null) 
+        for (int i = 0; i < maxSpawnedRedPotions; i++) 
         {
-            int randomRedSpawn = Random.Range(0, ItemSpawnPoints.Count);
-            currentRedSpawnPoint = ItemSpawnPoints[randomRedSpawn].position;
-            GameObject redPotionObject = Instantiate(RedPotionPrefab, currentRedSpawnPoint, Quaternion.identity);
-            NetworkServer.Spawn(redPotionObject);
-            ItemSpawnPoints.Remove(ItemSpawnPoints[randomRedSpawn]);
-        }
+            if (RedPotionPrefab != null)
+            {
+                int randomRedSpawn = Random.Range(0, ItemSpawnPoints.Count);
+                currentRedSpawnPoint = ItemSpawnPoints[randomRedSpawn].position;
+                GameObject redPotionObject = Instantiate(RedPotionPrefab, currentRedSpawnPoint, Quaternion.identity);
+                NetworkServer.Spawn(redPotionObject);
+                ItemSpawnPoints.Remove(ItemSpawnPoints[randomRedSpawn]);
+            }
+        }        
     }
 
     public void ChooseRandomKeySpawnPoint() 
