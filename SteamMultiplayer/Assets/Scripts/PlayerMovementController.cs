@@ -90,8 +90,8 @@ public class PlayerMovementController : NetworkBehaviour
                 HandleDrag();
                 HandleSprintCrouch();
                 GroundCheck();
-                HandleFlashlight();
-            }     
+            }
+            HandleFlashlight();
         }
     }
 
@@ -201,24 +201,21 @@ public class PlayerMovementController : NetworkBehaviour
 
     public void HandleFlashlight() 
     {
-        if (hasAuthority) 
+        if (Input.GetKeyDown(KeyCode.T))
         {
-            if (Input.GetKeyDown(KeyCode.T))
+            if (isServer)
             {
-                if (isServer)
+                if (flashlightEnabled)
                 {
-                    if (flashlightEnabled)
-                    {
-                        flashlightEnabled = false;
-                    }
-                    else
-                    {
-                        flashlightEnabled = true;
-                    }
+                    flashlightEnabled = false;
                 }
-                else CmdHandleFlashlight();
+                else
+                {
+                    flashlightEnabled = true;
+                }
             }
-        }       
+            else CmdHandleFlashlight();
+        }      
     }
 
     [Command]
