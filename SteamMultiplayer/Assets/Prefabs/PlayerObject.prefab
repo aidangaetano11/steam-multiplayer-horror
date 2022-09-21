@@ -450,12 +450,13 @@ MonoBehaviour:
   DebugText: {fileID: 1758176316854351293}
   iconSize: {x: 0, y: 0}
   itemSpawning: {fileID: 0}
+  RedPotion: {fileID: 4253060336477021176, guid: d87fc64e32effe64aa126461240ccbdd, type: 3}
   dropPoint: {fileID: 9039592142314951447}
   dropForce: 5
   dropUpForce: 5
   hand: {fileID: 330198849153914473}
   emptyHand: {fileID: 1552545710523184333, guid: ffae0755bdb03ed4c8ac71037d6838a9, type: 3}
-  currentItemInHand: {fileID: 0}
+  currentItemInHand: 0
 --- !u!1 &1063648044466518101
 GameObject:
   m_ObjectHideFlags: 0

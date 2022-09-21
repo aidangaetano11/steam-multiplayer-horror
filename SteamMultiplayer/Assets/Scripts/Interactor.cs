@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using Mirror;
 using Steamworks;
 
+
 public class Interactor : NetworkBehaviour
 {
     [Header("User Interface")]
@@ -24,6 +25,9 @@ public class Interactor : NetworkBehaviour
     public Vector2 iconSize;
 
     public ItemSpawning itemSpawning;
+
+    [Header("Object Prefabs")]
+    public GameObject RedPotion;
 
     [Header("Other Variables")]
     public Transform dropPoint;
@@ -44,7 +48,7 @@ public class Interactor : NetworkBehaviour
     }
 
     IEnumerator CreateItemInHand(GameObject newItemInHand)
-    { 
+    {
         while (hand.gameObject.transform.childCount == 0)
         {
             Instantiate(newItemInHand.GetComponent<ItemManager>().itemModel, hand.transform.position, Quaternion.identity, hand);
@@ -87,9 +91,10 @@ public class Interactor : NetworkBehaviour
             //Handles Item interactable
             if (hit.collider.GetComponent<ItemManager>() != false) 
             {
+                GameObject itemCast = hit.collider.gameObject;
                 if (Input.GetKeyDown(KeyCode.F)) 
                 {
-                    HandleItem(hit.collider.gameObject);
+                    HandleItem(itemCast);
                 }
             }
 
@@ -116,25 +121,46 @@ public class Interactor : NetworkBehaviour
                 interactImage.rectTransform.sizeDelta = defaultIconSize;
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.G) && currentItemInHand != null) 
+        {
+            DebugText.text = "Dropped Item";
+            CmdDropItem(currentItemInHand);
+        }
+    }
+
+
+    public void HandleItem(GameObject item)
+    {
+        if (isServer)
+        {
+            currentItemInHand = item;
+            item.transform.position = new Vector3(0f, 13f, 0f);
+            DebugText.text = "Server is handling.";
+        }
+        else CmdItemInHand(item);
     }
 
 
     [Command]
-    public void CmdItemInHand(GameObject selectedItem) 
+    public void CmdItemInHand(GameObject selectedItem)
     {
         HandleItem(selectedItem);
-        DebugText.text = "Command is being ran.";
+        //DebugText.text = "Command is being ran.";
     }
 
-    public void HandleItem(GameObject item) 
+    [Command]
+    void CmdDropItem(GameObject item)
     {
-        if (isServer) 
-        {
-            currentItemInHand = item;
-            item.SetActive(false);
-            DebugText.text = "Server is handling.";
-        } 
-        else CmdItemInHand(item);
+        Vector3 pos = hand.transform.position;
+        Quaternion rot = hand.transform.rotation;
+        GameObject sceneItem = Instantiate(item, pos, rot);
+
+
+        item.GetComponent<Rigidbody>().isKinematic = false;
+        //currentItemInHand = null;
+
+        NetworkServer.Spawn(sceneItem);
     }
 
     public void DropItem(Rigidbody rb, Collider col) 
