@@ -49,10 +49,19 @@ public class Interactor : NetworkBehaviour
 
     IEnumerator CreateItemInHand(GameObject newItemInHand)
     {
-        while (hand.gameObject.transform.childCount == 0)
+        while (hand.gameObject.transform.childCount > 0)
+        {
+            Destroy(hand.transform.GetChild(0).gameObject);
+            yield return null;
+        }
+
+        if (currentItemInHand != emptyHand)
         {
             Instantiate(newItemInHand.GetComponent<ItemManager>().itemModel, hand.transform.position, Quaternion.identity, hand);
-            yield return null;
+        }
+        else 
+        {
+            Instantiate(newItemInHand, hand.transform.position, Quaternion.identity, hand);
         }
     }
 
@@ -91,10 +100,9 @@ public class Interactor : NetworkBehaviour
             //Handles Item interactable
             if (hit.collider.GetComponent<ItemManager>() != false) 
             {
-                GameObject itemCast = hit.collider.gameObject;
                 if (Input.GetKeyDown(KeyCode.F)) 
                 {
-                    HandleItem(itemCast);
+                    HandleItem(hit.collider.gameObject);
                 }
             }
 
@@ -122,10 +130,10 @@ public class Interactor : NetworkBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.G) && currentItemInHand != null) 
+        if (Input.GetKeyDown(KeyCode.G) && currentItemInHand != emptyHand) 
         {
             DebugText.text = "Dropped Item";
-            CmdDropItem(currentItemInHand);
+            HandleItemWhenDropped(currentItemInHand);
         }
     }
 
@@ -135,7 +143,7 @@ public class Interactor : NetworkBehaviour
         if (isServer)
         {
             currentItemInHand = item;
-            item.transform.position = new Vector3(0f, 13f, 0f);
+            item.transform.position = new Vector3(0f, 13f, 0f);   //temporary: when object is picked up. object will be moved to roof to sell the idea that it moved to the players hand
             DebugText.text = "Server is handling.";
         }
         else CmdItemInHand(item);
@@ -149,25 +157,24 @@ public class Interactor : NetworkBehaviour
         //DebugText.text = "Command is being ran.";
     }
 
+    public void HandleItemWhenDropped(GameObject item) 
+    {
+        if (isServer)
+        {
+            currentItemInHand = emptyHand;
+
+            item.transform.position = dropPoint.position;
+            item.GetComponent<Rigidbody>().isKinematic = false;
+
+            item.GetComponent<Rigidbody>().AddForce(dropPoint.forward * dropForce + Vector3.up * dropUpForce, ForceMode.Impulse);
+        }
+        else CmdDropItem(item);
+    }
+
     [Command]
     void CmdDropItem(GameObject item)
     {
-        Vector3 pos = hand.transform.position;
-        Quaternion rot = hand.transform.rotation;
-        GameObject sceneItem = Instantiate(item, pos, rot);
-
-
-        item.GetComponent<Rigidbody>().isKinematic = false;
-        //currentItemInHand = null;
-
-        NetworkServer.Spawn(sceneItem);
-    }
-
-    public void DropItem(Rigidbody rb, Collider col) 
-    {
-        rb.isKinematic = false;
-        rb.AddForce(dropPoint.forward * dropForce + Vector3.up * dropUpForce, ForceMode.Impulse);
-        col.enabled = true;
+        HandleItemWhenDropped(item);
     }
 
 
