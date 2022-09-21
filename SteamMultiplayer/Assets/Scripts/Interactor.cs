@@ -37,6 +37,20 @@ public class Interactor : NetworkBehaviour
     [SyncVar(hook = nameof(OnCreateItemInHand))]
     public GameObject currentItemInHand;
 
+    void OnCreateItemInHand(GameObject oldItem, GameObject newItem)
+    {
+        //DebugText.text = "Function is ran from command.";
+        StartCoroutine(CreateItemInHand(newItem));
+    }
+
+    IEnumerator CreateItemInHand(GameObject newItemInHand)
+    { 
+        while (hand.gameObject.transform.childCount == 0)
+        {
+            Instantiate(newItemInHand.GetComponent<ItemManager>().itemModel, hand.transform.position, Quaternion.identity, hand);
+            yield return null;
+        }
+    }
 
     void Update()
     {
@@ -75,8 +89,7 @@ public class Interactor : NetworkBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.F)) 
                 {
-                    CmdItemInHand(hit.collider.gameObject);
-                    currentItemInHand = hit.collider.gameObject;
+                    HandleItem(hit.collider.gameObject);
                 }
             }
 
@@ -105,31 +118,22 @@ public class Interactor : NetworkBehaviour
         }
     }
 
-    void OnCreateItemInHand(GameObject oldItem, GameObject newItem) 
-    {
-        DebugText.text = "Function is ran from command.";
-        StartCoroutine(CreateItemInHand(newItem));
-    }
-
-    IEnumerator CreateItemInHand(GameObject newItemInHand) 
-    {
-        while (hand.gameObject.transform.childCount > 0) 
-        {
-            Destroy(hand.gameObject.transform.GetChild(0).gameObject);
-            yield return null;
-        }
-
-        Instantiate(newItemInHand, hand.transform.position, Quaternion.identity, hand);
-    }
 
     [Command]
     public void CmdItemInHand(GameObject selectedItem) 
     {
-        ItemManager itemManager = selectedItem.GetComponent<ItemManager>();
-        GameObject itemModel = itemManager.itemModel;
-        currentItemInHand = itemModel;
-        selectedItem.SetActive(false);
+        HandleItem(selectedItem);
         DebugText.text = "Command is being ran.";
+    }
+
+    public void HandleItem(GameObject item) 
+    {
+        if (isServer) 
+        {
+            currentItemInHand = item;
+            DebugText.text = "Server is handling.";
+        } 
+        else CmdItemInHand(item);
     }
 
     public void DropItem(Rigidbody rb, Collider col) 

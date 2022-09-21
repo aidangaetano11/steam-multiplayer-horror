@@ -455,7 +455,7 @@ MonoBehaviour:
   dropUpForce: 5
   hand: {fileID: 330198849153914473}
   emptyHand: {fileID: 1552545710523184333, guid: ffae0755bdb03ed4c8ac71037d6838a9, type: 3}
-  currentItemInHand: {fileID: 1552545710523184333, guid: ffae0755bdb03ed4c8ac71037d6838a9, type: 3}
+  currentItemInHand: {fileID: 0}
 --- !u!1 &1063648044466518101
 GameObject:
   m_ObjectHideFlags: 0
