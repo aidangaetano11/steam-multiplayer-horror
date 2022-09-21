@@ -201,24 +201,24 @@ public class PlayerMovementController : NetworkBehaviour
 
     public void HandleFlashlight() 
     {
-        if (!isLocalPlayer) return;
-
-        if (Input.GetKeyDown(KeyCode.T)) 
+        if (hasAuthority) 
         {
-            if (isServer)
+            if (Input.GetKeyDown(KeyCode.T))
             {
-                if (flashlightEnabled)
+                if (isServer)
                 {
-                    flashlightEnabled = false;
+                    if (flashlightEnabled)
+                    {
+                        flashlightEnabled = false;
+                    }
+                    else
+                    {
+                        flashlightEnabled = true;
+                    }
                 }
-                else
-                {
-                    flashlightEnabled = true;
-                }
+                else CmdHandleFlashlight();
             }
-            else CmdHandleFlashlight();
-        }
-        
+        }       
     }
 
     [Command]
