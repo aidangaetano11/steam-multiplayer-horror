@@ -131,6 +131,7 @@ public class Interactor : NetworkBehaviour
         if (isServer) 
         {
             currentItemInHand = item;
+            item.SetActive(false);
             DebugText.text = "Server is handling.";
         } 
         else CmdItemInHand(item);
