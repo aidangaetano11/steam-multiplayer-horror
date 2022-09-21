@@ -34,16 +34,11 @@ public class Interactor : NetworkBehaviour
     public Transform hand;
     public GameObject emptyHand;
 
-    [SyncVar (hook = nameof(OnCreateItemInHand))]
+    [SyncVar(hook = nameof(OnCreateItemInHand))]
     public GameObject currentItemInHand;
 
 
-    private void Start()
-    {
-        currentItemInHand = emptyHand;
-    }
-
-    private void Update()
+    void Update()
     {
         if (itemSpawning == null) 
         {
@@ -81,6 +76,7 @@ public class Interactor : NetworkBehaviour
                 if (Input.GetKeyDown(KeyCode.F)) 
                 {
                     CmdItemInHand(hit.collider.gameObject);
+                    currentItemInHand = hit.collider.gameObject;
                 }
             }
 
@@ -132,6 +128,7 @@ public class Interactor : NetworkBehaviour
         ItemManager itemManager = selectedItem.GetComponent<ItemManager>();
         GameObject itemModel = itemManager.itemModel;
         currentItemInHand = itemModel;
+        selectedItem.SetActive(false);
         DebugText.text = "Command is being ran.";
     }
 
