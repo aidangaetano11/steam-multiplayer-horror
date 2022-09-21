@@ -32,12 +32,15 @@ public class Interactor : NetworkBehaviour
 
     [Header("Hand Variables")]
     public Transform hand;
-    
-    [SerializeField] private GameObject currentItemInHand;
+    public GameObject emptyHand;
 
-    public void Start()
+    [SyncVar (hook = nameof(OnCreateItemInHand))]
+    public GameObject currentItemInHand;
+
+
+    private void Start()
     {
-        
+        currentItemInHand = emptyHand;
     }
 
     private void Update()
@@ -46,93 +49,90 @@ public class Interactor : NetworkBehaviour
         {
             itemSpawning = ItemSpawning.FindObjectOfType<ItemSpawning>();
         }
-        
+
+        if (!isLocalPlayer) return;
+
         RaycastHit hit;
-        if (hasAuthority) 
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, interactRange, interactMask))
         {
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, interactRange, interactMask))
+            //handles resizing interact icon and showing it
+            interactImage.sprite = interactIcon;
+            if (iconSize == Vector2.zero)
             {
-                //handles resizing interact icon and showing it
-                interactImage.sprite = interactIcon;
-                if (iconSize == Vector2.zero)
-                {
-                    interactImage.rectTransform.sizeDelta = defaultInteractIconSize;
-                }
-                else
-                {
-                    interactImage.rectTransform.sizeDelta = iconSize;
-                }
-
-                //Handles test item interactable
-                if (hit.collider.GetComponent<ItemTestManager>() != false)
-                {
-                    if (Input.GetKeyDown(KeyCode.F))
-                    {
-                        hit.collider.GetComponent<ItemTestManager>().CmdPickupTestItem();   //adds item to inventory and calls function in prefab script
-                    }
-                }
-
-                //Handles red potion interactable
-                if (hit.collider.GetComponent<ItemManager>() != false) 
-                {
-                    if (Input.GetKeyDown(KeyCode.F)) 
-                    {
-                        HandleItem(hit);
-                    }
-                }
-
-                //Handles office key interactable
-                if (hit.collider.GetComponent<OfficeKeyManager>() != false)
-                {
-                    if (Input.GetKeyDown(KeyCode.F))
-                    {
-                        hit.collider.GetComponent<OfficeKeyManager>().CmdDisableKey();      //Adds key to inventory key manager
-                    }
-                }
-
-                //Handles office door interactable
-                if (hit.collider.GetComponent<OfficeDoorManager>() != false)
-                {
-                    HandleDoor(hit);
-                }
+                interactImage.rectTransform.sizeDelta = defaultInteractIconSize;
             }
             else
             {
-                if (interactImage.sprite != defaultIcon)
+                interactImage.rectTransform.sizeDelta = iconSize;
+            }
+
+            //Handles test item interactable
+            if (hit.collider.GetComponent<ItemTestManager>() != false)
+            {
+                if (Input.GetKeyDown(KeyCode.F))
                 {
-                    interactImage.sprite = defaultIcon;
-                    interactImage.rectTransform.sizeDelta = defaultIconSize;
+                    hit.collider.GetComponent<ItemTestManager>().CmdPickupTestItem();   //adds item to inventory and calls function in prefab script
                 }
+            }
+
+            //Handles Item interactable
+            if (hit.collider.GetComponent<ItemManager>() != false) 
+            {
+                if (Input.GetKeyDown(KeyCode.F)) 
+                {
+                    CmdItemInHand(hit.collider.gameObject);
+                }
+            }
+
+            //Handles office key interactable
+            if (hit.collider.GetComponent<OfficeKeyManager>() != false)
+            {
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    hit.collider.GetComponent<OfficeKeyManager>().CmdDisableKey();      //Adds key to inventory key manager
+                }
+            }
+
+            //Handles office door interactable
+            if (hit.collider.GetComponent<OfficeDoorManager>() != false)
+            {
+                HandleDoor(hit);
+            }
+        }
+        else
+        {
+            if (interactImage.sprite != defaultIcon)
+            {
+                interactImage.sprite = defaultIcon;
+                interactImage.rectTransform.sizeDelta = defaultIconSize;
             }
         }
     }
 
-    [Command (requiresAuthority = false)]
-    public void CmdItemInHand(GameObject handItem, GameObject worldItem) 
+    void OnCreateItemInHand(GameObject oldItem, GameObject newItem) 
     {
-        DebugText.text = "Command is being ran.";
-        Instantiate(handItem, hand.transform.position, Quaternion.identity, hand);
-        worldItem.SetActive(false);
+        DebugText.text = "Function is ran from command.";
+        StartCoroutine(CreateItemInHand(newItem));
     }
 
-    public void HandleItem(RaycastHit hit) 
+    IEnumerator CreateItemInHand(GameObject newItemInHand) 
     {
-        ItemManager itemManager = hit.collider.gameObject.GetComponent<ItemManager>();
+        while (hand.gameObject.transform.childCount > 0) 
+        {
+            Destroy(hand.gameObject.transform.GetChild(0).gameObject);
+            yield return null;
+        }
 
-        GameObject item = hit.collider.gameObject;
-        currentItemInHand = itemManager.itemModel;
-
-        ItemInHand(item, itemManager);
+        Instantiate(newItemInHand, hand.transform.position, Quaternion.identity, hand);
     }
 
-    public void ItemInHand(GameObject worldPrefab,ItemManager itemManager) 
-    {         
-        GameObject itemPrefab = itemManager.itemPrefab;
+    [Command]
+    public void CmdItemInHand(GameObject selectedItem) 
+    {
+        ItemManager itemManager = selectedItem.GetComponent<ItemManager>();
         GameObject itemModel = itemManager.itemModel;
-
-        GameObject item = Instantiate(itemModel, hand.transform.position, Quaternion.identity, hand);
-        CmdItemInHand(item, worldPrefab);
-        worldPrefab.SetActive(false);
+        currentItemInHand = itemModel;
+        DebugText.text = "Command is being ran.";
     }
 
     public void DropItem(Rigidbody rb, Collider col) 
