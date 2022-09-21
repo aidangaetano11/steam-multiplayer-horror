@@ -78,8 +78,7 @@ public class Interactor : NetworkBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.F)) 
                     {
-                        currentItemInHand = hit.collider.gameObject;
-                        //if (!isLocalPlayer) { CmdChangeItemInHand(hit); }                                                                                                
+                        currentItemInHand = hit.collider.gameObject;                                                                                               
                     }
                 }
 
