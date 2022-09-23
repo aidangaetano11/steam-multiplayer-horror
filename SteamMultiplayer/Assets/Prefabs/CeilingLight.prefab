@@ -443,6 +443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spotlights: []
+  mesh: {fileID: 0}
   lightsOn: 1
 --- !u!1 &5554958488032967068
 GameObject:
