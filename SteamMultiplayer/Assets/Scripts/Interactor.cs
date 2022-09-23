@@ -100,7 +100,7 @@ public class Interactor : NetworkBehaviour
             //Handles Item interactable
             if (hit.collider.GetComponent<ItemManager>() != false) 
             {
-                if (Input.GetKeyDown(KeyCode.F)) 
+                if (Input.GetKeyDown(KeyCode.F) && currentItemInHand == emptyHand) 
                 {
                     HandleItem(hit.collider.gameObject);
                 }
