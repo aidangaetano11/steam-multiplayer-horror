@@ -163,27 +163,16 @@ public class Interactor : NetworkBehaviour
             {
                 if (!altarHandler.isActive)
                 {
-                    if (currentItemInHand)
-                    {
-                        altarHandler.particleColor = itemInHandManager.interactorColor;
-                        altarHandler.particleLight.color = itemInHandManager.interactorColor;
-                        altarHandler.isActive = true;
-                    }
+                    altarHandler.particleColor = itemInHandManager.interactorColor;
+                    altarHandler.particleLight.color = itemInHandManager.interactorColor;
+                    altarHandler.isActive = true;
                 }
-                else if (altarHandler.isActive)
+                else
                 {
                     altarHandler.isActive = false;
                 }
-                else Debug.Log("Error with handling Altar");
             }
             else CmdHandleAltar(altar);
-        }
-        else 
-        {
-            if (altarHandler.isActive) 
-            {
-                altarHandler.isActive = false;
-            }
         }
         
     }
