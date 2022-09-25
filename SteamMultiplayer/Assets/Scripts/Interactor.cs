@@ -156,9 +156,9 @@ public class Interactor : NetworkBehaviour
             {
                 if (currentItemInHand != emptyHand)
                 {
-                    altarHandler.isActive = true;
                     altarHandler.particleColor = itemInHandManager.interactorColor;
                     altarHandler.particleLight.color = itemInHandManager.interactorColor;
+                    altarHandler.isActive = true;
                 }
             }
             else if (altarHandler.isActive)

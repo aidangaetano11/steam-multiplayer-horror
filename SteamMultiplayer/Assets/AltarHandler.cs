@@ -7,10 +7,18 @@ public class AltarHandler : NetworkBehaviour
     public GameObject particle;
     public VisualEffect visualEffect;
     public Light particleLight;
+
+    [SyncVar (hook=nameof(OnColorChange))]
     public Color particleColor;
 
     [SyncVar (hook = nameof(OnActiveChange))]
     public bool isActive = false;
+
+    void OnColorChange(Color oldValue, Color newValue) 
+    {
+        Debug.Log("COLOR CHANGE: " + newValue.ToString());
+        particleColor = newValue;
+    }
 
     void OnActiveChange(bool oldValue, bool newValue)
     {
