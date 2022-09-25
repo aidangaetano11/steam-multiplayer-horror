@@ -106,13 +106,11 @@ public class Interactor : NetworkBehaviour
                 }
             }
 
-            if (hit.collider.GetComponent<AltarHandler>() != false) 
+            if (hit.collider.GetComponent<AltarHandler>() != false)
             {
-                if (Input.GetKeyDown(KeyCode.F)) 
+                if (Input.GetKeyDown(KeyCode.F))
                 {
-                    GameObject altar = hit.collider.gameObject;
-                    HandleAltar(altar);
-                    
+                    HandleAltar(hit.collider.gameObject);
                 }
             }
 
@@ -149,19 +147,25 @@ public class Interactor : NetworkBehaviour
 
     public void HandleAltar(GameObject altar) 
     {
+        AltarHandler altarHandler = altar.GetComponent<AltarHandler>();
+        ItemManager itemInHandManager = currentItemInHand.GetComponent<ItemManager>();
+
         if (isServer)
         {
-            AltarHandler altarHandler = altar.GetComponent<AltarHandler>();
-            ItemManager itemInHandManager = currentItemInHand.GetComponent<ItemManager>();
-            if (!altarHandler.isActive && currentItemInHand != emptyHand)
+            if (!altarHandler.isActive)
             {
-                altarHandler.particleColor = itemInHandManager.interactorColor;
-                altarHandler.EnableParticle();
+                if (currentItemInHand != emptyHand)
+                {
+                    altarHandler.isActive = true;
+                    altarHandler.particleColor = itemInHandManager.interactorColor;
+                    altarHandler.particleLight.color = itemInHandManager.interactorColor;
+                }
             }
-            else
+            else if (altarHandler.isActive)
             {
-                altarHandler.DisableParticle();
+                altarHandler.isActive = false;
             }
+            else Debug.Log("Error with handling Altar");
         }
         else CmdHandleAltar(altar);
     }
@@ -188,7 +192,6 @@ public class Interactor : NetworkBehaviour
     public void CmdItemInHand(GameObject selectedItem)
     {
         HandleItem(selectedItem);
-        //DebugText.text = "Command is being ran.";
     }
 
     public void HandleItemWhenDropped(GameObject item) 
