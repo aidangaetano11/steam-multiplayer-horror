@@ -216,6 +216,7 @@ MonoBehaviour:
   keyPrefab: {fileID: 6586380701880126115, guid: 9295189b4f03b8a47b9873a8492069d1, type: 3}
   spawnPrefab: {fileID: 1860124792835660777, guid: c6508cea2ba61a94e93ecdddee7f1a19, type: 3}
   redPotionPrefab: {fileID: 4253060336477021176, guid: d87fc64e32effe64aa126461240ccbdd, type: 3}
+  emptyHandPrefab: {fileID: 8783409379270256213, guid: 5a4338615bacdb64399f04a7eb31db0f, type: 3}
   GamePlayerPrefab: {fileID: 31764771190621457, guid: deb568f797d86014e8af53a0e87cae99, type: 3}
 --- !u!4 &344707810
 Transform:
@@ -242,6 +243,7 @@ GameObject:
   m_Component:
   - component: {fileID: 705507995}
   - component: {fileID: 705507994}
+  - component: {fileID: 705507996}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -326,6 +328,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &705507996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705507993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

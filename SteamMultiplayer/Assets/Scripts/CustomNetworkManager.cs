@@ -10,6 +10,7 @@ public class CustomNetworkManager : NetworkManager
     public GameObject keyPrefab;
     public GameObject spawnPrefab;
     public GameObject redPotionPrefab;
+    public GameObject emptyHandPrefab;
 
     //player
     [SerializeField] private PlayerObjectController GamePlayerPrefab;
@@ -36,6 +37,7 @@ public class CustomNetworkManager : NetworkManager
             NetworkClient.RegisterPrefab(keyPrefab);           //these will register object prefabs for the client to see and use
             NetworkClient.RegisterPrefab(spawnPrefab);
             NetworkClient.RegisterPrefab(redPotionPrefab);
+            NetworkClient.RegisterPrefab(emptyHandPrefab);
         }
               
     }

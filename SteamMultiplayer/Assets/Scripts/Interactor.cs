@@ -65,6 +65,11 @@ public class Interactor : NetworkBehaviour
         }
     }
 
+    void Start()
+    {
+        currentItemInHand = emptyHand;    
+    }
+
     void Update()
     {
         if (itemSpawning == null) 
