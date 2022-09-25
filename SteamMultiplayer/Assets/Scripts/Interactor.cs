@@ -55,19 +55,19 @@ public class Interactor : NetworkBehaviour
             yield return null;
         }
 
-        if (currentItemInHand != emptyHand)
+        if (currentItemInHand)
         {
             Instantiate(newItemInHand.GetComponent<ItemManager>().itemModel, hand.transform.position, Quaternion.identity, hand);
         }
         else 
         {
-            Instantiate(newItemInHand, hand.transform.position, Quaternion.identity, hand);
+            //Instantiate(newItemInHand, hand.transform.position, Quaternion.identity, hand);
         }
     }
 
     void Start()
     {
-        currentItemInHand = emptyHand;    
+        currentItemInHand = null;
     }
 
     void Update()
@@ -105,7 +105,7 @@ public class Interactor : NetworkBehaviour
             //Handles Item interactable
             if (hit.collider.GetComponent<ItemManager>() != false) 
             {
-                if (Input.GetKeyDown(KeyCode.F) && currentItemInHand == emptyHand) 
+                if (Input.GetKeyDown(KeyCode.F) && !currentItemInHand) 
                 {
                     HandleItem(hit.collider.gameObject);
                 }
@@ -143,7 +143,7 @@ public class Interactor : NetworkBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.G) && currentItemInHand != emptyHand) 
+        if (Input.GetKeyDown(KeyCode.G) && currentItemInHand) 
         {
             DebugText.text = "Dropped Item";
             HandleItemWhenDropped(currentItemInHand);
@@ -153,26 +153,39 @@ public class Interactor : NetworkBehaviour
     public void HandleAltar(GameObject altar) 
     {
         AltarHandler altarHandler = altar.GetComponent<AltarHandler>();
-        ItemManager itemInHandManager = currentItemInHand.GetComponent<ItemManager>();
 
-        if (isServer)
+
+        if (currentItemInHand)
         {
-            if (!altarHandler.isActive)
+            ItemManager itemInHandManager = currentItemInHand.GetComponent<ItemManager>();
+
+            if (isServer)
             {
-                if (currentItemInHand != emptyHand)
+                if (!altarHandler.isActive)
                 {
-                    altarHandler.particleColor = itemInHandManager.interactorColor;
-                    altarHandler.particleLight.color = itemInHandManager.interactorColor;
-                    altarHandler.isActive = true;
+                    if (currentItemInHand)
+                    {
+                        altarHandler.particleColor = itemInHandManager.interactorColor;
+                        altarHandler.particleLight.color = itemInHandManager.interactorColor;
+                        altarHandler.isActive = true;
+                    }
                 }
+                else if (altarHandler.isActive)
+                {
+                    altarHandler.isActive = false;
+                }
+                else Debug.Log("Error with handling Altar");
             }
-            else if (altarHandler.isActive)
+            else CmdHandleAltar(altar);
+        }
+        else 
+        {
+            if (altarHandler.isActive) 
             {
                 altarHandler.isActive = false;
             }
-            else Debug.Log("Error with handling Altar");
         }
-        else CmdHandleAltar(altar);
+        
     }
 
     [Command]
@@ -203,7 +216,7 @@ public class Interactor : NetworkBehaviour
     {
         if (isServer)
         {
-            currentItemInHand = emptyHand;
+            currentItemInHand = null;
 
             item.transform.position = dropPoint.position;
             item.GetComponent<Rigidbody>().isKinematic = false;
