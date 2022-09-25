@@ -106,6 +106,16 @@ public class Interactor : NetworkBehaviour
                 }
             }
 
+            if (hit.collider.GetComponent<AltarHandler>() != false) 
+            {
+                if (Input.GetKeyDown(KeyCode.F)) 
+                {
+                    GameObject altar = hit.collider.gameObject;
+                    HandleAltar(altar);
+                    
+                }
+            }
+
             //Handles office key interactable
             if (hit.collider.GetComponent<OfficeKeyManager>() != false)
             {
@@ -137,6 +147,30 @@ public class Interactor : NetworkBehaviour
         }
     }
 
+    public void HandleAltar(GameObject altar) 
+    {
+        if (isServer)
+        {
+            AltarHandler altarHandler = altar.GetComponent<AltarHandler>();
+            ItemManager itemInHandManager = currentItemInHand.GetComponent<ItemManager>();
+            if (!altarHandler.isActive && currentItemInHand != emptyHand)
+            {
+                altarHandler.particleColor = itemInHandManager.interactorColor;
+                altarHandler.EnableParticle();
+            }
+            else
+            {
+                altarHandler.DisableParticle();
+            }
+        }
+        else CmdHandleAltar(altar);
+    }
+
+    [Command]
+    public void CmdHandleAltar(GameObject altar) 
+    {
+        HandleAltar(altar);
+    }
 
     public void HandleItem(GameObject item)
     {
