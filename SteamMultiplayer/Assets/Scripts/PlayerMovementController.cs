@@ -38,7 +38,7 @@ public class PlayerMovementController : NetworkBehaviour
 
     [Header("Camera")]
     public Camera cam;
-    
+
 
     [Header("Model")]
     public Collider playerCollider;
@@ -48,13 +48,14 @@ public class PlayerMovementController : NetworkBehaviour
 
     public Text playerNameText;
 
-    public MeshRenderer PlayerMesh;
+    public SkinnedMeshRenderer PlayerMesh;
+    public Animator anim;
     public Material[] playerColors;
 
     Rigidbody rb;
 
     public Light flashlight;
-    [SyncVar (hook=nameof(OnChangeFlashlight))]
+    [SyncVar(hook = nameof(OnChangeFlashlight))]
     public bool flashlightEnabled;
 
     public void OnChangeFlashlight(bool oldValue, bool newValue)
@@ -68,13 +69,14 @@ public class PlayerMovementController : NetworkBehaviour
         cam = GetComponentInChildren<Camera>();
         flashlight = GetComponentInChildren<Light>();
         stamina = staminaMax;
+        anim.enabled = true;
     }
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().name == "Game") 
+        if (SceneManager.GetActiveScene().name == "Game")
         {
-            if (PlayerModel.activeSelf == false) 
+            if (PlayerModel.activeSelf == false)
             {
                 SetPosition();                      //this is called for every player on the scene
                 PlayerModel.SetActive(true);
@@ -82,6 +84,8 @@ public class PlayerMovementController : NetworkBehaviour
                 rb = GetComponent<Rigidbody>();
                 rb.freezeRotation = true;
                 PlayerCosmeticsSetup();
+
+                if (isLocalPlayer) PlayerMesh.enabled = false;
             }
 
             if (hasAuthority)       //should be called for individual player
@@ -89,9 +93,8 @@ public class PlayerMovementController : NetworkBehaviour
                 HandleJumping();
                 HandleDrag();
                 HandleSprintCrouch();
-                GroundCheck();
+                GroundCheck(); 
             }
-            HandleFlashlight();
         }
     }
 
@@ -99,21 +102,20 @@ public class PlayerMovementController : NetworkBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Game")
         {
-
-
             if (hasAuthority)
             {
                 Movement();
+                HandleAnimations();
             }
         }
     }
 
-    public void SetPosition() 
+    public void SetPosition()
     {
         transform.position = new Vector3(0f, 10f, 0f);
     }
 
-    public void Movement() 
+    public void Movement()
     {
         //rb.AddForce(Vector3.down * Time.deltaTime * -gravity);   //extra gravity
 
@@ -126,11 +128,39 @@ public class PlayerMovementController : NetworkBehaviour
         {
             rb.AddForce(moveDirection.normalized * speed * speedMultiplier, ForceMode.Acceleration);
         }
-        else if (!isGrounded) 
+        else if (!isGrounded)
         {
             rb.AddForce(moveDirection.normalized * speed * speedMultiplier * airMultiplier, ForceMode.Acceleration);
         }
-        
+
+    }
+
+    public void HandleAnimations() 
+    {
+        if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
+        {
+            anim.SetInteger("MoveState", 1);
+            anim.SetBool("IsMoving", true);
+        }
+        else if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W))
+        {
+            anim.SetInteger("MoveState", 0);
+            anim.SetBool("IsMoving", true);
+        }
+        else if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A))
+        {
+            anim.SetInteger("MoveState", 2);
+            anim.SetBool("IsMoving", true);
+        }
+        else if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.D))
+        {
+            anim.SetInteger("MoveState", 3);
+            anim.SetBool("IsMoving", true);
+        }
+        else
+        {
+            anim.SetBool("IsMoving", false);
+        }
     }
 
     public void HandleJumping() 
@@ -163,6 +193,7 @@ public class PlayerMovementController : NetworkBehaviour
             if (stamina > 0)
             {
                 isSprinting = true;
+                anim.speed = 1.5f;
                 speed = sprintSpeed;
                 stamina -= staminaDrain;
             }
@@ -185,6 +216,7 @@ public class PlayerMovementController : NetworkBehaviour
             speed = walkSpeed;
             PlayerMesh.transform.localScale = new Vector3(1f, 1f, 1f);
             cam.transform.localPosition = new Vector3(0f, 0.77f, 0.15f);
+            anim.speed = 1;
 
         }
     }
