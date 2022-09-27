@@ -167,6 +167,8 @@ public class Interactor : NetworkBehaviour
                     altarHandler.particleColor = itemInHandManager.interactorColor;
                     altarHandler.particleLight.color = itemInHandManager.interactorColor;
                     altarHandler.isActive = true;
+
+                    currentItemInHand = null;
                 }
                 else
                 {
