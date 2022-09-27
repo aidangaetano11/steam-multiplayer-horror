@@ -1,18 +1,26 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 using Mirror;
 public class AltarHandler : NetworkBehaviour
 {
+    [Header("Altar Variables")]
+    public string number;
     public GameObject particle;
     public VisualEffect visualEffect;
     public Light particleLight;
+
+    [SyncVar (hook=nameof(OnQuestItemChange))]
+    public string questItemName;
 
     [SyncVar (hook=nameof(OnColorChange))]
     public Color particleColor;
 
     [SyncVar (hook = nameof(OnActiveChange))]
     public bool isActive = false;
+
+    public List<GameObject> itemList;
 
     void OnColorChange(Color oldValue, Color newValue) 
     {
@@ -39,9 +47,38 @@ public class AltarHandler : NetworkBehaviour
         }
     }
 
+    void OnQuestItemChange(string oldValue, string newValue)
+    {
+        questItemName = newValue;
+        Debug.Log("Alter " + number + " Quest Item: " + questItemName); ;
+    }
+
     public void Start()
     {
         visualEffect.Stop();
         particleLight.enabled = false;
+
+        HandleQuestItem();
+    }
+
+    public GameObject PickQuestObject() 
+    {
+        int randomIndex = Random.Range(0, itemList.Count);
+        return itemList[randomIndex];      
+    }
+
+    public void HandleQuestItem() 
+    {
+        if (isServer)
+        {
+            questItemName = PickQuestObject().name;
+        }
+        else CmdHandleQuestItem();
+    }
+
+    [Command]
+    public void CmdHandleQuestItem() 
+    {
+        HandleQuestItem();
     }
 }
