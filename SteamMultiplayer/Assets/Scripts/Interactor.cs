@@ -36,6 +36,7 @@ public class Interactor : NetworkBehaviour
 
     [Header("Hand Variables")]
     public Transform hand;
+    public Transform thirdPersonHand;
     public GameObject emptyHand;
 
     [SyncVar(hook = nameof(OnCreateItemInHand))]

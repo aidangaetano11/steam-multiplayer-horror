@@ -216,7 +216,9 @@ MonoBehaviour:
   keyPrefab: {fileID: 6586380701880126115, guid: 9295189b4f03b8a47b9873a8492069d1, type: 3}
   spawnPrefab: {fileID: 1860124792835660777, guid: c6508cea2ba61a94e93ecdddee7f1a19, type: 3}
   redPotionPrefab: {fileID: 4253060336477021176, guid: d87fc64e32effe64aa126461240ccbdd, type: 3}
-  emptyHandPrefab: {fileID: 8783409379270256213, guid: 5a4338615bacdb64399f04a7eb31db0f, type: 3}
+  hammerPrefab: {fileID: 5873421985490563833, guid: 802e3965c6df4374090f080bbb2d9e26, type: 3}
+  tpPrefab: {fileID: 1851223044971311768, guid: ea24221835a46d84c9fc478cf25cfeec, type: 3}
+  plantPrefab: {fileID: 1161264141412401240, guid: b355de29f7b8c954eb56ae835e5787c6, type: 3}
   GamePlayerPrefab: {fileID: 31764771190621457, guid: deb568f797d86014e8af53a0e87cae99, type: 3}
 --- !u!4 &344707810
 Transform:

@@ -132,7 +132,7 @@ MonoBehaviour:
   itemName: RedPotion
   itemPrefab: {fileID: 4253060336477021176}
   itemModel: {fileID: 3034473432476154886, guid: 619021c019e6c7f4bb64e2b96cbeae0a, type: 3}
-  interactorColor: {r: 1, g: 0, b: 0, a: 0}
+  interactorColor: {r: 1, g: 0, b: 0.05751419, a: 0}
 --- !u!114 &1209238253014006773
 MonoBehaviour:
   m_ObjectHideFlags: 0

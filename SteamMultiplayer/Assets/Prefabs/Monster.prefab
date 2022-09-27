@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 3779593590746675393}
+  monsterCollider: {fileID: 0}
   player: {fileID: 0}
   waypoints: []
   whatIsGround:
@@ -146,6 +147,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   extendedChaseTime: 5
+  legs: []
+  legDelay: 0.1
+  walkSpeed: 8
+  runSpeed: 15
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 20
   sightRange: 20
@@ -165,7 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1b7724e4d340434596c944e3df3cd9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewRadius: 20
+  viewRadius: 19.88
   viewAngle: 114
   targetMask:
     serializedVersion: 2

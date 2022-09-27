@@ -19,6 +19,10 @@ public class MonsterAI : MonoBehaviour
     public List <GroundSearchManager> legs = new List<GroundSearchManager> ();
     public float legDelay = 0.1f;
 
+    [Header("Movement")]
+    public float walkSpeed = 8f;
+    public float runSpeed = 15f;
+
     [Header("States")]
     //Patrolling
     public Vector3 walkPoint;
@@ -129,7 +133,7 @@ public class MonsterAI : MonoBehaviour
 
     private void Patrolling() 
     {
-        agent.speed = 5f;
+        agent.speed = walkSpeed;
         if (!walkPointSet) SearchWalkPoint();
 
         if (walkPointSet) agent.SetDestination(walkPoint);
@@ -160,7 +164,7 @@ public class MonsterAI : MonoBehaviour
 
     private void ChasePlayer() 
     {
-        agent.speed = 8f;
+        agent.speed = runSpeed;
         agent.SetDestination(player.position);
         wasChasingPlayer = true;
     }
