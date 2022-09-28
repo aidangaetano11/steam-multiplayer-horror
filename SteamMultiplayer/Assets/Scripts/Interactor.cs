@@ -170,18 +170,7 @@ public class Interactor : NetworkBehaviour
 
             if (isServer)
             {
-                for (int i = 0; i < ITHandler.wallNumbers.Count; i++) 
-                {
-                    ITHandler.wallNumbers[i].GetComponent<WallNumberHandler>().numColor = Color.red;
-                }
-
-                for (int i = 0; i < ITHandler.altars.Count; i++)
-                {
-                    if (ITHandler.altars[i].questItemName == itemManager.itemName)
-                    {
-                        ITHandler.wallNumbers[i].GetComponent<WallNumberHandler>().numColor = Color.green;
-                    }
-                }
+                ITHandler.TestItem(itemManager.itemName);
                 currentItemInHand = null;
             }
             else CmdHandleItemTester(IT);
