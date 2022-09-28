@@ -124,7 +124,7 @@ public class Interactor : NetworkBehaviour
             //Handles item tester interactable
             if (hit.collider.GetComponent<ItemTesterHandler>() != false) 
             {
-                if (Input.GetKeyDown(KeyCode.F) && currentItemInHand) 
+                if (Input.GetKeyDown(KeyCode.F)) 
                 {
                     HandleItemTester(hit);                  
                 }
@@ -162,12 +162,20 @@ public class Interactor : NetworkBehaviour
 
     public void HandleItemTester(RaycastHit hit) 
     {
-        if (isServer)
+        ItemTesterHandler ITHandler = hit.collider.GetComponent<ItemTesterHandler>();
+
+        if (currentItemInHand) 
         {
-            hit.collider.GetComponent<ItemTesterHandler>().TestItem(currentItemInHand.GetComponent<ItemManager>().itemName);
-            currentItemInHand = null;
-        }
-        else CmdHandleItemTester(hit);
+            ItemManager itemManager = currentItemInHand.GetComponent<ItemManager>();
+
+            if (isServer)
+            {
+                ITHandler.TestItem(itemManager.itemName);
+
+                currentItemInHand = null;
+            }
+            else CmdHandleItemTester(hit);
+        }        
     }
 
     [Command]
