@@ -127,7 +127,7 @@ public class Interactor : NetworkBehaviour
                 if (Input.GetKeyDown(KeyCode.F) && currentItemInHand) 
                 {
                     hit.collider.GetComponent<ItemTesterHandler>().TestItem(currentItemInHand.GetComponent<ItemManager>().itemName);
-                    currentItemInHand = null;
+                    HandleItemTester();                  
                 }
             }
 
@@ -159,6 +159,21 @@ public class Interactor : NetworkBehaviour
         {
             HandleItemWhenDropped(currentItemInHand);
         }
+    }
+
+    public void HandleItemTester() 
+    {
+        if (isServer)
+        {
+            currentItemInHand = null;
+        }
+        else CmdHandleItemTester();
+    }
+
+    [Command]
+    public void CmdHandleItemTester() 
+    {
+        HandleItemTester();
     }
 
     public void HandleAltar(GameObject altar) 
