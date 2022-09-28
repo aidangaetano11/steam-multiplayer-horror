@@ -1046,6 +1046,8 @@ GameObject:
   - component: {fileID: 7886314700628178926}
   - component: {fileID: 7886314700628178927}
   - component: {fileID: 6872173996544642508}
+  - component: {fileID: 831006284719207476}
+  - component: {fileID: 2246598136192833422}
   m_Layer: 0
   m_Name: Summoning Circle
   m_TagString: Untagged
@@ -1117,3 +1119,32 @@ MonoBehaviour:
   visible: 0
   m_AssetId: 8ae63daec5905824f8f1a8e5a7ae3a58
   hasSpawned: 0
+--- !u!114 &831006284719207476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7886314700628178924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d704ce8fa0728a04781350b00931b975, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  col: {fileID: 2246598136192833422}
+  killed: 0
+--- !u!65 &2246598136192833422
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7886314700628178924}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.2216554, y: 3.198752, z: 5.8444295}
+  m_Center: {x: -0.49242902, y: -1.099376, z: 2.9260962}
