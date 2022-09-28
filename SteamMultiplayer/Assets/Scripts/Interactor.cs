@@ -112,11 +112,22 @@ public class Interactor : NetworkBehaviour
                 }
             }
 
+            //Handles altar interactable
             if (hit.collider.GetComponent<AltarHandler>() != false)
             {
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     HandleAltar(hit.collider.gameObject);
+                }
+            }
+
+            //Handles item tester interactable
+            if (hit.collider.GetComponent<ItemTesterHandler>() != false) 
+            {
+                if (Input.GetKeyDown(KeyCode.F) && currentItemInHand) 
+                {
+                    hit.collider.GetComponent<ItemTesterHandler>().TestItem(currentItemInHand.GetComponent<ItemManager>().itemName);
+                    currentItemInHand = null;
                 }
             }
 
@@ -146,7 +157,6 @@ public class Interactor : NetworkBehaviour
 
         if (Input.GetKeyDown(KeyCode.G) && currentItemInHand) 
         {
-            DebugText.text = "Dropped Item";
             HandleItemWhenDropped(currentItemInHand);
         }
     }

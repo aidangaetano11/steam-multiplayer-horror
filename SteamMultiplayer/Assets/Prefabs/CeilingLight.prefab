@@ -45,8 +45,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 5
-  m_Range: 15
+  m_Intensity: 10
+  m_Range: 10
   m_SpotAngle: 179
   m_InnerSpotAngle: 110.52832
   m_CookieSize: 10
@@ -82,7 +82,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2147483647
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -257,8 +257,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 5
-  m_Range: 15
+  m_Intensity: 10
+  m_Range: 10
   m_SpotAngle: 179
   m_InnerSpotAngle: 110.52832
   m_CookieSize: 10
@@ -294,7 +294,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2147483647
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -339,13 +339,12 @@ GameObject:
   - component: {fileID: 2882642658759941320}
   - component: {fileID: 2882642658759941323}
   - component: {fileID: 2882642658759941322}
-  - component: {fileID: 6853804791507981523}
   m_Layer: 0
   m_Name: CeilingLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &2882642658759941321
 Transform:
@@ -430,21 +429,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &6853804791507981523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2882642658759941317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33a4dfe101469924ea0cc6728ab83289, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spotlights: []
-  mesh: {fileID: 0}
-  lightsOn: 1
 --- !u!1 &5554958488032967068
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,8 +474,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 5
-  m_Range: 15
+  m_Intensity: 10
+  m_Range: 10
   m_SpotAngle: 179
   m_InnerSpotAngle: 110.52832
   m_CookieSize: 10
@@ -527,7 +511,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2147483647
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
