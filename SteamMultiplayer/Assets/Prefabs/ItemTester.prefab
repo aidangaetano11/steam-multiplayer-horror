@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6097591248095744946}
   - component: {fileID: 826192735403104568}
   - component: {fileID: 5205281613975859450}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Scope1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4468560682600988986}
   - component: {fileID: 4411112386532687500}
   - component: {fileID: 7457584770344053352}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Stand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 7473764445942741734}
   - component: {fileID: 2667833866728471206}
   - component: {fileID: 4074643078506705514}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 6280297213468955142}
   - component: {fileID: 2614780698957105225}
   - component: {fileID: 1225641142658609241}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Scope3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 3539948518953695180}
   - component: {fileID: 4939113607388277516}
   - component: {fileID: 1390863498729445813}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 8972968624644640531}
   - component: {fileID: 2168653251913181475}
   - component: {fileID: 1515656006889165335}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Scope2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -509,7 +509,7 @@ GameObject:
   - component: {fileID: 8440586804164200328}
   - component: {fileID: 6111781595395370272}
   - component: {fileID: 2410719263430927810}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ItemHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -592,7 +592,8 @@ GameObject:
   - component: {fileID: 7445809256820940552}
   - component: {fileID: 741316899056741417}
   - component: {fileID: 3651665676996533360}
-  m_Layer: 0
+  - component: {fileID: 1105876161117340357}
+  m_Layer: 11
   m_Name: ItemTester
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -633,7 +634,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a2cc44de746ee40b4c3b9c14d1c6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   altars: []
+  wallNumbers: []
 --- !u!65 &3651665676996533360
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -647,3 +651,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.3043213, y: 2.6377602, z: 2.0591526}
   m_Center: {x: -0.13239288, y: 0.71100426, z: 0.009806633}
+--- !u!114 &1105876161117340357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7790951091521242546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  visible: 0
+  m_AssetId: 335c9d6e4cc7c8a4bb6792e442ec9286
+  hasSpawned: 0

@@ -50,7 +50,7 @@ public class AltarHandler : NetworkBehaviour
     void OnQuestItemChange(string oldValue, string newValue)
     {
         questItemName = newValue;
-        Debug.Log("Alter " + number + " Quest Item: " + questItemName); ;
+        Debug.Log("Alter " + number + " Quest Item: " + questItemName);
     }
 
     public void Start()
