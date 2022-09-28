@@ -9,9 +9,24 @@ public class EndGameHandler : NetworkBehaviour
 
     public List<AltarHandler> altars;
 
+    public List<Transform> summonPoints;
+
+    public GameObject summoningCircle;
+
     public void OnAltarsComplete(bool oldValue, bool newValue) 
     {
         altarsComplete = newValue;
+        SpawnSummoningCircle();
+    }
+
+    public void SpawnSummoningCircle() 
+    {
+        Debug.Log("Circle Summoned");
+        int randomSpawn = Random.Range(0, summonPoints.Count);
+
+        GameObject summonObject = Instantiate(summoningCircle, summonPoints[randomSpawn].position, Quaternion.identity);
+        summonObject.transform.SetPositionAndRotation(new Vector3(summonPoints[randomSpawn].position.x, -1.85f, summonPoints[randomSpawn].position.z), Quaternion.Euler(-90f,0f,0f));
+        NetworkServer.Spawn(summonObject);      
     }
 
     public void Update()

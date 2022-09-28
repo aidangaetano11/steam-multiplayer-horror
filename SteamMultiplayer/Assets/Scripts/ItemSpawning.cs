@@ -8,6 +8,8 @@ public class ItemSpawning : NetworkBehaviour
     public int maxSpawnedItems = 3;
     public int maxSpawnedRedPotions = 3;
 
+    public Transform Objects;
+
     [Header("Spawnpoint Lists")]
     public List<Transform> ItemSpawnPoints = new List<Transform>();
     public List<Transform> KeySpawnPoints = new List<Transform>();
@@ -50,23 +52,11 @@ public class ItemSpawning : NetworkBehaviour
             {
                 int randomSpawn = Random.Range(0, ItemSpawnPoints.Count);           //randomly loop all spawnpoints
                 currentItemSpawnPoint = ItemSpawnPoints[randomSpawn].position;         //save position of that spawn point
-                GameObject obj = Instantiate(ChooseRandomItem(), currentItemSpawnPoint, Quaternion.identity);
+                GameObject obj = Instantiate(ChooseRandomItem(), currentItemSpawnPoint, Quaternion.identity, Objects);
                 NetworkServer.Spawn(obj);                               //spawn item prefab on spawn point
                 ItemSpawnPoints.Remove(ItemSpawnPoints[randomSpawn]);          //delete spawn point from list, so we cant try and spawn another object on that point
             }           
-        }
-
-        //for (int i = 0; i < maxSpawnedRedPotions; i++) 
-        //{
-        //    if (RedPotionPrefab != null)
-        //    {
-        //        int randomRedSpawn = Random.Range(0, ItemSpawnPoints.Count);
-        //        currentRedSpawnPoint = ItemSpawnPoints[randomRedSpawn].position;
-        //        GameObject redPotionObject = Instantiate(RedPotionPrefab, currentRedSpawnPoint, Quaternion.identity);
-        //        NetworkServer.Spawn(redPotionObject);
-        //        ItemSpawnPoints.Remove(ItemSpawnPoints[randomRedSpawn]);
-        //    }
-        //}        
+        }     
     }
 
     public void ChooseRandomKeySpawnPoint() 

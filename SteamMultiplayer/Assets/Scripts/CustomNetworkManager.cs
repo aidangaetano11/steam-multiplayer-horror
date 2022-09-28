@@ -14,6 +14,7 @@ public class CustomNetworkManager : NetworkManager
     public GameObject hammerPrefab;
     public GameObject tpPrefab;
     public GameObject plantPrefab;
+    public GameObject SCPrefab;
 
     //player
     [SerializeField] private PlayerObjectController GamePlayerPrefab;
@@ -43,6 +44,7 @@ public class CustomNetworkManager : NetworkManager
             NetworkClient.RegisterPrefab(hammerPrefab);
             NetworkClient.RegisterPrefab(tpPrefab);
             NetworkClient.RegisterPrefab(plantPrefab);
+            NetworkClient.RegisterPrefab(SCPrefab);
         }
               
     }
