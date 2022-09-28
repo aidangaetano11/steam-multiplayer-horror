@@ -171,17 +171,12 @@ public class Interactor : NetworkBehaviour
             if (isServer)
             {
                 ITHandler.TestItem(itemManager.itemName);
-
-                currentItemInHand = null;
             }
-            else CmdHandleItemTester(hit);
+            else 
+            {
+                ITHandler.CmdTestItem(itemManager.itemName);
+            }          
         }        
-    }
-
-    [Command]
-    public void CmdHandleItemTester(RaycastHit hit) 
-    {
-        HandleItemTester(hit);
     }
 
     public void HandleAltar(GameObject altar) 

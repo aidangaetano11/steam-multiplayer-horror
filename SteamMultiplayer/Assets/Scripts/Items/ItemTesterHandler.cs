@@ -16,43 +16,30 @@ public class ItemTesterHandler : NetworkBehaviour
         ChangeItemColors(itemName);
     }
 
+    [Command]
+    public void CmdTestItem(string itemName) 
+    {
+        TestItem(itemName);
+    }
+
 
     public void RevertItemColors()
     {
-        if (isServer) 
+        for (int i = 0; i < wallNumbers.Count; i++)   //resets colors of wallnumbers back to red
         {
-            for (int i = 0; i < wallNumbers.Count; i++)   //resets colors of wallnumbers back to red
-            {
-                wallNumbers[i].GetComponent<WallNumberHandler>().numColor = Color.red;
-            }
+            wallNumbers[i].GetComponent<WallNumberHandler>().numColor = Color.red;
         }
-        else CmdRevertItemColors();
     }
 
-    [Command]
-    public void CmdRevertItemColors()  
-    {
-        RevertItemColors();
-    }
 
     public void ChangeItemColors(string itemName) 
     {
-        if (isServer) 
+        for (int i = 0; i < altars.Count; i++)      //changes wallnumbers to green if matching object with quest item altar
         {
-            for (int i = 0; i < altars.Count; i++)      //changes wallnumbers to green if matching object with quest item altar
+            if (altars[i].questItemName == itemName)
             {
-                if (altars[i].questItemName == itemName)
-                {
-                    wallNumbers[i].GetComponent<WallNumberHandler>().numColor = Color.green;
-                }
+                wallNumbers[i].GetComponent<WallNumberHandler>().numColor = Color.green;
             }
         }
-        else CmdChangeItemColors(itemName);
-    }
-
-    [Command]
-    public void CmdChangeItemColors(string itemName) 
-    {
-        ChangeItemColors(itemName);
     }
 }
