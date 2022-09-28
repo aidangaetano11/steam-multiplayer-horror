@@ -16,12 +16,6 @@ public class ItemTesterHandler : NetworkBehaviour
         ChangeItemColors(itemName);      
     }
 
-    [Command]
-    public void CmdTestItem(string itemName)
-    {
-        TestItem(itemName);
-    }
-
 
     public void RevertItemColors()
     {

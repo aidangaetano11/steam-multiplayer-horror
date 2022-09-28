@@ -160,7 +160,7 @@ public class Interactor : NetworkBehaviour
         }
     }
 
-    public void HandleItemTester(GameObject IT) 
+    public void HandleItemTester(GameObject IT)     //calls test item function in item tester script
     {
         ItemTesterHandler ITHandler = IT.GetComponent<ItemTesterHandler>();
 
@@ -168,12 +168,12 @@ public class Interactor : NetworkBehaviour
         {
             ItemManager itemManager = currentItemInHand.GetComponent<ItemManager>();
 
-            if (isServer)
+            if (isServer)                //if we are the server then we will test the item
             {
                 ITHandler.TestItem(itemManager.itemName);
                 currentItemInHand = null;
             }
-            else CmdHandleItemTester(IT);
+            else CmdHandleItemTester(IT); //if we are client we will call command to tell server to test the item
         }        
     }
 
@@ -199,6 +199,8 @@ public class Interactor : NetworkBehaviour
                     altarHandler.particleColor = itemInHandManager.interactorColor;
                     altarHandler.particleLight.color = itemInHandManager.interactorColor;
                     altarHandler.isActive = true;
+
+                    altarHandler.CheckItem(currentItemInHand);
 
                     currentItemInHand = null;
                 }

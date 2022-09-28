@@ -20,11 +20,12 @@ public class AltarHandler : NetworkBehaviour
     [SyncVar (hook = nameof(OnActiveChange))]
     public bool isActive = false;
 
+    public bool correctItem = false;
+
     public List<GameObject> itemList;
 
     void OnColorChange(Color oldValue, Color newValue) 
     {
-        Debug.Log("COLOR CHANGE: " + newValue.ToString());
         particleColor = newValue;
     }
 
@@ -32,14 +33,13 @@ public class AltarHandler : NetworkBehaviour
     {
         if (oldValue)      //if is active
         {
-            Debug.Log("Disable Smoke");
             particleLight.enabled = false;
             visualEffect.Stop();
+            correctItem = false;
 
         }
         else
         {
-            Debug.Log("Enable Smoke");
             visualEffect.SetVector4("SmokeColor", particleColor);
             particleLight.color = particleColor;
             particleLight.enabled = true;
@@ -59,6 +59,14 @@ public class AltarHandler : NetworkBehaviour
         particleLight.enabled = false;
 
         HandleQuestItem();
+    }
+
+    public void CheckItem(GameObject item)   //called from interactor script
+    {
+        if (item.GetComponent<ItemManager>().itemName == questItemName) 
+        {
+            correctItem = true;
+        }
     }
 
     public GameObject PickQuestObject() 
