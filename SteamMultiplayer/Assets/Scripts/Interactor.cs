@@ -126,8 +126,7 @@ public class Interactor : NetworkBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.F) && currentItemInHand) 
                 {
-                    hit.collider.GetComponent<ItemTesterHandler>().TestItem(currentItemInHand.GetComponent<ItemManager>().itemName);
-                    HandleItemTester();                  
+                    HandleItemTester(hit);                  
                 }
             }
 
@@ -161,19 +160,20 @@ public class Interactor : NetworkBehaviour
         }
     }
 
-    public void HandleItemTester() 
+    public void HandleItemTester(RaycastHit hit) 
     {
         if (isServer)
         {
+            hit.collider.GetComponent<ItemTesterHandler>().TestItem(currentItemInHand.GetComponent<ItemManager>().itemName);
             currentItemInHand = null;
         }
-        else CmdHandleItemTester();
+        else CmdHandleItemTester(hit);
     }
 
     [Command]
-    public void CmdHandleItemTester() 
+    public void CmdHandleItemTester(RaycastHit hit) 
     {
-        HandleItemTester();
+        HandleItemTester(hit);
     }
 
     public void HandleAltar(GameObject altar) 
