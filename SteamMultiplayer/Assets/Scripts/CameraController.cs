@@ -36,10 +36,14 @@ public class CameraController : NetworkBehaviour
         {
             if (hasAuthority)     //individual player
             {
+                if (PauseMenu.GameIsPaused == false) 
+                {
+                    LockCursor();
+                }
+
                 if (cam.enabled == false) 
                 {
                     cam.enabled = true;
-                    LockCursor();
                 }
                 if (audioListener.enabled == false) 
                 {
@@ -67,13 +71,8 @@ public class CameraController : NetworkBehaviour
         xRot = Mathf.Clamp(xRot, -90f, 90f);
     }
 
-    private void LockCursor()
+    public void LockCursor()
     {
         Cursor.lockState = CursorLockMode.Locked;
-    }
-
-    private void UnlockCursor()
-    {
-        Cursor.lockState = CursorLockMode.None;
     }
 }
