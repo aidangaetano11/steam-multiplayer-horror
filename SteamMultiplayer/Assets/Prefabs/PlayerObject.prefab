@@ -469,6 +469,7 @@ MonoBehaviour:
   syncInterval: 0.1
   pauseMenuUI: {fileID: 6419539540101184263}
   camController: {fileID: 247777681444402785}
+  lobbyController: {fileID: 0}
 --- !u!1 &215582301043896517
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,7 +683,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press F to pick up this object.
+  m_Text: 
 --- !u!1 &554292819372472679
 GameObject:
   m_ObjectHideFlags: 0
