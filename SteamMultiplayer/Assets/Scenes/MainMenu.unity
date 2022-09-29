@@ -220,6 +220,7 @@ MonoBehaviour:
   tpPrefab: {fileID: 1851223044971311768, guid: ea24221835a46d84c9fc478cf25cfeec, type: 3}
   plantPrefab: {fileID: 1161264141412401240, guid: b355de29f7b8c954eb56ae835e5787c6, type: 3}
   SCPrefab: {fileID: 7886314700628178924, guid: 8ae63daec5905824f8f1a8e5a7ae3a58, type: 3}
+  blackHolePrefab: {fileID: 4924344142698886166, guid: 145b0cb7b2a23d3449f062ad2410b839, type: 3}
   GamePlayerPrefab: {fileID: 31764771190621457, guid: deb568f797d86014e8af53a0e87cae99, type: 3}
 --- !u!4 &344707810
 Transform:
