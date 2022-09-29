@@ -200,8 +200,8 @@ public class MonsterAI : NetworkBehaviour
 
             agent.speed = 0f;      //monster will take a break to "eat" player
             justKilled = true;
+            player.gameObject.GetComponent<PlayerMovementController>().isDead = true;
             StartCoroutine("WaitAfterKill", 5f);     //monster eats for delay amount
-            player.gameObject.SetActive(false);   //kills player
         }
         else CmdAttackPlayer();
     }

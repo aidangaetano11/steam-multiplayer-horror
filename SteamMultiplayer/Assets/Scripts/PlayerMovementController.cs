@@ -54,6 +54,14 @@ public class PlayerMovementController : NetworkBehaviour
 
     Rigidbody rb;
 
+    [SyncVar (hook = nameof(OnDeath))]
+    public bool isDead = false;
+
+    public void OnDeath(bool oldValue, bool newValue) 
+    {
+        isDead = newValue;
+        gameObject.SetActive(oldValue);
+    }
 
     private void Start()
     {
@@ -63,11 +71,11 @@ public class PlayerMovementController : NetworkBehaviour
         anim.enabled = true;
     }
 
-    private void Update()
+    public void Update()
     {
         if (SceneManager.GetActiveScene().name == "Game")
         {
-            if (PlayerModel.activeSelf == false)
+            if (PlayerModel.activeSelf == false && !isDead)
             {
                 SetPosition();                      //this is called for every player on the scene
                 PlayerModel.SetActive(true);
