@@ -48,11 +48,7 @@ public class PauseMenu : NetworkBehaviour
     }
 
     public void LoadMenu() 
-    {
-        NetworkIdentity.Destroy(gameObject);
-        NetworkClient.Disconnect();
-        SteamMatchmaking.LeaveLobby(SteamUser.GetSteamID());
-        
+    {   
         SceneManager.LoadScene("MainMenu");
     }
 

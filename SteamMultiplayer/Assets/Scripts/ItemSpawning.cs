@@ -29,13 +29,7 @@ public class ItemSpawning : NetworkBehaviour
 
     Vector3 currentItemSpawnPoint;
     Vector3 currentKeySpawnPoint;
-    Vector3 currentRedSpawnPoint;
 
-
-    private void Awake()
-    {
-       
-    }
 
     [Server]
     void Start()
