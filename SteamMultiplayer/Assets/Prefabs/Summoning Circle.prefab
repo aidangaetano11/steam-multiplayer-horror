@@ -1076,6 +1076,7 @@ Transform:
   - {fileID: 2951392103007757175}
   - {fileID: 6077553325378925416}
   - {fileID: 2851101867864638068}
+  - {fileID: 3386647863035386471}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1134,6 +1135,8 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   col: {fileID: 2246598136192833422}
+  portalSpawn: {fileID: 3386647863035386471}
+  portal: {fileID: 4924344142698886166, guid: 145b0cb7b2a23d3449f062ad2410b839, type: 3}
   killed: 0
 --- !u!65 &2246598136192833422
 BoxCollider:
@@ -1148,3 +1151,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.2216554, y: 3.198752, z: 5.8444295}
   m_Center: {x: -0.49242902, y: -1.099376, z: 2.9260962}
+--- !u!1 &8891871356849996714
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3386647863035386471}
+  m_Layer: 0
+  m_Name: PortalSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3386647863035386471
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8891871356849996714}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.56, y: -1.2, z: 1.08}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7886314700628178926}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
