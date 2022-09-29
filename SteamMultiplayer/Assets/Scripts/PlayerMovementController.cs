@@ -54,20 +54,11 @@ public class PlayerMovementController : NetworkBehaviour
 
     Rigidbody rb;
 
-    public Light flashlight;
-    [SyncVar(hook = nameof(OnChangeFlashlight))]
-    public bool flashlightEnabled;
-
-    public void OnChangeFlashlight(bool oldValue, bool newValue)
-    {
-        flashlight.enabled = newValue;
-    }
 
     private void Start()
     {
         PlayerModel.SetActive(false);
         cam = GetComponentInChildren<Camera>();
-        flashlight = GetComponentInChildren<Light>();
         stamina = staminaMax;
         anim.enabled = true;
     }
@@ -231,30 +222,6 @@ public class PlayerMovementController : NetworkBehaviour
         }
     }
 
-    public void HandleFlashlight() 
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            if (isServer)
-            {
-                if (flashlightEnabled)
-                {
-                    flashlightEnabled = false;
-                }
-                else
-                {
-                    flashlightEnabled = true;
-                }
-            }
-            else CmdHandleFlashlight();
-        }      
-    }
-
-    [Command]
-    public void CmdHandleFlashlight() 
-    {
-        HandleFlashlight();
-    }
 
     private void GroundCheck() 
     {

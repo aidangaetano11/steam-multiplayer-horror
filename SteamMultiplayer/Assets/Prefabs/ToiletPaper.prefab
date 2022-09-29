@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 193692155244942157}
   - component: {fileID: 1581842093460967652}
   - component: {fileID: 2889446437054782085}
+  - component: {fileID: 5786605980253165431}
   - component: {fileID: 2916382070610818434}
   - component: {fileID: 5293332521533820875}
   - component: {fileID: 5053928379905076902}
@@ -120,6 +121,19 @@ MonoBehaviour:
   itemPrefab: {fileID: 1851223044971311768}
   itemModel: {fileID: 1851223044971311768, guid: b0d2a401c07e4bb46ab718c2e69fa6df, type: 3}
   interactorColor: {r: 1, g: 1, b: 1, a: 0}
+--- !u!114 &5786605980253165431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851223044971311768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc9f0d6e38a2c5c49a2b7092374afc7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InteractableHintMessage: Press F to pick up toilet paper
 --- !u!54 &2916382070610818434
 Rigidbody:
   m_ObjectHideFlags: 0

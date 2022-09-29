@@ -902,6 +902,7 @@ GameObject:
   - component: {fileID: 6540709191350020801}
   - component: {fileID: 6732624053350892035}
   - component: {fileID: 1120298157559099656}
+  - component: {fileID: 1168740557487517285}
   - component: {fileID: -4150889320137428819}
   - component: {fileID: -3559208281515897535}
   m_Layer: 11
@@ -990,6 +991,19 @@ MonoBehaviour:
   itemPrefab: {fileID: 1161264141412401240}
   itemModel: {fileID: 1161264141412401240, guid: 0a6fc2d89cae990498226e2d30387a7a, type: 3}
   interactorColor: {r: 0, g: 1, b: 0.003575325, a: 0}
+--- !u!114 &1168740557487517285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161264141412401240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc9f0d6e38a2c5c49a2b7092374afc7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InteractableHintMessage: Press F to pick up plant
 --- !u!114 &-4150889320137428819
 MonoBehaviour:
   m_ObjectHideFlags: 0

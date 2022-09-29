@@ -2,7 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.AI;
-public class MonsterAI : MonoBehaviour
+using Mirror;
+public class MonsterAI : NetworkBehaviour
 {
     public NavMeshAgent agent;
     public Collider monsterCollider;
@@ -14,6 +15,8 @@ public class MonsterAI : MonoBehaviour
     public LayerMask whatIsGround, whatIsPlayer;
 
     public float extendedChaseTime = 5f;
+
+    public bool justKilled = false;
 
     [Header("Leg Manager")]
     public List <GroundSearchManager> legs = new List<GroundSearchManager> ();
@@ -90,11 +93,16 @@ public class MonsterAI : MonoBehaviour
         }
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if (!playerInSightRange && !playerInAttackRange && !wasChasingPlayer) Patrolling();
-        if (playerInSightRange && !playerInAttackRange || wasChasingPlayer) ChasePlayer();
+        if (!playerInSightRange && !playerInAttackRange && !wasChasingPlayer && !justKilled) Patrolling();
+        if (playerInSightRange && !playerInAttackRange && !justKilled || wasChasingPlayer && !justKilled) 
+        {
+            ChasePlayer();
+            agent.speed = runSpeed;
+        }
+        
         if (playerInSightRange && playerInAttackRange) AttackPlayer();
 
-        if (!playerInSightRange && !playerInAttackRange && wasChasingPlayer) StartCoroutine("ChasePlayerNotInSight", Random.Range(extendedChaseTime, extendedChaseTime*4));
+        if (!playerInSightRange && !playerInAttackRange && wasChasingPlayer && !justKilled) StartCoroutine("ChasePlayerNotInSight", Random.Range(extendedChaseTime, extendedChaseTime*4));
     }
 
 
@@ -164,7 +172,6 @@ public class MonsterAI : MonoBehaviour
 
     private void ChasePlayer() 
     {
-        agent.speed = runSpeed;
         agent.SetDestination(player.position);
         wasChasingPlayer = true;
     }
@@ -180,12 +187,41 @@ public class MonsterAI : MonoBehaviour
         }
     }
 
-    private void AttackPlayer() 
+    public void AttackPlayer()    //kill player
     {
-        //AttackPlayer
-        transform.LookAt(player);
-        player.gameObject.SetActive(false);
-        Debug.Log("ATTACKING PLAYER");
+        if (isServer)
+        {
+            //AttackPlayer
+            transform.LookAt(player);
+            if (player.gameObject.GetComponentInChildren<Interactor>().currentItemInHand)    //drops item in players hand if player has an item
+            {
+                player.gameObject.GetComponentInChildren<Interactor>().HandleItemWhenDropped(player.gameObject.GetComponentInChildren<Interactor>().currentItemInHand);
+            }
+
+            agent.speed = 0f;      //monster will take a break to "eat" player
+            justKilled = true;
+            StartCoroutine("WaitAfterKill", 5f);     //monster eats for delay amount
+            player.gameObject.SetActive(false);   //kills player
+        }
+        else CmdAttackPlayer();
+    }
+
+    public IEnumerator WaitAfterKill(float delay)    //after the delay, the monster will start to patrol again
+    {
+        while (true) 
+        {
+            yield return new WaitForSeconds(delay);
+            agent.speed = walkSpeed;
+            justKilled = false;
+            wasChasingPlayer=false;
+            StopCoroutine("WaitAfterKill");
+        }
+    }
+
+    [Command]
+    public void CmdAttackPlayer() 
+    {
+        AttackPlayer();
     }
 
     private void OnDrawGizmos()

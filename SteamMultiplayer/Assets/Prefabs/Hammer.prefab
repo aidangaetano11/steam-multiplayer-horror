@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5368970655113794348}
   - component: {fileID: 2547270074147996608}
   - component: {fileID: 2846408027100107204}
+  - component: {fileID: 7798015203319487462}
   - component: {fileID: 6941437333872253644}
   - component: {fileID: 8164558053592725354}
   - component: {fileID: -6259406252131659870}
@@ -120,6 +121,19 @@ MonoBehaviour:
   itemPrefab: {fileID: 5873421985490563833}
   itemModel: {fileID: 5873421985490563833, guid: 30e139bee40629545abeead0f8c4592b, type: 3}
   interactorColor: {r: 0.254717, g: 0.12538752, b: 0.018022425, a: 0}
+--- !u!114 &7798015203319487462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5873421985490563833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc9f0d6e38a2c5c49a2b7092374afc7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InteractableHintMessage: Press F to pick up hammer
 --- !u!114 &6941437333872253644
 MonoBehaviour:
   m_ObjectHideFlags: 0

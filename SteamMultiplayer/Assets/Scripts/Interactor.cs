@@ -21,10 +21,15 @@ public class Interactor : NetworkBehaviour
     public Sprite defaultIcon;
     public Sprite defaultInteractIcon;
     public Text DebugText;
+    public Text InteractTipText;
+    public string emptyText = "";
 
     public Vector2 iconSize;
 
     public ItemSpawning itemSpawning;
+
+    [SyncVar(hook =nameof(onHasKey))]
+    public bool hasKey = false;
 
     [Header("Object Prefabs")]
     public GameObject RedPotion;
@@ -46,6 +51,11 @@ public class Interactor : NetworkBehaviour
     {
         //DebugText.text = "Function is ran from command.";
         StartCoroutine(CreateItemInHand(newItem));
+    }
+
+    void onHasKey(bool oldValue, bool newValue)   //makes key obtained on all clients
+    {
+        hasKey = newValue;
     }
 
     IEnumerator CreateItemInHand(GameObject newItemInHand)
@@ -85,6 +95,25 @@ public class Interactor : NetworkBehaviour
         {
             //handles resizing interact icon and showing it
             interactImage.sprite = interactIcon;
+            if (hit.collider.GetComponent<AltarHandler>() && !currentItemInHand)
+            {
+                InteractTipText.text = "You need an item to interact with the altar";
+            }
+            else if (hit.collider.GetComponent<ItemTesterHandler>() && !currentItemInHand)
+            {
+                InteractTipText.text = "You need an item to interact with the item tester";
+            }
+            else if (hit.collider.GetComponent<ItemManager>() && currentItemInHand)
+            {
+                InteractTipText.text = "You are already carrying an item";
+            }
+            else if (hit.collider.GetComponent<OfficeDoorManager>() && !hasKey) 
+            {
+                InteractTipText.text = "The door is locked";
+            }
+            else InteractTipText.text = hit.collider.GetComponent<Interactable>().InteractableHintMessage;
+
+
             if (iconSize == Vector2.zero)
             {
                 interactImage.rectTransform.sizeDelta = defaultInteractIconSize;
@@ -136,6 +165,7 @@ public class Interactor : NetworkBehaviour
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     hit.collider.GetComponent<OfficeKeyManager>().CmdDisableKey();      //Adds key to inventory key manager
+                    CheckKey();
                 }
             }
 
@@ -151,6 +181,7 @@ public class Interactor : NetworkBehaviour
             {
                 interactImage.sprite = defaultIcon;
                 interactImage.rectTransform.sizeDelta = defaultIconSize;
+                InteractTipText.text = emptyText;
             }
         }
 
@@ -158,6 +189,21 @@ public class Interactor : NetworkBehaviour
         {
             HandleItemWhenDropped(currentItemInHand);
         }
+    }
+
+    public void CheckKey() 
+    {
+        if (isServer)
+        {
+            hasKey = true;
+        }
+        else CmdCheckKey();
+    }
+
+    [Command]
+    public void CmdCheckKey() 
+    {
+        CheckKey();
     }
 
     public void HandleItemTester(GameObject IT)     //calls test item function in item tester script

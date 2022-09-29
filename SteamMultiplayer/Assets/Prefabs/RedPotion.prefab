@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7116506694472230727}
   - component: {fileID: 7783145004885286066}
   - component: {fileID: 6235657698865434018}
+  - component: {fileID: 4554654360503907174}
   - component: {fileID: 1209238253014006773}
   - component: {fileID: 2403419389533424680}
   - component: {fileID: 479411265969370472}
@@ -133,6 +134,19 @@ MonoBehaviour:
   itemPrefab: {fileID: 4253060336477021176}
   itemModel: {fileID: 3034473432476154886, guid: 619021c019e6c7f4bb64e2b96cbeae0a, type: 3}
   interactorColor: {r: 1, g: 0, b: 0.05751419, a: 0}
+--- !u!114 &4554654360503907174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4253060336477021176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc9f0d6e38a2c5c49a2b7092374afc7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InteractableHintMessage: Press F to pick up red potion
 --- !u!114 &1209238253014006773
 MonoBehaviour:
   m_ObjectHideFlags: 0

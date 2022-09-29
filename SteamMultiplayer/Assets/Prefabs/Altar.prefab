@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 64323185233773669}
   - component: {fileID: 2810372411411574958}
   - component: {fileID: 7129998722280482907}
+  - component: {fileID: -4006001565682782047}
   - component: {fileID: 7367816480550412510}
   m_Layer: 11
   m_Name: Altar
@@ -120,14 +121,28 @@ MonoBehaviour:
   particle: {fileID: 7825991584951918233, guid: a0748bc868392b24d9d58535012fbe70, type: 3}
   visualEffect: {fileID: 7522104413249230799}
   particleLight: {fileID: 7522104414055511702}
-  questItem: {fileID: 0}
+  questItemName: 
   particleColor: {r: 0.027189402, g: 0.4433962, b: 0.11842457, a: 0}
   isActive: 0
+  correctItem: 0
   itemList:
   - {fileID: 4253060336477021176, guid: d87fc64e32effe64aa126461240ccbdd, type: 3}
   - {fileID: 1851223044971311768, guid: ea24221835a46d84c9fc478cf25cfeec, type: 3}
   - {fileID: 1161264141412401240, guid: b355de29f7b8c954eb56ae835e5787c6, type: 3}
   - {fileID: 5873421985490563833, guid: 802e3965c6df4374090f080bbb2d9e26, type: 3}
+--- !u!114 &-4006001565682782047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009865373872154032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc9f0d6e38a2c5c49a2b7092374afc7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InteractableHintMessage: Press F to place item in altar (Will destroy item)
 --- !u!114 &7367816480550412510
 MonoBehaviour:
   m_ObjectHideFlags: 0

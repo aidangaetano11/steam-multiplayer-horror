@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7863301623646972091}
   - component: {fileID: 4006133426622870570}
+  - component: {fileID: 8174623134921778024}
   - component: {fileID: 8484669358797991564}
   - component: {fileID: 2737541661366549551}
   - component: {fileID: 6320780275536539486}
@@ -52,6 +53,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentObject: {fileID: 7863301623646972091}
+--- !u!114 &8174623134921778024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6586380701880126115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc9f0d6e38a2c5c49a2b7092374afc7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InteractableHintMessage: Press F to pick up key
 --- !u!54 &8484669358797991564
 Rigidbody:
   m_ObjectHideFlags: 0

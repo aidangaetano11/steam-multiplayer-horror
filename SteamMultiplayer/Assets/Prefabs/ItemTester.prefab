@@ -591,6 +591,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7445809256820940552}
   - component: {fileID: 741316899056741417}
+  - component: {fileID: 6858211280759806321}
   - component: {fileID: 3651665676996533360}
   - component: {fileID: 1105876161117340357}
   m_Layer: 11
@@ -638,6 +639,19 @@ MonoBehaviour:
   syncInterval: 0.1
   altars: []
   wallNumbers: []
+--- !u!114 &6858211280759806321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7790951091521242546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc9f0d6e38a2c5c49a2b7092374afc7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InteractableHintMessage: Press F to test item (Will destroy item)
 --- !u!65 &3651665676996533360
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -139,6 +139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d675c427e7fda68499c984d020ac7e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   agent: {fileID: 3779593590746675393}
   monsterCollider: {fileID: 0}
   player: {fileID: 0}

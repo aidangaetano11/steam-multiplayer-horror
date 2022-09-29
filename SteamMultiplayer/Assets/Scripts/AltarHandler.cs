@@ -10,6 +10,7 @@ public class AltarHandler : NetworkBehaviour
     public GameObject particle;
     public VisualEffect visualEffect;
     public Light particleLight;
+    public Interactable interactable;
 
     [SyncVar (hook=nameof(OnQuestItemChange))]
     public string questItemName;
@@ -55,6 +56,7 @@ public class AltarHandler : NetworkBehaviour
 
     public void Start()
     {
+        interactable = GetComponent<Interactable>();
         visualEffect.Stop();
         particleLight.enabled = false;
 
