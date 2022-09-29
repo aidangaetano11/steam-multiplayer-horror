@@ -15,10 +15,10 @@ GameObject:
   - component: {fileID: 7783145004885286066}
   - component: {fileID: 6235657698865434018}
   - component: {fileID: 4554654360503907174}
-  - component: {fileID: 1209238253014006773}
-  - component: {fileID: 2403419389533424680}
-  - component: {fileID: 479411265969370472}
   - component: {fileID: 7515873622512461344}
+  - component: {fileID: 7185591346454770944}
+  - component: {fileID: -9091539277468414482}
+  - component: {fileID: 1621008707738889310}
   m_Layer: 11
   m_Name: RedPotion
   m_TagString: Untagged
@@ -147,7 +147,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractableHintMessage: Press F to pick up red potion
---- !u!114 &1209238253014006773
+--- !u!54 &7515873622512461344
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4253060336477021176}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!114 &7185591346454770944
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,7 +180,7 @@ MonoBehaviour:
   visible: 0
   m_AssetId: d87fc64e32effe64aa126461240ccbdd
   hasSpawned: 0
---- !u!114 &2403419389533424680
+--- !u!114 &-9091539277468414482
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -177,9 +193,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
-  syncInterval: 0
+  syncInterval: 0.1
   clientAuthority: 0
-  sendInterval: 0.01
+  sendInterval: 0.05
   syncPosition: 1
   syncRotation: 1
   syncScale: 0
@@ -188,17 +204,17 @@ MonoBehaviour:
   interpolateScale: 0
   bufferTimeMultiplier: 1
   bufferSizeLimit: 64
-  catchupThreshold: 8
-  catchupMultiplier: 1
+  catchupThreshold: 4
+  catchupMultiplier: 0.1
   onlySyncOnChange: 1
   bufferResetMultiplier: 5
-  positionSensitivity: 0.001
-  rotationSensitivity: 0.001
-  scaleSensitivity: 0.001
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
---- !u!114 &479411265969370472
+--- !u!114 &1621008707738889310
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -220,19 +236,3 @@ MonoBehaviour:
   syncAngularVelocity: 1
   clearAngularVelocity: 0
   angularVelocitySensitivity: 0.1
---- !u!54 &7515873622512461344
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4253060336477021176}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 0
-  m_CollisionDetection: 1
