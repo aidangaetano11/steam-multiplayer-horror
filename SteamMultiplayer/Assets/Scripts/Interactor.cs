@@ -177,12 +177,16 @@ public class Interactor : NetworkBehaviour
         }
         else
         {
-            if (interactImage.sprite != defaultIcon)
+            if (hasAuthority) 
             {
-                interactImage.sprite = defaultIcon;
-                interactImage.rectTransform.sizeDelta = defaultIconSize;
-                InteractTipText.text = emptyText;
+                if (interactImage.sprite != defaultIcon)
+                {
+                    interactImage.sprite = defaultIcon;
+                    interactImage.rectTransform.sizeDelta = defaultIconSize;
+                    InteractTipText.text = emptyText;
+                }
             }
+            
         }
 
         if (Input.GetKeyDown(KeyCode.G) && currentItemInHand) 
