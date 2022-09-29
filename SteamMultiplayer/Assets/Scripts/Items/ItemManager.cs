@@ -1,6 +1,6 @@
 using UnityEngine;
 using Mirror;
-public class ItemManager : MonoBehaviour
+public class ItemManager : NetworkBehaviour
 {
     public InventoryManager inventoryManager;
 
