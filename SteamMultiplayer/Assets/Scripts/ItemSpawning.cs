@@ -46,7 +46,7 @@ public class ItemSpawning : NetworkBehaviour
             {
                 int randomSpawn = Random.Range(0, ItemSpawnPoints.Count);           //randomly loop all spawnpoints
                 currentItemSpawnPoint = ItemSpawnPoints[randomSpawn].position;         //save position of that spawn point
-                GameObject obj = Instantiate(ChooseRandomItem(), currentItemSpawnPoint, Quaternion.identity, Objects);
+                GameObject obj = Instantiate(ChooseRandomItem(), currentItemSpawnPoint, Quaternion.identity);
                 NetworkServer.Spawn(obj);                               //spawn item prefab on spawn point
                 ItemSpawnPoints.Remove(ItemSpawnPoints[randomSpawn]);          //delete spawn point from list, so we cant try and spawn another object on that point
             }           
