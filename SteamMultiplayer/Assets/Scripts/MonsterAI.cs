@@ -214,6 +214,7 @@ public class MonsterAI : NetworkBehaviour
 
             controller.isDead = true;
             controller.gameObject.tag = "DeadPlayer";
+            controller.gameObject.layer = 13;   //sets player layer to DeadPlayer
             
 
             agent.speed = 0f;      //monster will take a break to "eat" player
