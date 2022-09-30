@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 7185591346454770944}
   - component: {fileID: -9091539277468414482}
   - component: {fileID: 1621008707738889310}
-  - component: {fileID: 7280462562765332108}
+  - component: {fileID: 2354870607184415549}
   m_Layer: 11
   m_Name: RedPotion
   m_TagString: Untagged
@@ -133,7 +133,7 @@ MonoBehaviour:
   inventoryManager: {fileID: 0}
   itemName: Red Potion
   itemCollider: {fileID: 7116506694472230727}
-  itemDropSound: {fileID: 7280462562765332108}
+  itemDropSound: {fileID: 2354870607184415549}
   itemPrefab: {fileID: 4253060336477021176}
   itemModel: {fileID: 3034473432476154886, guid: 619021c019e6c7f4bb64e2b96cbeae0a, type: 3}
   interactorColor: {r: 1, g: 0, b: 0.05751419, a: 0}
@@ -239,7 +239,7 @@ MonoBehaviour:
   syncAngularVelocity: 1
   clearAngularVelocity: 0
   angularVelocitySensitivity: 0.1
---- !u!82 &7280462562765332108
+--- !u!82 &2354870607184415549
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -260,7 +260,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 10
+  MaxDistance: 25
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -274,6 +274,15 @@ AudioSource:
       value: 1
       inSlope: 0
       outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.17512435
+      value: 0.44277543
+      inSlope: -1.4073896
+      outSlope: -1.4073896
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
@@ -295,7 +304,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
