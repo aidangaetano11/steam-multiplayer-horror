@@ -259,6 +259,7 @@ MonoBehaviour:
   playerHeight: 2
   PlayerModel: {fileID: 2673419436439718497}
   playerNameText: {fileID: 7157635937497295139}
+  playerLight: {fileID: 7984767895266177333}
   PlayerMesh: {fileID: 7885544453789363645}
   anim: {fileID: 7885544453793600381}
   playerColors:

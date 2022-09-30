@@ -47,6 +47,7 @@ public class PlayerMovementController : NetworkBehaviour
     public static Transform instance;
 
     public Text playerNameText;
+    public Light playerLight;
 
     public SkinnedMeshRenderer PlayerMesh;
     public Animator anim;
@@ -63,11 +64,13 @@ public class PlayerMovementController : NetworkBehaviour
     {
         isDead = newValue;
         PlayerMesh.enabled = false;
+        playerNameText.enabled = false;
+        playerLight.enabled = false;
+        gameObject.tag = "DeadPlayer";
 
-        if (isLocalPlayer) 
+        if (hasAuthority) 
         {
-            deathPanel.SetActive(newValue);
-            gameObject.tag = "DeadPlayer";
+            deathPanel.SetActive(newValue);         
             gameObject.GetComponent<Interactor>().enabled = false;
         }
     }
