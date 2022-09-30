@@ -57,22 +57,17 @@ public class PlayerMovementController : NetworkBehaviour
 
     public GameObject deathPanel;
 
-    [SyncVar (hook = nameof(OnDeath))]
     public bool isDead = false;
 
-    public void OnDeath(bool oldValue, bool newValue) 
+    public void OnDeath() 
     {
-        isDead = newValue;
         PlayerMesh.enabled = false;
         playerNameText.enabled = false;
         playerLight.enabled = false;
         gameObject.tag = "DeadPlayer";
 
-        if (hasAuthority) 
-        {
-            deathPanel.SetActive(newValue);         
-            gameObject.GetComponent<Interactor>().enabled = false;
-        }
+        deathPanel.SetActive(true);         
+        gameObject.GetComponent<Interactor>().enabled = false;
     }
 
     private void Start()
@@ -88,6 +83,12 @@ public class PlayerMovementController : NetworkBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Game")
         {
+            if (isDead && isLocalPlayer) 
+            {
+                OnDeath();
+            }
+            
+
             if (PlayerModel.activeSelf == false && !isDead)
             {
                 SetPosition();                      //this is called for every player on the scene
