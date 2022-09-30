@@ -100,7 +100,7 @@ public class MonsterAI : NetworkBehaviour
             agent.speed = runSpeed;
         }
         
-        if (playerInSightRange && playerInAttackRange) AttackPlayer();
+        //if (playerInSightRange && playerInAttackRange) AttackPlayer();
 
         if (!playerInSightRange && !playerInAttackRange && wasChasingPlayer && !justKilled) StartCoroutine("ChasePlayerNotInSight", Random.Range(extendedChaseTime, extendedChaseTime*4));
     }
@@ -193,31 +193,38 @@ public class MonsterAI : NetworkBehaviour
         }
     }
 
-    public void AttackPlayer()    //kill player
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.gameObject.tag == "Player") 
+        {
+            AttackPlayer(collision.collider.gameObject);
+        }
+    }
+
+    public void AttackPlayer(GameObject collider)    //kill player
     {
         if (isServer)
         {
-            //AttackPlayer
-            transform.LookAt(player);
-            if (player.gameObject.GetComponentInChildren<Interactor>().currentItemInHand)    //drops item in players hand if player has an item
+            PlayerMovementController controller = collider.GetComponent<PlayerMovementController>();
+
+            if (collider.GetComponentInChildren<Interactor>().currentItemInHand)    //drops item in players hand if player has an item
             {
-                player.gameObject.GetComponentInChildren<Interactor>().HandleItemWhenDropped(player.gameObject.GetComponentInChildren<Interactor>().currentItemInHand);
+                collider.GetComponentInChildren<Interactor>().HandleItemWhenDropped(collider.GetComponentInChildren<Interactor>().currentItemInHand);
             }
 
-            agent.speed = 0f;      //monster will take a break to "eat" player
-            justKilled = true;
-            PlayerMovementController controller = player.gameObject.GetComponent<PlayerMovementController>();
             controller.isDead = true;
             controller.gameObject.tag = "DeadPlayer";
             controller.playerLight.enabled = false;
             controller.PlayerMesh.enabled = false;
             controller.playerNameText.enabled = false;
             controller.deathPanel.SetActive(true);
-            
-                
-            StartCoroutine("WaitAfterKill", 5f);     //monster eats for delay amount       
+
+            agent.speed = 0f;      //monster will take a break to "eat" player
+            justKilled = true;
+
+            StartCoroutine("WaitAfterKill", 5f);     //monster eats for delay amount  
         }
-        else CmdAttackPlayer();
+        else CmdAttackPlayer(collider);
         
     }
 
@@ -234,9 +241,9 @@ public class MonsterAI : NetworkBehaviour
     }
 
     [Command]
-    public void CmdAttackPlayer() 
+    public void CmdAttackPlayer(GameObject collider) 
     {
-        AttackPlayer();
+        AttackPlayer(collider);
     }
 
     private void OnDrawGizmos()
