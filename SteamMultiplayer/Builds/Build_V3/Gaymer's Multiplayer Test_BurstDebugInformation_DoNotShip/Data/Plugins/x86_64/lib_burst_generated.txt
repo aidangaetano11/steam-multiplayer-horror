@@ -186,8 +186,8 @@ Library: lib_burst_generated
 --root-assembly=D:\Unity\Unity Projects\GitHubProjects\steam-multiplayer-horror\SteamMultiplayer\Temp\StagingArea\Data\Managed\Unity.Burst.dll
 --root-assembly=D:\Unity\Unity Projects\GitHubProjects\steam-multiplayer-horror\SteamMultiplayer\Temp\StagingArea\Data\Managed\Unity.RenderPipeline.Universal.ShaderLibrary.dll
 --root-assembly=D:\Unity\Unity Projects\GitHubProjects\steam-multiplayer-horror\SteamMultiplayer\Temp\StagingArea\Data\Managed\Unity.Services.Core.Environments.dll
---root-assembly=D:\Unity\Unity Projects\GitHubProjects\steam-multiplayer-horror\SteamMultiplayer\Temp\StagingArea\Data\Managed\Telepathy.dll
 --root-assembly=D:\Unity\Unity Projects\GitHubProjects\steam-multiplayer-horror\SteamMultiplayer\Temp\StagingArea\Data\Managed\Assembly-CSharp.dll
+--root-assembly=D:\Unity\Unity Projects\GitHubProjects\steam-multiplayer-horror\SteamMultiplayer\Temp\StagingArea\Data\Managed\Telepathy.dll
 --root-assembly=D:\Unity\Unity Projects\GitHubProjects\steam-multiplayer-horror\SteamMultiplayer\Temp\StagingArea\Data\Managed\Unity.ProBuilder.Poly2Tri.dll
 --root-assembly=D:\Unity\Unity Projects\GitHubProjects\steam-multiplayer-horror\SteamMultiplayer\Temp\StagingArea\Data\Managed\Unity.Services.Core.Internal.dll
 --root-assembly=D:\Unity\Unity Projects\GitHubProjects\steam-multiplayer-horror\SteamMultiplayer\Temp\StagingArea\Data\Managed\Unity.ProBuilder.dll
@@ -415,8 +415,8 @@ Library: lib_burst_generated
 --root-assembly=D:\Unity\Unity Projects\GitHubProjects\steam-multiplayer-horror\SteamMultiplayer\Temp\StagingArea\Data\Managed\Unity.Burst.dll
 --root-assembly=D:\Unity\Unity Projects\GitHubProjects\steam-multiplayer-horror\SteamMultiplayer\Temp\StagingArea\Data\Managed\Unity.RenderPipeline.Universal.ShaderLibrary.dll
 --root-assembly=D:\Unity\Unity Projects\GitHubProjects\steam-multiplayer-horror\SteamMultiplayer\Temp\StagingArea\Data\Managed\Unity.Services.Core.Environments.dll
---root-assembly=D:\Unity\Unity Projects\GitHubProjects\steam-multiplayer-horror\SteamMultiplayer\Temp\StagingArea\Data\Managed\Telepathy.dll
 --root-assembly=D:\Unity\Unity Projects\GitHubProjects\steam-multiplayer-horror\SteamMultiplayer\Temp\StagingArea\Data\Managed\Assembly-CSharp.dll
+--root-assembly=D:\Unity\Unity Projects\GitHubProjects\steam-multiplayer-horror\SteamMultiplayer\Temp\StagingArea\Data\Managed\Telepathy.dll
 --root-assembly=D:\Unity\Unity Projects\GitHubProjects\steam-multiplayer-horror\SteamMultiplayer\Temp\StagingArea\Data\Managed\Unity.ProBuilder.Poly2Tri.dll
 --root-assembly=D:\Unity\Unity Projects\GitHubProjects\steam-multiplayer-horror\SteamMultiplayer\Temp\StagingArea\Data\Managed\Unity.Services.Core.Internal.dll
 --root-assembly=D:\Unity\Unity Projects\GitHubProjects\steam-multiplayer-horror\SteamMultiplayer\Temp\StagingArea\Data\Managed\Unity.ProBuilder.dll

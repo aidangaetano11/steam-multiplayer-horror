@@ -97,6 +97,7 @@ public class PlayerMovementController : NetworkBehaviour
                 PlayerCosmeticsSetup();
 
                 if (isLocalPlayer) PlayerMesh.enabled = false;
+                else playerLight.enabled = false;
             }
 
             if (hasAuthority)       //should be called for individual player

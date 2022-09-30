@@ -39,6 +39,9 @@ public class Interactor : NetworkBehaviour
     public float dropForce;
     public float dropUpForce;
 
+    [Header("Sounds")]
+    public AudioSource pickupSound;
+
     [Header("Hand Variables")]
     public Transform hand;
     public Transform thirdPersonHand;
@@ -56,7 +59,6 @@ public class Interactor : NetworkBehaviour
     void onHasKey(bool oldValue, bool newValue)   //makes key obtained on all clients
     {
         hasKey = newValue;
-        Debug.Log(hasKey);
     }
 
     IEnumerator CreateItemInHand(GameObject newItemInHand)
@@ -139,6 +141,7 @@ public class Interactor : NetworkBehaviour
                 if (Input.GetKeyDown(KeyCode.F) && !currentItemInHand) 
                 {
                     HandleItem(hit.collider.gameObject);
+                    pickupSound.Play();
                 }
             }
 
