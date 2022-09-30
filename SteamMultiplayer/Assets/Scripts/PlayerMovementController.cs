@@ -54,13 +54,18 @@ public class PlayerMovementController : NetworkBehaviour
 
     Rigidbody rb;
 
+    public GameObject deathPanel;
+
     [SyncVar (hook = nameof(OnDeath))]
     public bool isDead = false;
 
     public void OnDeath(bool oldValue, bool newValue) 
     {
         isDead = newValue;
-        gameObject.SetActive(oldValue);
+        deathPanel.SetActive(newValue);
+        gameObject.tag = "DeadPlayer";
+        gameObject.GetComponent<Interactor>().enabled = false;
+        PlayerMesh.enabled = false;
     }
 
     private void Start()
@@ -69,6 +74,7 @@ public class PlayerMovementController : NetworkBehaviour
         cam = GetComponentInChildren<Camera>();
         stamina = staminaMax;
         anim.enabled = true;
+        deathPanel.SetActive(false);
     }
 
     public void Update()

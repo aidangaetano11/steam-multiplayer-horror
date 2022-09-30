@@ -111,7 +111,13 @@ public class MonsterAI : NetworkBehaviour
         List<GameObject> players = new List<GameObject>();
         foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player"))       //finds players based on their tag
         {
-            players.Add(p);
+             players.Add(p);        
+        }
+
+        if (players.Count <= 0) 
+        {
+            Debug.Log("PLAYERS ARE ALL DEAD");
+            this.enabled = false;
         }
 
         return players;
@@ -201,9 +207,11 @@ public class MonsterAI : NetworkBehaviour
             agent.speed = 0f;      //monster will take a break to "eat" player
             justKilled = true;
             player.gameObject.GetComponent<PlayerMovementController>().isDead = true;
-            StartCoroutine("WaitAfterKill", 5f);     //monster eats for delay amount
+                
+            StartCoroutine("WaitAfterKill", 5f);     //monster eats for delay amount       
         }
         else CmdAttackPlayer();
+        
     }
 
     public IEnumerator WaitAfterKill(float delay)    //after the delay, the monster will start to patrol again

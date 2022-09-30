@@ -8,6 +8,7 @@ TagManager:
   - ItemTest
   - GameManager
   - Monster
+  - DeadPlayer
   layers:
   - Default
   - TransparentFX
