@@ -96,7 +96,7 @@ public class PlayerMovementController : NetworkBehaviour
                 rb.freezeRotation = true;
                 PlayerCosmeticsSetup();
 
-                if (isLocalPlayer) PlayerMesh.enabled = false;
+                if (isLocalPlayer) PlayerMesh.enabled = true;
                 else playerLight.enabled = false;
             }
 

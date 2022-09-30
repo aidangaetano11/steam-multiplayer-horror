@@ -79,6 +79,11 @@ public class Interactor : NetworkBehaviour
         }
     }
 
+    public void PlayFootstep() 
+    {
+        if (hasAuthority) gameObject.GetComponentInChildren<PlayerAudioHelper>().AuthorityPlaySound();
+    }
+
     void Start()
     {
         currentItemInHand = null;

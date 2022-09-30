@@ -3061,7 +3061,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 100002, guid: 7e15121f5f042ed46aba81406403f2d2, type: 3}
   m_PrefabInstance: {fileID: 7885544453786281501}
   m_PrefabAsset: {fileID: 0}
---- !u!82 &8474974950881968006
+--- !u!82 &7940799830026155605
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3073,7 +3073,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.274
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3157,7 +3157,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8701046032571592707
+--- !u!114 &6939850871220765135
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3169,17 +3169,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e94a33dd69bf1441b3ddcf69dd48557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  footstepSound: {fileID: 8474974950881968006}
+  footstepSound: {fileID: 7940799830026155605}
   footstepClips:
-  - {fileID: 8300000, guid: 45705bc44b293284b898c39f89adb11d, type: 3}
-  - {fileID: 8300000, guid: 5398670f1526dbc4a9e81c7f49bfef96, type: 3}
-  - {fileID: 8300000, guid: c3208b0840a889a438ff8e97497d29c2, type: 3}
-  - {fileID: 8300000, guid: 397ed21eca7363c4fad085543a82f5c5, type: 3}
-  - {fileID: 8300000, guid: 3b1e4813ed0819e4387e9bccc047eeeb, type: 3}
-  - {fileID: 8300000, guid: 2bc1dd8a544649c4486e6251491a8e79, type: 3}
-  - {fileID: 8300000, guid: 3c815cc5574c1544ea8e1f119f18c586, type: 3}
-  - {fileID: 8300000, guid: 559ecb60e31e9834f9b6a13cf51a8f83, type: 3}
-  - {fileID: 8300000, guid: a69c64dd7c65a6041845dd7f01198e54, type: 3}
+  - {fileID: 8300000, guid: b6dd0471fb469f94a9c193ce07afd928, type: 3}
+  - {fileID: 8300000, guid: 677edb055a094684db4c6667a7fc021a, type: 3}
+  - {fileID: 8300000, guid: 641b1df491117864a9005a6a88d0b4fd, type: 3}
+  - {fileID: 8300000, guid: 79f47a0b324fe994ca338e933129af8d, type: 3}
+  - {fileID: 8300000, guid: 911c1a79ed157084ba1bd14ff04448fa, type: 3}
+  - {fileID: 8300000, guid: 5c9ae6129d77bfc4080c4eeea1c417e2, type: 3}
+  - {fileID: 8300000, guid: ad4de36f34d70ad4f9df429a310cf18e, type: 3}
+  - {fileID: 8300000, guid: 5a37c27bb0bd4764e83a37d9853a6627, type: 3}
+  - {fileID: 8300000, guid: 1bb1cbbacbb42d3488aed29320dd4c05, type: 3}
 --- !u!4 &7885544453786418335 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: 7e15121f5f042ed46aba81406403f2d2, type: 3}
