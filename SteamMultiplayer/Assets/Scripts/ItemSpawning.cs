@@ -8,10 +8,12 @@ public class ItemSpawning : NetworkBehaviour
     public int maxSpawnedItems = 3;
     public int maxSpawnedRedPotions = 3;
 
+
     public Transform Objects;
 
     [Header("Spawnpoint Lists")]
     public List<Transform> ItemSpawnPoints = new List<Transform>();
+    public List<Transform> TotalItemSpawnPoints = new List<Transform>();    //this is used for resetting map
     public List<Transform> KeySpawnPoints = new List<Transform>();
 
     [Header("Item Pool")]
@@ -27,6 +29,8 @@ public class ItemSpawning : NetworkBehaviour
 
     private CustomNetworkManager manager;
 
+    public List<GameObject> objectsInScene;
+
     Vector3 currentItemSpawnPoint;
     Vector3 currentKeySpawnPoint;
 
@@ -36,6 +40,14 @@ public class ItemSpawning : NetworkBehaviour
     {
         ChooseRandomPoint();  
         ChooseRandomKeySpawnPoint();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.V)) 
+        {
+            RestartGameItems();
+        }
     }
 
     void ChooseRandomPoint()     //this will handle spawning random items, red potion, yellow potion, blue potion
@@ -75,6 +87,29 @@ public class ItemSpawning : NetworkBehaviour
         int randomRange = Random.Range(0, ItemPool.Count);
         GameObject currentItem = ItemPool[randomRange];
         return currentItem;
+    }
+
+    public void RestartGameItems() 
+    {
+        foreach (ItemManager p in FindObjectsOfType<ItemManager>()) 
+        {
+            objectsInScene.Add(p.gameObject);
+        }
+
+        foreach (GameObject g in objectsInScene) 
+        {
+            NetworkServer.Destroy(g);
+        }
+
+        objectsInScene.Clear();
+
+        ItemSpawnPoints.Clear();
+
+        foreach (Transform t in TotalItemSpawnPoints) 
+        {
+            ItemSpawnPoints.Add(t);
+        }
+        ChooseRandomPoint();
     }
 
 }
