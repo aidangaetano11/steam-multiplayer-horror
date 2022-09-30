@@ -57,9 +57,18 @@ public class PlayerMovementController : NetworkBehaviour
 
     public GameObject deathPanel;
 
-    [SyncVar]
+    [SyncVar (hook =nameof(OnDeath))]
     public bool isDead = false;
 
+
+    public void OnDeath(bool oldValue, bool newValue) 
+    {
+        playerLight.enabled = false;
+        PlayerMesh.enabled = false;
+        playerNameText.enabled = false;
+        gameObject.GetComponent<Interactor>().enabled = false;
+        deathPanel.SetActive(true);
+    }
 
     private void Start()
     {

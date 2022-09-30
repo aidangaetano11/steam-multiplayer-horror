@@ -214,10 +214,7 @@ public class MonsterAI : NetworkBehaviour
 
             controller.isDead = true;
             controller.gameObject.tag = "DeadPlayer";
-            controller.playerLight.enabled = false;
-            controller.PlayerMesh.enabled = false;
-            controller.playerNameText.enabled = false;
-            controller.deathPanel.SetActive(true);
+            
 
             agent.speed = 0f;      //monster will take a break to "eat" player
             justKilled = true;
