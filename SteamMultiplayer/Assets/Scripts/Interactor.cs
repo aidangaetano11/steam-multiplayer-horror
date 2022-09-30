@@ -83,19 +83,10 @@ public class Interactor : NetworkBehaviour
     {
         if (hasAuthority)
         {
-            if (isServer)
-            {
-                gameObject.GetComponentInChildren<PlayerAudioHelper>().AuthorityPlaySound();
-            }
-            else CmdPlayFootstep();
+            gameObject.GetComponentInChildren<PlayerAudioHelper>().AuthorityPlaySound();
         }
     }
 
-    [Command]
-    public void CmdPlayFootstep() 
-    {
-        gameObject.GetComponentInChildren<PlayerAudioHelper>().AuthorityPlaySound();
-    }
 
 
     void Start()
