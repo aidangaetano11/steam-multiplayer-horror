@@ -206,7 +206,14 @@ public class MonsterAI : NetworkBehaviour
 
             agent.speed = 0f;      //monster will take a break to "eat" player
             justKilled = true;
-            player.gameObject.GetComponent<PlayerMovementController>().isDead = true;
+            PlayerMovementController controller = player.gameObject.GetComponent<PlayerMovementController>();
+            controller.isDead = true;
+            controller.gameObject.tag = "DeadPlayer";
+            controller.playerLight.enabled = false;
+            controller.PlayerMesh.enabled = false;
+            controller.playerNameText.enabled = false;
+            controller.deathPanel.SetActive(true);
+            
                 
             StartCoroutine("WaitAfterKill", 5f);     //monster eats for delay amount       
         }
