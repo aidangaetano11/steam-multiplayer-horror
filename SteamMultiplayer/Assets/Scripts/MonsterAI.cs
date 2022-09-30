@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 using Mirror;
 public class MonsterAI : NetworkBehaviour
 {
@@ -40,6 +41,20 @@ public class MonsterAI : NetworkBehaviour
     public bool playerInSightRange, playerInAttackRange;
     public bool wasChasingPlayer;
 
+
+    private CustomNetworkManager manager;
+
+    private CustomNetworkManager Manager
+    {
+        get
+        {
+            if (manager != null)
+            {
+                return manager;
+            }
+            return manager = CustomNetworkManager.singleton as CustomNetworkManager;
+        }
+    }
 
     private void Awake()
     {
@@ -116,13 +131,12 @@ public class MonsterAI : NetworkBehaviour
 
         if (players.Count <= 0) 
         {
-            Debug.Log("PLAYERS ARE ALL DEAD");
+            Debug.Log("All Players Dead.");
             this.enabled = false;
         }
 
         return players;
     }
-
 
     void FindClosestPlayer()                     //finds the distance of every player in the list and calculates the shortest one from the monster
     {

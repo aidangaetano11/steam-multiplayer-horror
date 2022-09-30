@@ -56,6 +56,7 @@ public class Interactor : NetworkBehaviour
     void onHasKey(bool oldValue, bool newValue)   //makes key obtained on all clients
     {
         hasKey = newValue;
+        Debug.Log(hasKey);
     }
 
     IEnumerator CreateItemInHand(GameObject newItemInHand)
@@ -164,8 +165,8 @@ public class Interactor : NetworkBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.F))
                 {
-                    hit.collider.GetComponent<OfficeKeyManager>().CmdDisableKey();      //Adds key to inventory key manager
                     CheckKey();
+                    hit.collider.GetComponent<OfficeKeyManager>().CmdDisableKey();      //Adds key to inventory key manager
                 }
             }
 
