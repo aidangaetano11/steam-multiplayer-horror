@@ -62,10 +62,14 @@ public class PlayerMovementController : NetworkBehaviour
     public void OnDeath(bool oldValue, bool newValue) 
     {
         isDead = newValue;
-        deathPanel.SetActive(newValue);
-        gameObject.tag = "DeadPlayer";
-        gameObject.GetComponent<Interactor>().enabled = false;
         PlayerMesh.enabled = false;
+
+        if (isLocalPlayer) 
+        {
+            deathPanel.SetActive(newValue);
+            gameObject.tag = "DeadPlayer";
+            gameObject.GetComponent<Interactor>().enabled = false;
+        }
     }
 
     private void Start()
