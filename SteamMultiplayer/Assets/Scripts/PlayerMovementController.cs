@@ -68,7 +68,7 @@ public class PlayerMovementController : NetworkBehaviour
             playerLight.enabled = false;
             PlayerMesh.enabled = false;
             playerNameText.enabled = false;
-            playerCollider.enabled = false;
+            //playerCollider.enabled = false;
             gameObject.GetComponent<Interactor>().enabled = false;
             if (isLocalPlayer) deathPanel.SetActive(true);
         }
