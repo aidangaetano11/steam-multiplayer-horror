@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8051773861825223413}
   m_Layer: 7
   m_Name: Isle1 (44)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 4894570078536748209}
   m_Layer: 7
   m_Name: LongShelfRow
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -412,6 +412,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 44cbea998ea1f864eb33c8e657c2c39d, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 44cbea998ea1f864eb33c8e657c2c39d, type: 3}
+      propertyPath: m_TagString
+      value: Map
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 44cbea998ea1f864eb33c8e657c2c39d, type: 3}
       propertyPath: m_RootOrder
@@ -534,6 +538,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 44cbea998ea1f864eb33c8e657c2c39d, type: 3}
+      propertyPath: m_TagString
+      value: Map
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 44cbea998ea1f864eb33c8e657c2c39d, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -654,6 +662,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 44cbea998ea1f864eb33c8e657c2c39d, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 44cbea998ea1f864eb33c8e657c2c39d, type: 3}
+      propertyPath: m_TagString
+      value: Map
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 44cbea998ea1f864eb33c8e657c2c39d, type: 3}
       propertyPath: m_RootOrder
@@ -776,6 +788,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 44cbea998ea1f864eb33c8e657c2c39d, type: 3}
+      propertyPath: m_TagString
+      value: Map
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 44cbea998ea1f864eb33c8e657c2c39d, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -896,6 +912,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 44cbea998ea1f864eb33c8e657c2c39d, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 44cbea998ea1f864eb33c8e657c2c39d, type: 3}
+      propertyPath: m_TagString
+      value: Map
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 44cbea998ea1f864eb33c8e657c2c39d, type: 3}
       propertyPath: m_RootOrder
@@ -1022,6 +1042,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 44cbea998ea1f864eb33c8e657c2c39d, type: 3}
+      propertyPath: m_TagString
+      value: Map
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 44cbea998ea1f864eb33c8e657c2c39d, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1143,6 +1167,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 44cbea998ea1f864eb33c8e657c2c39d, type: 3}
+      propertyPath: m_TagString
+      value: Map
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 44cbea998ea1f864eb33c8e657c2c39d, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -1263,6 +1291,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 44cbea998ea1f864eb33c8e657c2c39d, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 44cbea998ea1f864eb33c8e657c2c39d, type: 3}
+      propertyPath: m_TagString
+      value: Map
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 44cbea998ea1f864eb33c8e657c2c39d, type: 3}
       propertyPath: m_RootOrder

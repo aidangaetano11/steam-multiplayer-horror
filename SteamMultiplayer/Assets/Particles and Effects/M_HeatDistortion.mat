@@ -53,10 +53,10 @@ Material:
     m_Floats:
     - _Distortion1: 0.673
     - _DistortionAmount: 0.563
-    - _DistortionScale: 50
+    - _DistortionScale: 48.29
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RotationAmount: -1
-    - _TwirlStrength: 5
+    - _RotationAmount: -0.3
+    - _TwirlStrength: 3.92
     m_Colors: []
   m_BuildTextureStacks: []

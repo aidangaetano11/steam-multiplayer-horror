@@ -13,9 +13,12 @@ public class EndGameHandler : NetworkBehaviour
 
     public GameObject summoningCircle;
 
+    public AudioSource altarsCompleteSound;
+
     public void OnAltarsComplete(bool oldValue, bool newValue) 
     {
         altarsComplete = newValue;
+        altarsCompleteSound.Play();
         SpawnSummoningCircle();
     }
 

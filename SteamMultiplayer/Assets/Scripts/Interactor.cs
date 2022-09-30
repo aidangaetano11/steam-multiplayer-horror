@@ -41,6 +41,9 @@ public class Interactor : NetworkBehaviour
 
     [Header("Sounds")]
     public AudioSource pickupSound;
+    public AudioClip emptyAltarInteractSound;
+    public AudioClip itemAltarInteractSound;
+    public AudioSource keySound;
 
     [Header("Hand Variables")]
     public Transform hand;
@@ -179,6 +182,7 @@ public class Interactor : NetworkBehaviour
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     CheckKey();
+                    keySound.Play();
                     hit.collider.GetComponent<OfficeKeyManager>().CmdDisableKey();      //Adds key to inventory key manager
                 }
             }
@@ -251,6 +255,7 @@ public class Interactor : NetworkBehaviour
         if (currentItemInHand)
         {
             ItemManager itemInHandManager = currentItemInHand.GetComponent<ItemManager>();
+            altarHandler.PlayInteractSound(itemAltarInteractSound);   //play interact sound
 
             if (isServer)
             {
@@ -271,7 +276,8 @@ public class Interactor : NetworkBehaviour
             }
             else CmdHandleAltar(altar);
         }
-        
+        else altarHandler.PlayInteractSound(emptyAltarInteractSound);    //play empty handed interact sound
+
     }
 
     [Command]

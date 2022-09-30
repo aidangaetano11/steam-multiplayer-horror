@@ -9,10 +9,12 @@ public class ItemTesterHandler : NetworkBehaviour
     public List<AltarHandler> altars = new List<AltarHandler>();
     public List<TextMeshPro> wallNumbers = new List<TextMeshPro>();
 
+    public AudioSource itemTesterSound;
+
     public void TestItem(string itemName)
     {
         RevertItemColors();
-
+        itemTesterSound.Play();
         ChangeItemColors(itemName);      
     }
 

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1807569525124756996}
   m_Layer: 7
   m_Name: Shelf (15)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 6482256229497212256}
   m_Layer: 7
   m_Name: ShelfRow
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 9194008253982423486}
   m_Layer: 7
   m_Name: Shelf (14)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 9020349428426059781}
   m_Layer: 7
   m_Name: Shelf (13)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -429,7 +429,7 @@ GameObject:
   - component: {fileID: 1514741913183125047}
   m_Layer: 7
   m_Name: Shelf (16)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -555,7 +555,7 @@ GameObject:
   - component: {fileID: 8534981128497744138}
   m_Layer: 7
   m_Name: Isle1 (44)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -912,7 +912,7 @@ GameObject:
   - component: {fileID: 3788159366473933584}
   m_Layer: 7
   m_Name: Shelf (17)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1037,7 +1037,7 @@ GameObject:
   - component: {fileID: 8436321934788206659}
   m_Layer: 7
   m_Name: Shelf (12)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

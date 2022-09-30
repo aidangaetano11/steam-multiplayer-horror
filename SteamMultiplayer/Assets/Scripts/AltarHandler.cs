@@ -12,6 +12,10 @@ public class AltarHandler : NetworkBehaviour
     public Light particleLight;
     public Interactable interactable;
 
+    [Header("Altar Sounds")]
+    public AudioSource altarInteractSound;
+    public AudioSource altarActiveSound;
+
     [SyncVar (hook=nameof(OnQuestItemChange))]
     public string questItemName;
 
@@ -37,7 +41,7 @@ public class AltarHandler : NetworkBehaviour
             particleLight.enabled = false;
             visualEffect.Stop();
             correctItem = false;
-
+            altarActiveSound.Stop();
         }
         else
         {
@@ -45,6 +49,7 @@ public class AltarHandler : NetworkBehaviour
             particleLight.color = particleColor;
             particleLight.enabled = true;
             visualEffect.Play();
+            altarActiveSound.Play();
         }
     }
 
@@ -69,6 +74,12 @@ public class AltarHandler : NetworkBehaviour
         {
             correctItem = true;
         }
+    }
+
+    public void PlayInteractSound(AudioClip clip)   //called from interactor script
+    {
+        altarInteractSound.clip = clip;
+        altarInteractSound.Play();
     }
 
     public GameObject PickQuestObject() 

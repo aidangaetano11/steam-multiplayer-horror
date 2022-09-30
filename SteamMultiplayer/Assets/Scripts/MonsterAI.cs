@@ -9,6 +9,7 @@ public class MonsterAI : NetworkBehaviour
     public NavMeshAgent agent;
     public Collider monsterCollider;
     private FieldOfView fov;
+    public MonsterAudio monsterAudio;
 
     public Transform player;
     public Transform[] waypoints;
@@ -61,6 +62,7 @@ public class MonsterAI : NetworkBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         fov = GetComponent<FieldOfView>();
+        monsterAudio = GetComponent<MonsterAudio>();
     }
 
     private void Start()
@@ -108,10 +110,16 @@ public class MonsterAI : NetworkBehaviour
         }
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if (!playerInSightRange && !playerInAttackRange && !wasChasingPlayer && !justKilled) Patrolling();
+        if (!playerInSightRange && !playerInAttackRange && !wasChasingPlayer && !justKilled) 
+        {
+            Patrolling();
+            monsterAudio.chaseSoundPlayed = false;
+        }
+        
         if (playerInSightRange && !playerInAttackRange && !justKilled || wasChasingPlayer && !justKilled) 
         {
             ChasePlayer();
+            monsterAudio.StartCoroutine("PlayChaseSound");
             agent.speed = runSpeed;
         }
         

@@ -1,14 +1,21 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 using Mirror;
 
 public enum DoorState : byte 
 {
     Open, Closed, Locked
 }
+
+
 public class OfficeDoorManager : NetworkBehaviour
 {
     public InventoryManager inventoryManager;
     private Animator anim;
+
+    public AudioSource doorOpenSound;
+    public AudioSource doorCloseSound;
 
     [SyncVar]
     public DoorState doorState;
@@ -52,6 +59,16 @@ public class OfficeDoorManager : NetworkBehaviour
             return;
         }
         
+    }
+
+    public void OpenDoorSound()   //called from anim
+    {
+        doorOpenSound.Play();
+    }
+
+    public void CloseDoorSound()    //called from anim
+    {
+        doorCloseSound.Play();
     }
 
 }
