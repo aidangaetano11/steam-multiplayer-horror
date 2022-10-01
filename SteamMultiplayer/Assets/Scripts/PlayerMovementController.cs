@@ -75,6 +75,7 @@ public class PlayerMovementController : NetworkBehaviour
         else 
         {
             playerLight.enabled = true;
+            if (!isLocalPlayer) playerLight.enabled = false;
             PlayerMesh.enabled = true;
             if (isLocalPlayer) PlayerMesh.enabled = false;
             playerNameText.enabled = true;
