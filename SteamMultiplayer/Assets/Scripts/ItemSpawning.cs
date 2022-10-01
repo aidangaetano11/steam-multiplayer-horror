@@ -64,6 +64,7 @@ public class ItemSpawning : NetworkBehaviour
         
     }
 
+    [Server]
     void ChooseRandomPoint()     //this will handle spawning random items, red potion, yellow potion, blue potion
     {
         for (int i = 0; i < maxSpawnedItems; i++)                           //loop and spawn items as much as maxSpawnedItems
@@ -72,13 +73,14 @@ public class ItemSpawning : NetworkBehaviour
             {
                 int randomSpawn = Random.Range(0, ItemSpawnPoints.Count);           //randomly loop all spawnpoints
                 currentItemSpawnPoint = ItemSpawnPoints[randomSpawn].position;         //save position of that spawn point
-                GameObject obj = Instantiate(RedPotionPrefab, currentItemSpawnPoint, Quaternion.identity);
+                GameObject obj = Instantiate(ChooseRandomItem(), currentItemSpawnPoint, Quaternion.identity);
                 NetworkServer.Spawn(obj);                               //spawn item prefab on spawn point
                 ItemSpawnPoints.Remove(ItemSpawnPoints[randomSpawn]);          //delete spawn point from list, so we cant try and spawn another object on that point
             }           
         }     
     }
 
+    [Server]
     public void ChooseRandomKeySpawnPoint() 
     {      
         int randomSpawn = Random.Range(0, KeySpawnPoints.Count);           //randomly loop all spawnpoints
@@ -136,7 +138,7 @@ public class ItemSpawning : NetworkBehaviour
             ItemSpawnPoints.Add(t);           //and takes each spawn point from that list and re adds it to other spawnpoint list
         }
 
-        //ChooseRandomPoint();   //re spawns all items again
+        ChooseRandomPoint();   //re spawns all items again
 
         if (hasKey)  //check if we have key
         {
