@@ -97,64 +97,74 @@ public class ItemSpawning : NetworkBehaviour
         return currentItem;
     }
 
-    public void RestartGameItems() 
+    public void RestartGameItems()   //restarts game
     {
-        foreach (Interactor i in FindObjectsOfType<Interactor>())   //searches every player
+        if (isServer)
         {
-            i.currentItemInHand = null;       //removes item in hand
-            i.gameObject.transform.position = new Vector3(0,0,0);
-
-            if (i.gameObject.GetComponent<PlayerMovementController>().isDead) 
+            foreach (Interactor i in FindObjectsOfType<Interactor>())   //searches every player
             {
-                i.gameObject.GetComponent<PlayerMovementController>().isDead = false;   //makes player not dead. yay
-                i.gameObject.layer = 8;  //changes layer to 8 ("Player")
-                i.gameObject.tag = "Player";
+                i.currentItemInHand = null;       //removes item in hand
+                i.gameObject.transform.position = new Vector3(0, 0, 0);
+
+                if (i.gameObject.GetComponent<PlayerMovementController>().isDead)
+                {
+                    i.gameObject.GetComponent<PlayerMovementController>().isDead = false;   //makes player not dead. yay
+                    i.gameObject.layer = 8;  //changes layer to 8 ("Player")
+                    i.gameObject.tag = "Player";
+                }
             }
+
+            foreach (ItemManager p in FindObjectsOfType<ItemManager>())   //searches every item with itemmanager in the scene
+            {
+                objectsInScene.Add(p.gameObject);         //adds it to new list
+            }
+
+            foreach (GameObject g in objectsInScene)      //destroys every object in the new list
+            {
+                NetworkServer.Destroy(g);
+            }
+
+            objectsInScene.Clear();          //clear the new list
+
+            ItemSpawnPoints.Clear();           //clear the spawn points list
+
+            foreach (Transform t in TotalItemSpawnPoints)     //take the unchanged spawn points list
+            {
+                ItemSpawnPoints.Add(t);           //and takes each spawn point from that list and re adds it to other spawnpoint list
+            }
+
+            ChooseRandomPoint();   //re spawns all items again
+
+            if (hasKey)  //check if we have key
+            {
+                hasKey = false;  //if we do, we will not destroy it, but we will set haskey to false
+            }
+            else NetworkServer.Destroy(FindObjectOfType<OfficeKeyManager>().gameObject);    //if we dont have  key we will destroy it from map
+
+
+            FindObjectOfType<OfficeDoorManager>().anim.SetBool("DoorOpen", false);   //play animation to close door
+            FindObjectOfType<OfficeDoorManager>().doorState = DoorState.Locked;    //we will relock door
+
+            ChooseRandomKeySpawnPoint();    //spawn new key 
+
+            foreach (AltarHandler p in FindObjectsOfType<AltarHandler>())   //searches through every altar
+            {
+                p.isActive = false;   //makes it inactive
+                p.HandleQuestItem();  //changes to new random quest item
+            }
+
+            FindObjectOfType<MonsterAI>().enabled = true;   //makes sure monster is enabled
+            FindObjectOfType<MonsterAI>().gameObject.GetComponentInParent<Transform>().gameObject.transform.position = monsterSpawnPos.position;  //resets monster pos
+
+            FindObjectOfType<ItemTesterHandler>().RevertItemColors();   //resets item tester back to normal
         }
+        else CmdRestartGame();
+    }
 
-        foreach (ItemManager p in FindObjectsOfType<ItemManager>())   //searches every item with itemmanager in the scene
-        {
-            objectsInScene.Add(p.gameObject);         //adds it to new list
-        }
-
-        foreach (GameObject g in objectsInScene)      //destroys every object in the new list
-        {
-            NetworkServer.Destroy(g);
-        }
-
-        objectsInScene.Clear();          //clear the new list
-
-        ItemSpawnPoints.Clear();           //clear the spawn points list
-
-        foreach (Transform t in TotalItemSpawnPoints)     //take the unchanged spawn points list
-        {
-            ItemSpawnPoints.Add(t);           //and takes each spawn point from that list and re adds it to other spawnpoint list
-        }
-
-        ChooseRandomPoint();   //re spawns all items again
-
-        if (hasKey)  //check if we have key
-        {
-            hasKey = false;  //if we do, we will not destroy it, but we will set haskey to false
-        }
-        else NetworkServer.Destroy(FindObjectOfType<OfficeKeyManager>().gameObject);    //if we dont have  key we will destroy it from map
-
-
-        FindObjectOfType<OfficeDoorManager>().anim.SetBool("DoorOpen", false);   //play animation to close door
-        FindObjectOfType<OfficeDoorManager>().doorState = DoorState.Locked;    //we will relock door
-        
-        ChooseRandomKeySpawnPoint();    //spawn new key 
-
-        foreach (AltarHandler p in FindObjectsOfType<AltarHandler>())   //searches through every altar
-        {
-            p.isActive = false;   //makes it inactive
-            p.HandleQuestItem();  //changes to new random quest item
-        }
-
-        FindObjectOfType<MonsterAI>().enabled = true;   //makes sure monster is enabled
-        FindObjectOfType<MonsterAI>().gameObject.GetComponentInParent<Transform>().gameObject.transform.position = monsterSpawnPos.position;  //resets monster pos
-
-        FindObjectOfType<ItemTesterHandler>().RevertItemColors();   //resets item tester back to normal
+    [Command]
+    public void CmdRestartGame() 
+    {
+        RestartGameItems();
     }
 
 }
