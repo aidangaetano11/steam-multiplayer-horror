@@ -63,7 +63,8 @@ public class PlayerMovementController : NetworkBehaviour
 
     public void OnDeath(bool oldValue, bool newValue) 
     {
-        if (isDead) 
+        isDead = newValue;
+        if (isDead)
         {
             playerLight.enabled = false;
             PlayerMesh.enabled = false;
@@ -71,6 +72,16 @@ public class PlayerMovementController : NetworkBehaviour
             gameObject.GetComponent<Interactor>().enabled = false;
             if (isLocalPlayer) deathPanel.SetActive(true);
         }
+        else 
+        {
+            playerLight.enabled = true;
+            PlayerMesh.enabled = true;
+            if (isLocalPlayer) PlayerMesh.enabled = false;
+            playerNameText.enabled = true;
+            gameObject.GetComponent<Interactor>().enabled = true;
+            if (isLocalPlayer) deathPanel.SetActive(false);
+        }
+        
      
     }
 
