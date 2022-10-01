@@ -61,8 +61,7 @@ public class Interactor : NetworkBehaviour
 
     void onHasKey(bool oldValue, bool newValue)   //makes key obtained on all clients
     {
-        hasKey = newValue;
-        Debug.Log("HAS KEY CALLED");
+        if (isLocalPlayer) hasKey = newValue;
     }
 
     IEnumerator CreateItemInHand(GameObject newItemInHand)
