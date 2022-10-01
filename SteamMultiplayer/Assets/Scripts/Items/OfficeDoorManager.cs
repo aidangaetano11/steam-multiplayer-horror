@@ -11,8 +11,8 @@ public enum DoorState : byte
 
 public class OfficeDoorManager : NetworkBehaviour
 {
-    public InventoryManager inventoryManager;
-    private Animator anim;
+    public ItemSpawning itemSpawning;
+    public Animator anim;
 
     public AudioSource doorOpenSound;
     public AudioSource doorCloseSound;
@@ -29,16 +29,14 @@ public class OfficeDoorManager : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void CmdSetDoorState() 
     {
-        bool hasDoorKey = inventoryManager.officeKeyObtained;   //bool to detect if we have picked up key or not
-
-        if (doorState == DoorState.Locked && !hasDoorKey)         //if door is locked and we dont have key, make sure door stays closed
+        if (doorState == DoorState.Locked && !itemSpawning.hasKey)         //if door is locked and we dont have key, make sure door stays closed
         {
             Debug.Log("Door is Locked");
             anim.SetBool("DoorOpen", false);
             return;
         }
 
-        if (doorState == DoorState.Locked && hasDoorKey)    //if door is locked, but we have key, then door becomes open
+        if (doorState == DoorState.Locked && itemSpawning.hasKey)    //if door is locked, but we have key, then door becomes open
         {
             doorState = DoorState.Open;
             anim.SetBool("DoorOpen", true);

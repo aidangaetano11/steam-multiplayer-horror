@@ -31,11 +31,18 @@ public class ItemSpawning : NetworkBehaviour
 
     public List<GameObject> objectsInScene;
 
+    [SyncVar (hook = nameof(OnHasKey))]
+    public bool hasKey = false;
+
     Vector3 currentItemSpawnPoint;
     Vector3 currentKeySpawnPoint;
 
 
-    [Server]
+    void OnHasKey(bool oldValue, bool newValue) 
+    {
+        hasKey = newValue;
+    }
+
     void Start()
     {
         ChooseRandomPoint();  
@@ -111,23 +118,16 @@ public class ItemSpawning : NetworkBehaviour
 
         ChooseRandomPoint();   //re spawns all items again
 
-        bool playerHasKey = false;                   // initializes with false
-        foreach (Interactor i in FindObjectsOfType<Interactor>())     //loops each of the players
+        if (hasKey) 
         {
-            if (FindObjectOfType<Interactor>().hasKey)    //if the player has key
-            {
-                playerHasKey = true;                            //then we set bool to true
-                FindObjectOfType<Interactor>().hasKey = false;       //and has key to false for the players
-            }
+            hasKey = false;
         }
+        else NetworkServer.Destroy(FindObjectOfType<OfficeKeyManager>().gameObject);
 
-        if (!playerHasKey)           //if we do not have key
-        {
-            NetworkServer.Destroy(FindObjectOfType<OfficeKeyManager>().gameObject);       //then we destroy it
-        }
 
+        FindObjectOfType<OfficeDoorManager>().anim.SetBool("DoorOpen", false);   //play animation to close door
+        FindObjectOfType<OfficeDoorManager>().doorState = DoorState.Locked;    //we will relock door
         
-
         ChooseRandomKeySpawnPoint();    //spawn new key 
     }
 

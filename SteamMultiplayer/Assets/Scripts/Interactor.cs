@@ -28,9 +28,6 @@ public class Interactor : NetworkBehaviour
 
     public ItemSpawning itemSpawning;
 
-    [SyncVar(hook =nameof(onHasKey))]
-    public bool hasKey = false;
-
     [Header("Object Prefabs")]
     public GameObject RedPotion;
 
@@ -59,10 +56,6 @@ public class Interactor : NetworkBehaviour
         StartCoroutine(CreateItemInHand(newItem));
     }
 
-    void onHasKey(bool oldValue, bool newValue)   //makes key obtained on all clients
-    {
-        if (isLocalPlayer) hasKey = newValue;
-    }
 
     IEnumerator CreateItemInHand(GameObject newItemInHand)
     {
@@ -123,7 +116,7 @@ public class Interactor : NetworkBehaviour
             {
                 InteractTipText.text = "You are already carrying an item";
             }
-            else if (hit.collider.GetComponent<OfficeDoorManager>() && !hasKey) 
+            else if (hit.collider.GetComponent<OfficeDoorManager>() && !itemSpawning.hasKey) 
             {
                 InteractTipText.text = "The door is locked";
             }
@@ -213,7 +206,7 @@ public class Interactor : NetworkBehaviour
     {
         if (isServer)
         {
-            hasKey = true;
+            itemSpawning.hasKey = true;
         }
         else CmdCheckKey();
     }
