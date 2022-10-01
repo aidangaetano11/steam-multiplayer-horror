@@ -45,6 +45,7 @@ public class ItemSpawning : NetworkBehaviour
         hasKey = newValue;
     }
 
+    [Server]
     void Start()
     {
         ChooseRandomPoint();  
