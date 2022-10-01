@@ -11,12 +11,10 @@ public class OfficeKeyManager : NetworkBehaviour
     }
 
 
-    [Command (requiresAuthority = false)]
-    public void CmdDisableKey()  //function is called from interactor script, from raycast collision
+    public void DisableKey()  //function is called from interactor script, from raycast collision
     {
-        inventoryManager.Inventory.Add(keyPrefab);        //adds key to inventory.
-        gameObject.SetActive(false);
-        NetworkServer.UnSpawn(gameObject);        //unspawns key from game
+        //inventoryManager.Inventory.Add(keyPrefab);        //adds key to inventory.
+        NetworkServer.Destroy(keyPrefab);
     }
 
 }

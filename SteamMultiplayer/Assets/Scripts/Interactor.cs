@@ -183,7 +183,7 @@ public class Interactor : NetworkBehaviour
                 {
                     CheckKey();
                     keySound.Play();
-                    hit.collider.GetComponent<OfficeKeyManager>().CmdDisableKey();      //Adds key to inventory key manager
+                    hit.collider.GetComponent<OfficeKeyManager>().DisableKey();      //Adds key to inventory key manager
                 }
             }
 
@@ -211,6 +211,7 @@ public class Interactor : NetworkBehaviour
 
     public void CheckKey() 
     {
+        hasKey = true;
         if (isServer)
         {
             hasKey = true;
