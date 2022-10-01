@@ -78,7 +78,6 @@ public class ItemSpawning : NetworkBehaviour
         {            
             GameObject keyObject = Instantiate(KeyPrefab, spawnPoint, Quaternion.identity);
             NetworkServer.Spawn(keyObject);                             //spawn item prefab on spawn point
-            KeySpawnPoints.Remove(KeySpawnPoints[index]);          //delete spawn point from list, so we cant try and spawn another object on that point
         }        
     }
 
@@ -91,25 +90,45 @@ public class ItemSpawning : NetworkBehaviour
 
     public void RestartGameItems() 
     {
-        foreach (ItemManager p in FindObjectsOfType<ItemManager>()) 
+        foreach (ItemManager p in FindObjectsOfType<ItemManager>())   //searches every item with itemmanager in the scene
         {
-            objectsInScene.Add(p.gameObject);
+            objectsInScene.Add(p.gameObject);         //adds it to new list
         }
 
-        foreach (GameObject g in objectsInScene) 
+        foreach (GameObject g in objectsInScene)      //destroys every object in the new list
         {
             NetworkServer.Destroy(g);
         }
 
-        objectsInScene.Clear();
+        objectsInScene.Clear();          //clear the new list
 
-        ItemSpawnPoints.Clear();
+        ItemSpawnPoints.Clear();           //clear the spawn points list
 
-        foreach (Transform t in TotalItemSpawnPoints) 
+        foreach (Transform t in TotalItemSpawnPoints)     //take the unchanged spawn points list
         {
-            ItemSpawnPoints.Add(t);
+            ItemSpawnPoints.Add(t);           //and takes each spawn point from that list and re adds it to other spawnpoint list
         }
-        ChooseRandomPoint();
+
+        ChooseRandomPoint();   //re spawns all items again
+
+        bool playerHasKey = false;                   // initializes with false
+        foreach (Interactor i in FindObjectsOfType<Interactor>())     //loops each of the players
+        {
+            if (FindObjectOfType<Interactor>().hasKey)    //if the player has key
+            {
+                playerHasKey = true;                            //then we set bool to true
+                FindObjectOfType<Interactor>().hasKey = false;       //and has key to false for the players
+            }
+        }
+
+        if (!playerHasKey)           //if we do not have key
+        {
+            NetworkServer.Destroy(FindObjectOfType<OfficeKeyManager>().gameObject);       //then we destroy it
+        }
+
+        
+
+        ChooseRandomKeySpawnPoint();    //spawn new key 
     }
 
 }
