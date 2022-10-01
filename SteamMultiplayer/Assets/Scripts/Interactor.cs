@@ -62,6 +62,7 @@ public class Interactor : NetworkBehaviour
     void onHasKey(bool oldValue, bool newValue)   //makes key obtained on all clients
     {
         hasKey = newValue;
+        Debug.Log("HAS KEY CALLED");
     }
 
     IEnumerator CreateItemInHand(GameObject newItemInHand)
@@ -211,7 +212,6 @@ public class Interactor : NetworkBehaviour
 
     public void CheckKey() 
     {
-        hasKey = true;
         if (isServer)
         {
             hasKey = true;
