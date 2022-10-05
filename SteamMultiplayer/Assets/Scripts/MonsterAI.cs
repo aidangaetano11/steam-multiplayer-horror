@@ -20,6 +20,10 @@ public class MonsterAI : NetworkBehaviour
 
     public bool justKilled = false;
 
+    [Header("Monster Body")]
+    public Transform neck;
+    public Transform spine;
+
     [Header("Leg Manager")]
     public List <GroundSearchManager> legs = new List<GroundSearchManager> ();
     public float legDelay = 0.1f;
@@ -33,6 +37,7 @@ public class MonsterAI : NetworkBehaviour
     public Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
+    public bool hasNewTarget = false;
 
     //Attacking
 
@@ -169,6 +174,9 @@ public class MonsterAI : NetworkBehaviour
 
     private void Patrolling() 
     {
+        if (hasNewTarget) return;
+
+
         agent.speed = walkSpeed;
         if (!walkPointSet) SearchWalkPoint();
 
@@ -181,26 +189,27 @@ public class MonsterAI : NetworkBehaviour
            walkPointSet = false;
     }
 
+    public void RunToSpecificTarget(Vector3 targetPosition) 
+    {
+        hasNewTarget = true;
+        agent.speed = runSpeed;
+        walkPointSet = false;
+        agent.SetDestination(targetPosition);  
+    }
+
     private void SearchWalkPoint() 
     {
         int randomWaypoint = Random.Range(0, waypoints.Length);
         walkPoint = waypoints[randomWaypoint].position;
-        //Debug.Log("Selected Waypoint: " + waypoints[randomWaypoint].name);
-        ////Calculate random point in range
-        //float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        //float randomX = Random.Range(-walkPointRange, walkPointRange);
 
-        //walkPoint = new Vector3(walkPoint[randomWaypoint], transform.position.y, walkPoint[randomWaypoint]);
-
-        //if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)) 
-        //{
-           walkPointSet = true;
-        //}
+        walkPointSet = true;
     }
 
     private void ChasePlayer() 
     {
+        hasNewTarget = false;
         agent.SetDestination(player.position);
+        neck.LookAt(player.position);
         wasChasingPlayer = true;
     }
 

@@ -16,7 +16,9 @@ public class PlayerMovementController : NetworkBehaviour
     public float staminaMax = 100f;
     public float staminaDrain = 1f;
     public float staminaRechargeTime = 5f;
+    [SerializeField] private bool canUseHeadbob = true; 
     public bool isSprinting = false;
+    public bool isCrouching = false;
     [SerializeField] float airMultiplier = 0.4f;
 
     [Header("Drag")]
@@ -36,8 +38,16 @@ public class PlayerMovementController : NetworkBehaviour
     private Vector3 velocity = Vector3.zero;
 
 
-    [Header("Camera")]
+    [Header("Camera and Headbob")]
     public Camera cam;
+    public float walkBobSpeed = 14f;
+    public float walkBobAmount = 0.005f;
+    public float sprintBobSpeed = 18f;
+    public float sprintBobAmount = 0.011f;
+    public float crouchBobSpeed = 8f;
+    public float crouchBobAmount = 0.025f;
+    private float defaultYPos = 0;
+    private float timer;
 
 
     [Header("Model")]
@@ -59,6 +69,10 @@ public class PlayerMovementController : NetworkBehaviour
 
     [SyncVar (hook =nameof(OnDeath))]
     public bool isDead = false;
+
+    [Header("Audio")]
+    public AudioSource heartbeatSource;
+    public bool isPlayingHeartbeat = false;
 
 
     public void OnDeath(bool oldValue, bool newValue) 
@@ -90,6 +104,7 @@ public class PlayerMovementController : NetworkBehaviour
     {
         PlayerModel.SetActive(false);
         cam = GetComponentInChildren<Camera>();
+        defaultYPos = cam.transform.localPosition.y;
         stamina = staminaMax;
         anim.enabled = true;
         deathPanel.SetActive(false);
@@ -98,7 +113,26 @@ public class PlayerMovementController : NetworkBehaviour
     public void Update()
     {
         if (SceneManager.GetActiveScene().name == "Game")
-        {   
+        {
+            if (isLocalPlayer)   //plays hearbeat sound if is close to monster
+            {
+                Vector3 distanceToMonster = FindObjectOfType<MonsterAI>().transform.position - transform.position;
+
+                if (distanceToMonster.magnitude < 15f)
+                {
+                    if (!isPlayingHeartbeat)
+                    {
+                        heartbeatSource.Play();
+                        isPlayingHeartbeat = true;
+                    }
+                }
+                else
+                {
+                    heartbeatSource.Stop();
+                    isPlayingHeartbeat = false;
+                }
+            }
+
             if (PlayerModel.activeSelf == false && !isDead)
             {
                 SetPosition();                      //this is called for every player on the scene
@@ -117,7 +151,10 @@ public class PlayerMovementController : NetworkBehaviour
                 HandleJumping();
                 HandleDrag();
                 HandleSprintCrouch();
-                GroundCheck(); 
+                GroundCheck();
+
+                if (canUseHeadbob)
+                    HandleHeadbob();
             }
         }
     }
@@ -125,7 +162,7 @@ public class PlayerMovementController : NetworkBehaviour
     private void FixedUpdate()
     {
         if (SceneManager.GetActiveScene().name == "Game")
-        {
+        {           
             if (hasAuthority)
             {
                 Movement();
@@ -134,9 +171,10 @@ public class PlayerMovementController : NetworkBehaviour
         }
     }
 
+
     public void SetPosition()
     {
-        transform.position = new Vector3(0f, 10f, 0f);
+        transform.position = new Vector3(0f, 0f, 0f);
     }
 
     public void Movement()
@@ -210,6 +248,20 @@ public class PlayerMovementController : NetworkBehaviour
         
     }
 
+    public void HandleHeadbob() 
+    {
+        if (!isGrounded) return;
+
+        if (Mathf.Abs(moveDirection.x) > 0.1f || Mathf.Abs(moveDirection.z) > 0.1f) 
+        {
+            timer += Time.deltaTime * (isCrouching ? crouchBobSpeed : isSprinting ? sprintBobSpeed : walkBobSpeed);
+            cam.transform.localPosition = new Vector3(
+                cam.transform.localPosition.x,
+                defaultYPos + Mathf.Sin(timer) * (isCrouching ? crouchBobAmount : isSprinting ? sprintBobAmount : walkBobAmount),
+                cam.transform.localPosition.z);
+        }
+    }
+
     public void HandleSprintCrouch() 
     {
         if (Input.GetKey(KeyCode.LeftShift))
@@ -219,11 +271,10 @@ public class PlayerMovementController : NetworkBehaviour
                 isSprinting = true;
                 anim.speed = 1.5f;
                 speed = sprintSpeed;
-                stamina -= staminaDrain;
+                //stamina -= staminaDrain;
             }
             else
-            {
-                isSprinting = false;
+            {            
                 speed = walkSpeed;
                 StartCoroutine("RechargeStamina", staminaRechargeTime);
             }
@@ -232,14 +283,17 @@ public class PlayerMovementController : NetworkBehaviour
         else if (Input.GetKey(KeyCode.LeftControl))
         {
             speed = crouchSpeed;
-            PlayerMesh.transform.localScale = new Vector3(1f, 0.5f, 1f);
-            cam.transform.localPosition = new Vector3(0f, 0.2f, 0.15f);
+            isCrouching = true;
+            //PlayerMesh.transform.localScale = new Vector3(1f, 0.5f, 1f);
+            //cam.transform.localPosition = new Vector3(0f, 0.2f, 0.15f);
         }
         else
         {
             speed = walkSpeed;
-            PlayerMesh.transform.localScale = new Vector3(1f, 1f, 1f);
-            cam.transform.localPosition = new Vector3(0f, 0.77f, 0.15f);
+            isCrouching = false;
+            isSprinting = false;
+            //PlayerMesh.transform.localScale = new Vector3(1f, 1f, 1f);
+            //cam.transform.localPosition = new Vector3(0f, 0.77f, 0.15f);
             anim.speed = 1;
 
         }

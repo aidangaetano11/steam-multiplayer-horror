@@ -595,6 +595,7 @@ GameObject:
   - component: {fileID: 3651665676996533360}
   - component: {fileID: 1105876161117340357}
   - component: {fileID: 3344900842716229035}
+  - component: {fileID: 7358737320183406361}
   m_Layer: 11
   m_Name: ItemTester
   m_TagString: Untagged
@@ -641,6 +642,8 @@ MonoBehaviour:
   altars: []
   wallNumbers: []
   itemTesterSound: {fileID: 3344900842716229035}
+  monster: {fileID: 0}
+  endGame: {fileID: 0}
 --- !u!114 &6858211280759806321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -789,3 +792,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!135 &7358737320183406361
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7790951091521242546}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4
+  m_Center: {x: 0, y: 0, z: 0}

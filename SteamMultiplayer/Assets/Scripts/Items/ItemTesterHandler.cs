@@ -11,11 +11,38 @@ public class ItemTesterHandler : NetworkBehaviour
 
     public AudioSource itemTesterSound;
 
+    public MonsterAI monster;
+    public EndGameHandler endGame;
+
+    [Header("1 Out of __ Chance to Trigger.")]
+    public int MonsterTriggerChance = 2;
+
+    public void OnTriggerEnter(Collider other)   //if monster targets the item tester, and he will continue to patroll if he touches item tester
+    {
+        if (other.gameObject.GetComponent<MonsterAI>()) 
+        {
+            Debug.Log("Monster Entered");
+            other.gameObject.GetComponent<MonsterAI>().hasNewTarget = false;           
+        }
+    }
+
     public void TestItem(string itemName)
     {
         RevertItemColors();
         itemTesterSound.Play();
-        ChangeItemColors(itemName);      
+        ChangeItemColors(itemName);
+        CheckIfMonsterTriggered();
+    }
+
+    public void CheckIfMonsterTriggered() 
+    {
+        int randomIndex = Random.Range(0, MonsterTriggerChance);
+        Debug.Log(randomIndex);
+        if (randomIndex == 0) 
+        {
+            endGame.altarsCompleteSound.Play();
+            monster.RunToSpecificTarget(transform.position);
+        }
     }
 
 
