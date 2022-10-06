@@ -174,7 +174,17 @@ public class PlayerMovementController : NetworkBehaviour
 
     public void SetPosition()
     {
-        transform.position = new Vector3(0f, 0f, 0f);
+        if (isServer)
+        {
+            transform.position = new Vector3(0f, 0f, 0f);
+        }
+        else CmdSetPosition();
+    }
+
+    [Command]
+    public void CmdSetPosition() 
+    {
+        SetPosition();
     }
 
     public void Movement()

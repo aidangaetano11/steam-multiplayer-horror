@@ -302,7 +302,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  inventoryManager: {fileID: 0}
+  itemSpawning: {fileID: 0}
+  anim: {fileID: 0}
   doorOpenSound: {fileID: 7516146642203355101}
   doorCloseSound: {fileID: 1729274811903101998}
   doorState: 0
@@ -636,7 +637,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5012549295946848745}
   - component: {fileID: 5748287324738400477}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -764,7 +765,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 60736632973991740}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: Bone_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
