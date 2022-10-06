@@ -11,6 +11,12 @@ public class ItemSpawning : NetworkBehaviour
 
     public Transform Objects;
 
+    [Header("Start Zone Settings")]
+    public Collider startCollider;
+    public bool canRestartGame = false;
+    public int totalPlayerCount;
+    public int currentPlayerCount;
+
     [Header("Spawnpoint Lists")]
     public List<Transform> ItemSpawnPoints = new List<Transform>();
     public List<Transform> TotalItemSpawnPoints = new List<Transform>();    //this is used for resetting map
@@ -50,14 +56,22 @@ public class ItemSpawning : NetworkBehaviour
     {
         ChooseRandomPoint();  
         ChooseRandomKeySpawnPoint();
+
+        foreach (Interactor p in FindObjectsOfType<Interactor>())
+        {
+            totalPlayerCount++;
+        }
+
+        Debug.Log("Player Count: " + totalPlayerCount);
     }
 
     private void Update()
     {
         if (isServer) 
         {
-            if (Input.GetKeyDown(KeyCode.V))
+            if (Input.GetKeyDown(KeyCode.V) && canRestartGame)
             {
+                Debug.Log("Restarting Game....");
                 RestartGameItems();
             }
         }
@@ -102,6 +116,26 @@ public class ItemSpawning : NetworkBehaviour
         int randomRange = Random.Range(0, ItemPool.Count);
         GameObject currentItem = ItemPool[randomRange];
         return currentItem;
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 8 || other.gameObject.layer == 13)   //if player or dead player
+        {
+            currentPlayerCount++;
+        }
+
+        if (currentPlayerCount == totalPlayerCount) canRestartGame = true;
+        else canRestartGame = false;
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == 8 || other.gameObject.layer == 13)   //if player or dead player
+        {
+            currentPlayerCount--;
+            canRestartGame = false;
+        }
     }
 
     public void RestartGameItems()   //restarts game
