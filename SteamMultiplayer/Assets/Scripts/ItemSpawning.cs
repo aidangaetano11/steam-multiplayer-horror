@@ -109,7 +109,7 @@ public class ItemSpawning : NetworkBehaviour
         foreach (Interactor i in FindObjectsOfType<Interactor>())   //searches every player
         {
             i.currentItemInHand = null;       //removes item in hand
-            i.gameObject.transform.position = new Vector3(0, 0, 0);
+            i.gameObject.GetComponent<PlayerMovementController>().SetPosition();
 
             if (i.gameObject.GetComponent<PlayerMovementController>().isDead)
             {
