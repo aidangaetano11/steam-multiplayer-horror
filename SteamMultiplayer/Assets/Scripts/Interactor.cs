@@ -224,6 +224,7 @@ public class Interactor : NetworkBehaviour
         if (currentItemInHand) 
         {
             ItemManager itemManager = currentItemInHand.GetComponent<ItemManager>();
+            ITHandler.itemTesterSound.Play();
 
             if (isServer)                //if we are the server then we will test the item
             {

@@ -29,7 +29,7 @@ public class ItemTesterHandler : NetworkBehaviour
     public void TestItem(string itemName)
     {
         RevertItemColors();
-        itemTesterSound.Play();
+        //itemTesterSound.Play();
         ChangeItemColors(itemName);
         CheckIfMonsterTriggered();
     }
