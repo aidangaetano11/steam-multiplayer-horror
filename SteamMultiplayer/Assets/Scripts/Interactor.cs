@@ -42,10 +42,6 @@ public class Interactor : NetworkBehaviour
     public AudioClip itemAltarInteractSound;
     public AudioSource keySound;
 
-    [Header("Sound Manager")]
-    [SyncVar (hook =nameof(OnITSound))]
-    public bool ITPlaySound = false;
-
     [Header("Hand Variables")]
     public Transform hand;
     public Transform thirdPersonHand;
@@ -54,16 +50,6 @@ public class Interactor : NetworkBehaviour
     [SyncVar(hook = nameof(OnCreateItemInHand))]
     public GameObject currentItemInHand;
 
-    void OnITSound(bool oldValue, bool newValue) 
-    {
-        if (newValue == true) 
-        {
-            FindObjectOfType<ItemTesterHandler>().itemTesterSound.Play();
-            ITPlaySound = oldValue;
-        }
-        
-
-    }
 
     void OnCreateItemInHand(GameObject oldItem, GameObject newItem)
     {
@@ -243,7 +229,6 @@ public class Interactor : NetworkBehaviour
             if (isServer)                //if we are the server then we will test the item
             {
                 ITHandler.TestItem(itemManager.itemName);
-                ITPlaySound = true;
                 currentItemInHand = null;
             }
             else CmdHandleItemTester(IT); //if we are client we will call command to tell server to test the item

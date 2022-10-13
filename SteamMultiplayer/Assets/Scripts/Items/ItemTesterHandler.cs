@@ -20,18 +20,25 @@ public class ItemTesterHandler : NetworkBehaviour
 
     public void OnTriggerEnter(Collider other)   //if monster targets the item tester, and he will continue to patroll if he touches item tester
     {
-        if (other.gameObject.GetComponent<MonsterAI>()) 
+        if (other.gameObject.GetComponent<MonsterAI>())
         {
             Debug.Log("Monster Entered");
-            other.gameObject.GetComponent<MonsterAI>().hasNewTarget = false;           
+            other.gameObject.GetComponent<MonsterAI>().hasNewTarget = false;
         }
     }
 
     public void TestItem(string itemName)
     {
-        RevertItemColors();      
+        RevertItemColors();
         ChangeItemColors(itemName);
-        CheckIfMonsterTriggered();
+        //CheckIfMonsterTriggered();
+        RpcPlayITSound();
+    }
+
+    [ClientRpc]
+    public void RpcPlayITSound() 
+    {
+        itemTesterSound.Play();
     }
 
 
