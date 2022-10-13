@@ -14,21 +14,9 @@ public class ItemTesterHandler : NetworkBehaviour
     public MonsterAI monster;
     public EndGameHandler endGame;
 
-    [SyncVar (hook = nameof(OnTriggered))]
-    public bool isTriggered = false;
-
     [Header("1 Out of __ Chance to Trigger.")]
     public int MonsterTriggerChance = 2;
 
-    public void OnTriggered(bool oldValue, bool newValue) 
-    {
-        if (isTriggered == newValue) 
-        {
-            itemTesterSound.Play();
-            isTriggered = oldValue;
-        }
-        
-    }
 
     public void OnTriggerEnter(Collider other)   //if monster targets the item tester, and he will continue to patroll if he touches item tester
     {
@@ -44,20 +32,9 @@ public class ItemTesterHandler : NetworkBehaviour
         RevertItemColors();      
         ChangeItemColors(itemName);
         CheckIfMonsterTriggered();
-        HandleSound();
+        CmdPlayItemTesterSound();
     }
 
-    public void HandleSound() 
-    {
-        if (isServer) isTriggered = true;
-        else CmdHandleSound();
-    }
-
-    [Command]
-    public void CmdHandleSound() 
-    {
-        HandleSound();
-    }
 
     public void CheckIfMonsterTriggered() 
     {
@@ -65,11 +42,22 @@ public class ItemTesterHandler : NetworkBehaviour
         Debug.Log(randomIndex);
         if (randomIndex == 0) 
         {
-            endGame.altarsCompleteSound.Play();
+            CmdPlayMonsterSound();
             monster.RunToSpecificTarget(transform.position);
         }
     }
 
+    [Command (requiresAuthority = false)]
+    public void CmdPlayItemTesterSound() 
+    {
+        itemTesterSound.Play();
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdPlayMonsterSound() 
+    {
+        endGame.altarsCompleteSound.Play();
+    }
 
     public void RevertItemColors()
     {

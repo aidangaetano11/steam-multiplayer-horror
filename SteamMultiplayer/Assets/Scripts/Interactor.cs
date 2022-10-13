@@ -42,6 +42,7 @@ public class Interactor : NetworkBehaviour
     public AudioClip itemAltarInteractSound;
     public AudioSource keySound;
 
+
     [Header("Hand Variables")]
     public Transform hand;
     public Transform thirdPersonHand;
