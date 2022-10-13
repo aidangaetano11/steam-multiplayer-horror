@@ -175,8 +175,7 @@ public class Interactor : NetworkBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.F))
                 {
-                    CheckKey();                   
-                    hit.collider.GetComponent<OfficeKeyManager>().DisableKey();      //Adds key to inventory key manager
+                    CheckKey(hit.collider.gameObject);  // handle the key                 
                 }
             }
 
@@ -203,25 +202,26 @@ public class Interactor : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void RpcPlayKeySound() 
+    public void RpcPlayKeySound()   //function is called on all clients by the server
     {
         keySound.Play();
     }
 
-    public void CheckKey() 
-    {
-        if (isServer)
-        {
-            itemSpawning.hasKey = true;
-            RpcPlayKeySound();
+    public void CheckKey(GameObject key)   //handle the key
+    {     
+        if (isServer)          //if we are server and pick up the key
+        {           
+            itemSpawning.hasKey = true;    //set the server key pickup to true
+            key.GetComponent<OfficeKeyManager>().DisableKey();      //Adds key to inventory key manager
+            RpcPlayKeySound();        //call rpc function to play pickup sound on all clients by the server
         }
-        else CmdCheckKey();
+        else CmdCheckKey(key);      //if we are client, we will call command function
     }
 
     [Command]
-    public void CmdCheckKey() 
+    public void CmdCheckKey(GameObject key)      //runs command by client, which will call the check key function again, but as the server
     {
-        CheckKey();
+        CheckKey(key);
     }
 
     public void HandleItemTester(GameObject IT)     //calls test item function in item tester script
