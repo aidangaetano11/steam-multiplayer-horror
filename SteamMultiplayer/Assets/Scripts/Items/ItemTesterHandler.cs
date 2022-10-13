@@ -44,11 +44,19 @@ public class ItemTesterHandler : NetworkBehaviour
         RevertItemColors();      
         ChangeItemColors(itemName);
         CheckIfMonsterTriggered();
-        if (isClient) 
-        {
-            itemTesterSound.Play();
-        }
-        
+        HandleSound();
+    }
+
+    public void HandleSound() 
+    {
+        if (isServer) isTriggered = true;
+        else CmdHandleSound();
+    }
+
+    [Command]
+    public void CmdHandleSound() 
+    {
+        HandleSound();
     }
 
     public void CheckIfMonsterTriggered() 
