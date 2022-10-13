@@ -56,7 +56,7 @@ public class AltarHandler : NetworkBehaviour
     void OnQuestItemChange(string oldValue, string newValue)
     {
         questItemName = newValue;
-        Debug.Log("Alter " + number + " Quest Item: " + questItemName);
+        //Debug.Log("Alter " + number + " Quest Item: " + questItemName);
     }
 
     public void Start()
@@ -88,18 +88,9 @@ public class AltarHandler : NetworkBehaviour
         return itemList[randomIndex];      
     }
 
-    public void HandleQuestItem() 
+    [Server]
+    public void HandleQuestItem()   //server should set quest item for that altar
     {
-        if (isServer)
-        {
-            questItemName = PickQuestObject().GetComponent<ItemManager>().itemName;
-        }
-        else CmdHandleQuestItem();
-    }
-
-    [Command]
-    public void CmdHandleQuestItem() 
-    {
-        HandleQuestItem();
+         questItemName = PickQuestObject().GetComponent<ItemManager>().itemName;
     }
 }

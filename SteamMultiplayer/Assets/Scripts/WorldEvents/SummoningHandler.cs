@@ -15,7 +15,16 @@ public class SummoningHandler : NetworkBehaviour
     public void OnMonsterKilled(bool oldValue, bool newValue) 
     {
         killed = newValue;
-        Debug.Log("Monster Has Been Killed");
+    }
+
+    [Server]
+    public void ShowWinScreen() 
+    {
+        Debug.Log("THIS SHIT IS CALLED");
+        foreach (WinMenu w in FindObjectsOfType<WinMenu>()) 
+        {
+            w.RpcShowWinMenu();
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -27,7 +36,8 @@ public class SummoningHandler : NetworkBehaviour
             NetworkServer.Spawn(blackHole);
             other.gameObject.transform.position = new Vector3(0f, 15f, 0f);
             other.gameObject.GetComponent<NavMeshAgent>().enabled = false;
-            other.gameObject.GetComponent<MonsterAI>().enabled = false;            
+            other.gameObject.GetComponent<MonsterAI>().enabled = false;      
+            ShowWinScreen();
         }
     }
 

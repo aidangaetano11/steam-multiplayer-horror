@@ -32,7 +32,7 @@ public class PlayerMovementController : NetworkBehaviour
     public float gravity;
     public float groundDistance;
     public LayerMask groundMask;
-    [SerializeField] private bool isGrounded;
+    public bool isGrounded;
 
     Vector3 moveDirection;
     private Vector3 velocity = Vector3.zero;
@@ -189,7 +189,7 @@ public class PlayerMovementController : NetworkBehaviour
 
     public void Movement()
     {
-        //rb.AddForce(Vector3.down * Time.deltaTime * -gravity);   //extra gravity
+        rb.AddForce(Vector3.down * Time.deltaTime * -gravity);   //extra gravity
 
         float xDirection = Input.GetAxis("Horizontal");
         float zDirection = Input.GetAxis("Vertical");
@@ -200,15 +200,12 @@ public class PlayerMovementController : NetworkBehaviour
 
         if (isGrounded)
         {
-            if (zDirection == 0 && xDirection == 0)
-            {
-                rb.velocity = Vector3.zero;
-            }
-            else rb.AddForce(moveDirection.normalized * speed * speedMultiplier, ForceMode.Acceleration);
+            rb.AddForce(moveDirection.normalized * speed * speedMultiplier, ForceMode.Acceleration);
         }
         else if (!isGrounded)
         {
             rb.AddForce(moveDirection.normalized * speed * speedMultiplier * airMultiplier, ForceMode.Acceleration);
+            rb.AddForce(Vector3.down * Time.deltaTime * -gravity);   //extra gravity
         }
 
     }
@@ -339,8 +336,7 @@ public class PlayerMovementController : NetworkBehaviour
 
         if (isLocalPlayer) 
         {
-            playerNameText.transform.LookAt(transform);
+            playerNameText.enabled = false;   //disables name text from local player view
         }
-        //Debug.Log(playerColors[GetComponent<PlayerObjectController>().playerColor]);
     }
 }

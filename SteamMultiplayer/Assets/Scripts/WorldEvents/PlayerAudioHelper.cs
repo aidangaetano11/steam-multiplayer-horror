@@ -9,9 +9,11 @@ public class PlayerAudioHelper : MonoBehaviour
 
     public void PlaySound()
     {
-        footstepSound.clip = footstepClips[Random.Range(0, footstepClips.Count)];
-        footstepSound.Play();
-
+        if (gameObject.GetComponentInParent<PlayerMovementController>().isGrounded)    //wont play footsteps if player is in the air
+        {
+            footstepSound.clip = footstepClips[Random.Range(0, footstepClips.Count)];
+            footstepSound.Play();
+        }  
         //gameObject.GetComponentInParent<Interactor>().PlayFootstep();     //call interactor to see if this player has control  
     }
 
