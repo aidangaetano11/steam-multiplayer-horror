@@ -18,10 +18,10 @@ public class EndGameHandler : NetworkBehaviour
     public void OnAltarsComplete(bool oldValue, bool newValue) 
     {
         altarsComplete = newValue;
-        altarsCompleteSound.Play();
-        SpawnSummoningCircle();
+        altarsCompleteSound.Play();        
     }
 
+    [Server]
     public void SpawnSummoningCircle() 
     {
         Debug.Log("Circle Summoned");
@@ -58,6 +58,7 @@ public class EndGameHandler : NetworkBehaviour
             if (count == altars.Count)
             {
                 altarsComplete = true;
+                SpawnSummoningCircle();
             }
             else altarsComplete = false;
         }

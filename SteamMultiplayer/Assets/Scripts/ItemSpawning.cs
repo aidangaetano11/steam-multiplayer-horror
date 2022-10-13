@@ -190,9 +190,17 @@ public class ItemSpawning : NetworkBehaviour
 
         foreach (AltarHandler p in FindObjectsOfType<AltarHandler>())   //searches through every altar
         {
+            p.correctItem = false;
             p.isActive = false;   //makes it inactive
             p.HandleQuestItem();  //changes to new random quest item
-        } 
+        }
+
+        if (gameObject.GetComponent<EndGameHandler>().altarsComplete)    //searches if altars are complete
+        {
+            gameObject.GetComponent<EndGameHandler>().altarsComplete = false;    //makes altars complete false
+            NetworkServer.Destroy(FindObjectOfType<SummoningHandler>().gameObject);    //destroys summoning Circle
+        }
+
         MonsterAI monsterAI = FindObjectOfType<MonsterAI>();
         monsterAI.enabled = true;   //makes sure monster is enabled
         monsterAI.gameObject.GetComponent<NavMeshAgent>().enabled = true;    //re-enables monster navmesh
