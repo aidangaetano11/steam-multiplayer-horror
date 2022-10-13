@@ -44,7 +44,10 @@ public class ItemTesterHandler : NetworkBehaviour
         RevertItemColors();      
         ChangeItemColors(itemName);
         CheckIfMonsterTriggered();
-        isTriggered = true;
+        if (isClient) 
+        {
+            itemTesterSound.Play();
+        }
         
     }
 
