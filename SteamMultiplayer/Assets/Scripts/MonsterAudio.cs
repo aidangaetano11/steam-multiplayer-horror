@@ -26,15 +26,16 @@ public class MonsterAudio : NetworkBehaviour
         agent = GetComponent<NavMeshAgent>();
     }
 
+    [Server]
     private void Start()
     {
         footstep.maxDistance = footStepMaxDistance;
         StartCoroutine("PlayMonsterGroan", Random.Range(10, 30));
     }
 
-    public IEnumerator PlayChaseSound() 
+    public IEnumerator PlayChaseSound()
     {
-        while (true) 
+        while (true)
         {
             yield return null;
             if (!chaseSoundPlayed) HandleChaseSound();   //if we start the chase, then we call handlechasesound
@@ -64,22 +65,29 @@ public class MonsterAudio : NetworkBehaviour
         HandleChaseSound();
     }
 
-    public void PlayFootsteps() 
-    {      
+    public void PlayFootsteps()
+    {
         footstep.clip = footsteps[Random.Range(0, footsteps.Length)];
         footstep.Play();
     }
 
-    public IEnumerator PlayMonsterGroan(float delay) 
+    [Server]
+    public IEnumerator PlayMonsterGroan(float delay)
     {
         mapMonsterGroanSound.clip = monsterGroans[Random.Range(0, monsterGroans.Length)];
-        while (true) 
+        while (true)
         {
             yield return new WaitForSeconds(delay);
-            mapMonsterGroanSound.Play();
+            RpcPlayMonsterGroan();
             StopCoroutine("PlayMonsterGroan");
             StartCoroutine("PlayMonsterGroan", Random.Range(10, 30));
 
         }
+    }
+
+    [ClientRpc]
+    public void RpcPlayMonsterGroan() 
+    {
+        mapMonsterGroanSound.Play();
     }
 }
