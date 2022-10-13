@@ -20,11 +20,7 @@ public class SummoningHandler : NetworkBehaviour
     [Server]
     public void ShowWinScreen() 
     {
-        Debug.Log("THIS SHIT IS CALLED");
-        foreach (WinMenu w in FindObjectsOfType<WinMenu>()) 
-        {
-            w.RpcShowWinMenu();
-        }
+        FindObjectOfType<WinMenu>().HandleMonsterDeath();
     }
 
     void OnTriggerEnter(Collider other)
