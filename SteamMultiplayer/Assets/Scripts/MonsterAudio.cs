@@ -45,11 +45,17 @@ public class MonsterAudio : NetworkBehaviour
 
     public void HandleChaseSound() //handles the chase sound.
     {
-        if (isServer)              //if we are server, then we will play sound
+        if (isServer)              //if we are server, then we will call rpc function
         {
-            monsterChaseSound.Play();
+            RpcPlayChaseSound();
         }
         else CmdPlayChaseSound();     //if we are client, we will call command
+    }
+
+    [ClientRpc]
+    public void RpcPlayChaseSound()   //rpc is called by server, and will play sound on all clients
+    {
+        monsterChaseSound.Play();
     }
 
     [Command]
