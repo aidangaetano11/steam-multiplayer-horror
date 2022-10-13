@@ -2,7 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.AI;
-public class MonsterAudio : MonoBehaviour
+using Mirror;
+public class MonsterAudio : NetworkBehaviour
 {
     public MonsterAI ai;
     public NavMeshAgent agent;
@@ -36,12 +37,26 @@ public class MonsterAudio : MonoBehaviour
         while (true) 
         {
             yield return null;
-            if (!chaseSoundPlayed) monsterChaseSound.Play();   //if we start the chase, then we play sound once
+            if (!chaseSoundPlayed) HandleChaseSound();   //if we start the chase, then we call handlechasesound
             chaseSoundPlayed = true;
             StopCoroutine("PlayChaseSound");
         }
     }
 
+    public void HandleChaseSound() //handles the chase sound.
+    {
+        if (isServer)              //if we are server, then we will play sound
+        {
+            monsterChaseSound.Play();
+        }
+        else CmdPlayChaseSound();     //if we are client, we will call command
+    }
+
+    [Command]
+    public void CmdPlayChaseSound()    //command is called by client, and calls handle chase sound function again, but as server
+    {
+        HandleChaseSound();
+    }
 
     public void PlayFootsteps() 
     {      

@@ -119,7 +119,7 @@ public class Interactor : NetworkBehaviour
             }
             else if (hit.collider.GetComponent<OfficeDoorManager>() && !itemSpawning.hasKey) 
             {
-                InteractTipText.text = "The door is locked";
+                InteractTipText.text = "The door is locked. Maybe a key is needed?";
             }
             else InteractTipText.text = hit.collider.GetComponent<Interactable>().InteractableHintMessage;
 
