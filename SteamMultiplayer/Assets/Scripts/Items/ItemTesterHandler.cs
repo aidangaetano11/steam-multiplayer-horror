@@ -32,7 +32,6 @@ public class ItemTesterHandler : NetworkBehaviour
         RevertItemColors();      
         ChangeItemColors(itemName);
         CheckIfMonsterTriggered();
-        CmdPlayItemTesterSound();
     }
 
 
@@ -42,21 +41,9 @@ public class ItemTesterHandler : NetworkBehaviour
         Debug.Log(randomIndex);
         if (randomIndex == 0) 
         {
-            CmdPlayMonsterSound();
+            endGame.altarsCompleteSound.Play();
             monster.RunToSpecificTarget(transform.position);
         }
-    }
-
-    [Command (requiresAuthority = false)]
-    public void CmdPlayItemTesterSound() 
-    {
-        itemTesterSound.Play();
-    }
-
-    [Command(requiresAuthority = false)]
-    public void CmdPlayMonsterSound() 
-    {
-        endGame.altarsCompleteSound.Play();
     }
 
     public void RevertItemColors()
