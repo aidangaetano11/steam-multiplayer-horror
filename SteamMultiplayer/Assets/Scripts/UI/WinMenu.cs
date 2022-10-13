@@ -31,10 +31,18 @@ public class WinMenu : NetworkBehaviour
         Debug.Log("HANDLING MONSTER DEATH");
         if (isServer)                //if we are server
         {
-            Cursor.lockState = CursorLockMode.None;
+            ShowWinMenu();
             RpcShowWinMenu();   //we will check if monster is killed, if it is, then show win screen 
         }
         else CmdHandleMonsterDeath();     //if we arent server, call command function
+    }
+
+    public void ShowWinMenu()   
+    {
+        WinMenuActive = true;
+        winMenuUI.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        camController.enabled = false;
     }
 
     [ClientRpc]   
