@@ -31,7 +31,7 @@ public class ItemTesterHandler : NetworkBehaviour
     {
         RevertItemColors();
         ChangeItemColors(itemName);
-        //CheckIfMonsterTriggered();
+        CheckIfMonsterTriggered();
         RpcPlayITSound();
     }
 
@@ -41,6 +41,11 @@ public class ItemTesterHandler : NetworkBehaviour
         itemTesterSound.Play();
     }
 
+    [ClientRpc]
+    public void RpcPlayMonsterSound() 
+    {
+        endGame.altarsCompleteSound.Play();
+    }
 
     public void CheckIfMonsterTriggered() 
     {
@@ -48,7 +53,7 @@ public class ItemTesterHandler : NetworkBehaviour
         Debug.Log(randomIndex);
         if (randomIndex == 0) 
         {
-            endGame.altarsCompleteSound.Play();
+            RpcPlayMonsterSound();
             monster.RunToSpecificTarget(transform.position);
         }
     }
