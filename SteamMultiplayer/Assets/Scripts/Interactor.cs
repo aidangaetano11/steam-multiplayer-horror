@@ -228,7 +228,6 @@ public class Interactor : NetworkBehaviour
             if (isServer)                //if we are the server then we will test the item
             {
                 ITHandler.TestItem(itemManager.itemName);
-                ITHandler.itemTesterSound.Play();
                 currentItemInHand = null;
             }
             else CmdHandleItemTester(IT); //if we are client we will call command to tell server to test the item

@@ -14,8 +14,21 @@ public class ItemTesterHandler : NetworkBehaviour
     public MonsterAI monster;
     public EndGameHandler endGame;
 
+    [SyncVar (hook = nameof(OnTriggered))]
+    public bool isTriggered = false;
+
     [Header("1 Out of __ Chance to Trigger.")]
     public int MonsterTriggerChance = 2;
+
+    public void OnTriggered(bool oldValue, bool newValue) 
+    {
+        if (isTriggered == newValue) 
+        {
+            itemTesterSound.Play();
+            isTriggered = oldValue;
+        }
+        
+    }
 
     public void OnTriggerEnter(Collider other)   //if monster targets the item tester, and he will continue to patroll if he touches item tester
     {
@@ -28,10 +41,11 @@ public class ItemTesterHandler : NetworkBehaviour
 
     public void TestItem(string itemName)
     {
-        RevertItemColors();
-        //itemTesterSound.Play();
+        RevertItemColors();      
         ChangeItemColors(itemName);
         CheckIfMonsterTriggered();
+        isTriggered = true;
+        
     }
 
     public void CheckIfMonsterTriggered() 
