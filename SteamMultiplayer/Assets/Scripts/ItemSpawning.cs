@@ -3,6 +3,8 @@ using Mirror;
 using Steamworks;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.AI;
+
 public class ItemSpawning : NetworkBehaviour
 {
     public int maxSpawnedItems = 3;
@@ -190,10 +192,11 @@ public class ItemSpawning : NetworkBehaviour
         {
             p.isActive = false;   //makes it inactive
             p.HandleQuestItem();  //changes to new random quest item
-        }
-
-        FindObjectOfType<MonsterAI>().enabled = true;   //makes sure monster is enabled
-        FindObjectOfType<MonsterAI>().gameObject.GetComponentInParent<Transform>().gameObject.transform.position = monsterSpawnPos.position;  //resets monster pos
+        } 
+        MonsterAI monsterAI = FindObjectOfType<MonsterAI>();
+        monsterAI.enabled = true;   //makes sure monster is enabled
+        monsterAI.gameObject.GetComponent<NavMeshAgent>().enabled = true;    //re-enables monster navmesh
+        monsterAI.gameObject.GetComponentInParent<Transform>().gameObject.transform.position = monsterSpawnPos.position;  //resets monster pos
 
         FindObjectOfType<ItemTesterHandler>().RevertItemColors();   //resets item tester back to normal
     }
