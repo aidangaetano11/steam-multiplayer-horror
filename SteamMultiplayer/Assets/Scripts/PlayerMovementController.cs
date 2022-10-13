@@ -196,9 +196,15 @@ public class PlayerMovementController : NetworkBehaviour
 
         moveDirection = transform.forward * zDirection + transform.right * xDirection;
 
+        
+
         if (isGrounded)
         {
-            rb.AddForce(moveDirection.normalized * speed * speedMultiplier, ForceMode.Acceleration);
+            if (zDirection == 0 && xDirection == 0)
+            {
+                rb.velocity = Vector3.zero;
+            }
+            else rb.AddForce(moveDirection.normalized * speed * speedMultiplier, ForceMode.Acceleration);
         }
         else if (!isGrounded)
         {
@@ -329,7 +335,12 @@ public class PlayerMovementController : NetworkBehaviour
     {
         PlayerMesh.material = playerColors[GetComponent<PlayerObjectController>().playerColor];
         playerNameText.text = GetComponent<PlayerObjectController>().PlayerName;
-        playerNameText.color = Color.red;
-        Debug.Log(playerColors[GetComponent<PlayerObjectController>().playerColor]);
+        playerNameText.color = Color.white;
+
+        if (isLocalPlayer) 
+        {
+            playerNameText.transform.LookAt(transform);
+        }
+        //Debug.Log(playerColors[GetComponent<PlayerObjectController>().playerColor]);
     }
 }
