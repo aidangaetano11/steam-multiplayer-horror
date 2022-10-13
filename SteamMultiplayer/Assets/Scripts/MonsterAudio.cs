@@ -26,7 +26,6 @@ public class MonsterAudio : NetworkBehaviour
         agent = GetComponent<NavMeshAgent>();
     }
 
-    [Server]
     private void Start()
     {
         footstep.maxDistance = footStepMaxDistance;
@@ -71,23 +70,29 @@ public class MonsterAudio : NetworkBehaviour
         footstep.Play();
     }
 
-    [Server]
     public IEnumerator PlayMonsterGroan(float delay)
     {
         mapMonsterGroanSound.clip = monsterGroans[Random.Range(0, monsterGroans.Length)];
         while (true)
         {
             yield return new WaitForSeconds(delay);
-            RpcPlayMonsterGroan();
+            HandleMonsterGroan();   //handles playing monster groan
             StopCoroutine("PlayMonsterGroan");
             StartCoroutine("PlayMonsterGroan", Random.Range(10, 30));
 
         }
     }
 
+    [Server]
+    public void HandleMonsterGroan()    //handles playing monster groan
+    {
+        RpcPlayMonsterGroan();     //if we are server, then we will play groan on all clients (with rpc call)
+    }
+
     [ClientRpc]
-    public void RpcPlayMonsterGroan() 
+    public void RpcPlayMonsterGroan()    //will play monster groan across all clients
     {
         mapMonsterGroanSound.Play();
     }
+
 }
