@@ -176,7 +176,7 @@ public class Interactor : NetworkBehaviour
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     CheckKey();
-                    keySound.Play();
+                    RpcPlayKeySound();
                     hit.collider.GetComponent<OfficeKeyManager>().DisableKey();      //Adds key to inventory key manager
                 }
             }
@@ -201,6 +201,12 @@ public class Interactor : NetworkBehaviour
         {
             HandleItemWhenDropped(currentItemInHand);
         }
+    }
+
+    [ClientRpc]
+    public void RpcPlayKeySound() 
+    {
+        keySound.Play();
     }
 
     public void CheckKey() 

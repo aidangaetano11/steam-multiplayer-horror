@@ -29,20 +29,20 @@ public class ItemTesterHandler : NetworkBehaviour
 
     public void TestItem(string itemName)
     {
-        RevertItemColors();
-        ChangeItemColors(itemName);
-        CheckIfMonsterTriggered();
-        RpcPlayITSound();
+        RevertItemColors();         //resets all number colors back to red
+        ChangeItemColors(itemName);       //change specific numbers to green depending on item inputted
+        CheckIfMonsterTriggered();    //check if monster was called to the item tester
+        RpcPlayITSound();           //play item tester sound for all clients to hear
     }
 
     [ClientRpc]
-    public void RpcPlayITSound() 
+    public void RpcPlayITSound()     //plays item tester sound on all clients
     {
         itemTesterSound.Play();
     }
 
     [ClientRpc]
-    public void RpcPlayMonsterSound() 
+    public void RpcPlayMonsterSound()       //plays monster sound on all clients
     {
         endGame.altarsCompleteSound.Play();
     }
