@@ -11,6 +11,7 @@ TagManager:
   - DeadPlayer
   - Map
   - ItemSpawnPoint
+  - PlayerSpawnPoint
   layers:
   - Default
   - TransparentFX

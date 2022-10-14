@@ -175,7 +175,7 @@ public class PlayerMovementController : NetworkBehaviour
     public void SetPosition()    //called on game load
     {
         if (isServer)      //if we are server, we will call rpc to move clients
-        {
+        { 
             RpcSetPosition();   
         }
         else CmdSetPosition();   //if we are client, we will call command
@@ -184,7 +184,9 @@ public class PlayerMovementController : NetworkBehaviour
     [ClientRpc]
     public void RpcSetPosition()    //called on every client to move to this position
     {
-        transform.position = new Vector3(0f, 1f, 0f);
+        ItemSpawning IM = FindObjectOfType<ItemSpawning>();
+
+        transform.position = IM.PlayerSpawnPoints[Random.Range(0, IM.PlayerSpawnPoints.Count)].position;   
     }
 
     [Command]

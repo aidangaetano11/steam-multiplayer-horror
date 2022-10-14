@@ -15,11 +15,6 @@ public class PauseMenu : NetworkBehaviour
 
     public LobbyController lobbyController;
 
-    private void Start()
-    {
-        if (!isServer) restartButton.enabled = false;
-    }
-
     void Update()
     {
         if (hasAuthority && SceneManager.GetActiveScene().name == "Game") 
@@ -52,7 +47,9 @@ public class PauseMenu : NetworkBehaviour
         Cursor.lockState = CursorLockMode.None;
         pauseMenuUI.SetActive(true);
         GameIsPaused = true;
-        camController.enabled = false;      
+        camController.enabled = false;
+
+        if (!isServer) restartButton.enabled = false;   //if we are not the host, we can not see the button
     }
 
     public void LoadMenu() 
@@ -70,8 +67,10 @@ public class PauseMenu : NetworkBehaviour
     {
         PlayerMovementController PM = gameObject.GetComponent<PlayerMovementController>();
         ItemSpawning IS = FindObjectOfType<ItemSpawning>();
-
-        PM.SetPosition();
-        IS.RestartGameItems();
+        if (isServer) 
+        {
+            PM.SetPosition();
+            IS.RestartGameItems();
+        }        
     }
 }

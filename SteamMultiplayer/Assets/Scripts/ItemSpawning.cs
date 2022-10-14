@@ -24,6 +24,10 @@ public class ItemSpawning : NetworkBehaviour
     public List<Transform> TotalItemSpawnPoints = new List<Transform>();    //this is used for resetting map
     public List<Transform> KeySpawnPoints = new List<Transform>();
 
+    [Header("Player Spawnpoint Lists")]
+    public List<Transform> PlayerSpawnPoints = new List<Transform>();
+    public List<Transform> TotalPlayerSpawnPoints = new List<Transform>();
+
     [Header("Item Pool")]
     public List<GameObject> ItemPool = new List<GameObject>(); 
 
@@ -65,19 +69,6 @@ public class ItemSpawning : NetworkBehaviour
         }
 
         Debug.Log("Player Count: " + totalPlayerCount);
-    }
-
-    private void Update()
-    {
-        //if (isServer) 
-        //{
-        //    if (Input.GetKeyDown(KeyCode.V) && canRestartGame)
-        //    {
-        //        Debug.Log("Restarting Game....");
-        //        RestartGameItems();
-        //    }
-        //}
-        
     }
 
     [Server]
