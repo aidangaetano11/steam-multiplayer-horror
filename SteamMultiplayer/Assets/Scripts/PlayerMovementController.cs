@@ -176,9 +176,15 @@ public class PlayerMovementController : NetworkBehaviour
     {
         if (isServer)
         {
-            transform.position = new Vector3(0f, 0f, 0f);
+            RpcSetPosition();
         }
         else CmdSetPosition();
+    }
+
+    [ClientRpc]
+    public void RpcSetPosition() 
+    {
+        transform.position = new Vector3(0f, 2f, 0f);
     }
 
     [Command]
