@@ -26,7 +26,6 @@ public class ItemSpawning : NetworkBehaviour
 
     [Header("Player Spawnpoint Lists")]
     public List<Transform> PlayerSpawnPoints = new List<Transform>();
-    public List<Transform> TotalPlayerSpawnPoints = new List<Transform>();
 
     [Header("Item Pool")]
     public List<GameObject> ItemPool = new List<GameObject>(); 
