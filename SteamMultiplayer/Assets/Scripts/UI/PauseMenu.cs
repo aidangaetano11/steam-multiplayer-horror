@@ -1,16 +1,24 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 using Mirror;
+using TMPro;
 using Steamworks;
 public class PauseMenu : NetworkBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
+    public Button restartButton;
     public CameraController camController;
 
     public LobbyController lobbyController;
+
+    private void Start()
+    {
+        if (!isServer) restartButton.enabled = false;
+    }
 
     void Update()
     {
@@ -56,5 +64,14 @@ public class PauseMenu : NetworkBehaviour
     {
         Debug.Log("Quitting Game....");
         Application.Quit();
+    }
+
+    public void RestartGame() 
+    {
+        PlayerMovementController PM = gameObject.GetComponent<PlayerMovementController>();
+        ItemSpawning IS = FindObjectOfType<ItemSpawning>();
+
+        PM.SetPosition();
+        IS.RestartGameItems();
     }
 }

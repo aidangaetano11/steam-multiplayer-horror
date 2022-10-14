@@ -69,14 +69,14 @@ public class ItemSpawning : NetworkBehaviour
 
     private void Update()
     {
-        if (isServer) 
-        {
-            if (Input.GetKeyDown(KeyCode.V) && canRestartGame)
-            {
-                Debug.Log("Restarting Game....");
-                RestartGameItems();
-            }
-        }
+        //if (isServer) 
+        //{
+        //    if (Input.GetKeyDown(KeyCode.V) && canRestartGame)
+        //    {
+        //        Debug.Log("Restarting Game....");
+        //        RestartGameItems();
+        //    }
+        //}
         
     }
 

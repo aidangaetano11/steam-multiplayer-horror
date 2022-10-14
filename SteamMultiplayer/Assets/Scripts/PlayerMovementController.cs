@@ -172,23 +172,23 @@ public class PlayerMovementController : NetworkBehaviour
     }
 
 
-    public void SetPosition()
+    public void SetPosition()    //called on game load
     {
-        if (isServer)
+        if (isServer)      //if we are server, we will call rpc to move clients
         {
-            RpcSetPosition();
+            RpcSetPosition();   
         }
-        else CmdSetPosition();
+        else CmdSetPosition();   //if we are client, we will call command
     }
 
     [ClientRpc]
-    public void RpcSetPosition() 
+    public void RpcSetPosition()    //called on every client to move to this position
     {
-        transform.position = new Vector3(0f, 2f, 0f);
+        transform.position = new Vector3(0f, 1f, 0f);
     }
 
     [Command]
-    public void CmdSetPosition() 
+    public void CmdSetPosition()     //if we are client, we will send command to same function to act as server to teleport clients to spawn
     {
         SetPosition();
     }
