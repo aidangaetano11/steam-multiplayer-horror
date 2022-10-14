@@ -48,7 +48,7 @@ public class ItemSpawning : NetworkBehaviour
     Vector3 currentItemSpawnPoint;
     Vector3 currentKeySpawnPoint;
 
-    public Transform monsterSpawnPos;
+    public List<Transform> monsterSpawnPos = new List<Transform>();
 
 
     void OnHasKey(bool oldValue, bool newValue) 
@@ -192,9 +192,12 @@ public class ItemSpawning : NetworkBehaviour
         }
 
         MonsterAI monsterAI = FindObjectOfType<MonsterAI>();
+        monsterAI.enabled = false;   //makes sure monster is disabled so it is easier to teleport
+        monsterAI.gameObject.GetComponent<NavMeshAgent>().enabled = false;    //disables navmesh for monster, so the teleportation is correct    
+        monsterAI.gameObject.GetComponentInParent<Transform>().gameObject.transform.position = monsterSpawnPos[Random.Range(0, monsterSpawnPos.Count)].position;  //resets monster pos
         monsterAI.enabled = true;   //makes sure monster is enabled
-        monsterAI.gameObject.GetComponent<NavMeshAgent>().enabled = true;    //re-enables monster navmesh
-        monsterAI.gameObject.GetComponentInParent<Transform>().gameObject.transform.position = monsterSpawnPos.position;  //resets monster pos
+        monsterAI.gameObject.GetComponent<NavMeshAgent>().enabled = true;    //re-enables monster navmesh      
+        monsterAI.wasChasingPlayer = false;
 
         FindObjectOfType<ItemTesterHandler>().RevertItemColors();   //resets item tester back to normal
     }

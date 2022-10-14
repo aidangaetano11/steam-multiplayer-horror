@@ -51,7 +51,7 @@ public class FieldOfView : MonoBehaviour
             {
                 float distanceToTarget = Vector3.Distance(transform.position, target.position);      //then we get the distance of the target
 
-                if (!Physics.Raycast(transform.position, dirToTarget, distanceToTarget, obstacleMask))  //and check if there are no obstacles in the way of targets (with an arc raycast)
+                if (!Physics.Raycast(new Vector3(transform.position.x, transform.position.y+0.5f, transform.position.z), dirToTarget, distanceToTarget, obstacleMask))  //and check if there are no obstacles in the way of targets (with an arc raycast)
                 {
                     visibleTargets.Add(target);                   //add to list of visible targets if there is no obstacles in the way
                 }

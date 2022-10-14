@@ -67,12 +67,14 @@ public class PauseMenu : NetworkBehaviour
     {
         PlayerMovementController PM = gameObject.GetComponent<PlayerMovementController>();
         ItemSpawning IS = FindObjectOfType<ItemSpawning>();
+        CustomNetworkManager manager = FindObjectOfType<CustomNetworkManager>();
         if (isServer) 
         {
             PM.SetPosition();
-            IS.RestartGameItems();
+            IS.RestartGameItems();    
         }        
     }
+
 
     public void Fullscreen() 
     {
