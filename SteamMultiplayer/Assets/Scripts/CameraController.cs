@@ -5,7 +5,7 @@ using Mirror;
 using UnityEngine.SceneManagement;
 public class CameraController : NetworkBehaviour
 {
-    [SerializeField] private float mouseSens;     //300f
+    public float mouseSens;     //300f
     [SerializeField] private float multiplier;    //0.01f
 
     [SerializeField] private Transform arms;
