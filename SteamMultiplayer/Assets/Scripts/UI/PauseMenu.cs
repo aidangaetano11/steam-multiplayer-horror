@@ -73,4 +73,9 @@ public class PauseMenu : NetworkBehaviour
             IS.RestartGameItems();
         }        
     }
+
+    public void Fullscreen() 
+    {
+        Screen.fullScreen = !Screen.fullScreen;
+    }
 }
