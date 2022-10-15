@@ -13,6 +13,7 @@ public class MonsterAudio : NetworkBehaviour
     public AudioSource mapMonsterGroanSound;
     public AudioClip[] monsterGroans;
     public AudioSource monsterChaseSound;
+    public AudioSource monsterWaitSound;
 
     public float footStepDelay;
     public float footStepMaxDistance = 1f;
@@ -41,6 +42,27 @@ public class MonsterAudio : NetworkBehaviour
             chaseSoundPlayed = true;
             StopCoroutine("PlayChaseSound");
         }
+    }
+
+    public void HandleWaitSound() 
+    {
+        if (isServer)
+        {
+            RpcPlayWaitSound();
+        }
+        else CmdPlayWaitSound();
+    }
+
+    [ClientRpc]
+    public void RpcPlayWaitSound() 
+    {
+        monsterWaitSound.Play();
+    }
+
+    [Command]
+    public void CmdPlayWaitSound() 
+    {
+        HandleWaitSound();
     }
 
     public void HandleChaseSound() //handles the chase sound.

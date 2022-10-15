@@ -37,6 +37,7 @@ public class MonsterAI : NetworkBehaviour
     public bool justKilled = false;
     public bool isWaiting = false;
 
+    [SyncVar]
     public MonsterState monsterState;
 
     [Header("Monster Body")]
@@ -52,14 +53,15 @@ public class MonsterAI : NetworkBehaviour
     public float runSpeed = 15f;
 
     [Header("States")]
-    //Patrolling
     public Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
     public bool hasNewTarget = false;
+    public bool canWait = true;
 
     [Header("Sound Manager")]
     public bool chaseSoundPlayed = false;
+    public bool waitSoundPlayed = false;
 
 
     //States
@@ -147,6 +149,7 @@ public class MonsterAI : NetworkBehaviour
         agent.speed = walkSpeed;    //set our monster speed to walk speed
         playerMonsterIsChasing = null;  //reset player that monster was chasing
         chaseSoundPlayed = false;   //reset chase sound so it can play again
+        waitSoundPlayed = false;    //reset wait sound so it can play again
 
         if (!walkPointSet) SearchWalkPoint();    //if we dont have a walk waypoint, we will search for one
 
@@ -169,7 +172,7 @@ public class MonsterAI : NetworkBehaviour
 
         SearchPlayersInRadius();   //searches every player in radius and finds players sprinting
 
-        if (playerListeningTo)    //if we can hear player, we will set state to WAIT
+        if (playerListeningTo && canWait)    //if we can hear player, we will set state to WAIT
         {
             monsterState = MonsterState.WAIT;  //change state to WAIT
         }
@@ -188,6 +191,12 @@ public class MonsterAI : NetworkBehaviour
     {
         agent.speed = 0f;    //we will stop monster
         isWaiting = true;
+
+        if (!waitSoundPlayed) 
+        {
+            monsterAudio.HandleWaitSound();
+            waitSoundPlayed = true;
+        }
          
            
         StartCoroutine("CheckForPlayerSoundAfterDelay", 2f);   //if not we will wait for a delay before checking for player sounds again
@@ -286,11 +295,13 @@ public class MonsterAI : NetworkBehaviour
         {
             StartCoroutine("ChasePlayerPosOnTimer", extendedChaseTime);      //if we cant we will chase the closest player that the monster was just chasing
             agent.SetDestination(playerMonsterIsChasing.position);
+            canWait = false;
         }
         else                                        //if we are chasing the player pos from the wait state
         {
             StartCoroutine("ChasePlayerPosOnTimer", extendedChaseTime);      //then the monster will chase the player pos that is just heard
             agent.SetDestination(playerListeningTo.transform.position);
+            canWait = false;
         }
 
 
@@ -306,7 +317,18 @@ public class MonsterAI : NetworkBehaviour
             playerMonsterIsChasing = null;       //monster is now chasing no one
             ChasingPlayer = false;
             Debug.Log("No Longer chasing player");
+            StartCoroutine("WaitStateCooldown", 5f);     //after player escapes, the monster must wait a delay before it is possible to enter wait state again
             StopCoroutine("ChasePlayerPosOnTimer");
+        }
+    }
+
+    private IEnumerator WaitStateCooldown(float delay)    //this is to prevent the monster to immediatly wait after player just escaped
+    {
+        while (true) 
+        {
+            yield return new WaitForSeconds(delay);
+            canWait = true;
+            StopCoroutine("WaitStateCooldown");
         }
     }
 
