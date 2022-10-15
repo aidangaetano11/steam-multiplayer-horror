@@ -16,8 +16,12 @@ public class PlayerMovementController : NetworkBehaviour
     public float staminaMax = 100f;
     public float staminaDrain = 1f;
     public float staminaRechargeTime = 5f;
-    [SerializeField] private bool canUseHeadbob = true; 
+    [SerializeField] private bool canUseHeadbob = true;
+
+    [SyncVar]
     public bool isSprinting = false;
+
+
     public bool isCrouching = false;
     [SerializeField] float airMultiplier = 0.4f;
 
