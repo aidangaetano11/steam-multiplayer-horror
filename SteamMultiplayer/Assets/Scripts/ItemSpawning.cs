@@ -197,7 +197,8 @@ public class ItemSpawning : NetworkBehaviour
         monsterAI.gameObject.GetComponentInParent<Transform>().gameObject.transform.position = monsterSpawnPos[Random.Range(0, monsterSpawnPos.Count)].position;  //resets monster pos
         monsterAI.enabled = true;   //makes sure monster is enabled
         monsterAI.gameObject.GetComponent<NavMeshAgent>().enabled = true;    //re-enables monster navmesh      
-        monsterAI.wasChasingPlayer = false;
+        monsterAI.ChasingPlayer = false;
+        monsterAI.monsterState = MonsterState.PATROL;
 
         FindObjectOfType<ItemTesterHandler>().RevertItemColors();   //resets item tester back to normal
     }

@@ -54,7 +54,7 @@ public class ItemTesterHandler : NetworkBehaviour
         if (randomIndex == 0) 
         {
             RpcPlayMonsterSound();
-            monster.RunToSpecificTarget(transform.position);
+            //monster.RunToSpecificTarget(transform.position);        // ** WARNING: NEED TO SET THIS AGAIN WHEN MONSTER STATE: CHASE TARGET IS SETUP **
         }
     }
 
