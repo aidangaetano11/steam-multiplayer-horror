@@ -139,11 +139,7 @@ public class MonsterAI : NetworkBehaviour
         }
         else if (monsterState == MonsterState.WAIT && !isWaiting)   //  ** WAIT STATE ** if we are not already waiting, we will wait
         {
-            if (isServer)
-            {
-                HandleWait();
-            }
-            else CmdWait();
+            Wait();
         }
     }
 
@@ -191,16 +187,6 @@ public class MonsterAI : NetworkBehaviour
         walkPointSet = true;
     }
 
-    void HandleWait() 
-    {
-        if (isServer)
-        {
-            Wait();
-        }
-        else CmdWait();
-    }
-
-    [ClientRpc]
     private void Wait()
     {
         agent.speed = 0f;    //we will stop monster
@@ -216,11 +202,6 @@ public class MonsterAI : NetworkBehaviour
         StartCoroutine("CheckForPlayerSoundAfterDelay", 2f);   //if not we will wait for a delay before checking for player sounds again
     }
 
-    [Command]
-    private void CmdWait()
-    {
-        HandleWait();
-    }
 
     private IEnumerator CheckForPlayerSoundAfterDelay(float delay) 
     {
