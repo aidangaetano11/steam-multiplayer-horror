@@ -141,15 +141,13 @@ public class MonsterAI : NetworkBehaviour
         {
             if (isServer)
             {
-                Wait();
+                HandleWait();
             }
             else CmdWait();
         }
     }
 
     
-
-    [ClientRpc]
     private void Patrol()  //   ** PATROL STATE **
     {
         agent.speed = walkSpeed;    //set our monster speed to walk speed
@@ -193,29 +191,35 @@ public class MonsterAI : NetworkBehaviour
         walkPointSet = true;
     }
 
-    private void Wait()
+    void HandleWait() 
     {
         if (isServer)
         {
-            agent.speed = 0f;    //we will stop monster
-            isWaiting = true;
-
-            if (!waitSoundPlayed)
-            {
-                monsterAudio.HandleWaitSound();
-                waitSoundPlayed = true;
-            }
-
-
-            StartCoroutine("CheckForPlayerSoundAfterDelay", 2f);   //if not we will wait for a delay before checking for player sounds again
+            Wait();
         }
         else CmdWait();
+    }
+
+    [ClientRpc]
+    private void Wait()
+    {
+        agent.speed = 0f;    //we will stop monster
+        isWaiting = true;
+
+        if (!waitSoundPlayed)
+        {
+            monsterAudio.HandleWaitSound();
+            waitSoundPlayed = true;
+        }
+
+
+        StartCoroutine("CheckForPlayerSoundAfterDelay", 2f);   //if not we will wait for a delay before checking for player sounds again
     }
 
     [Command]
     private void CmdWait()
     {
-        Wait();
+        HandleWait();
     }
 
     private IEnumerator CheckForPlayerSoundAfterDelay(float delay) 
@@ -295,6 +299,7 @@ public class MonsterAI : NetworkBehaviour
 
 
     }
+
 
     private void ChasePlayerPos()   //  ** CHASE PLAYER POSITION STATE **
     {
