@@ -139,6 +139,7 @@ public class MonsterAI : NetworkBehaviour
         }
         else if (monsterState == MonsterState.WAIT && !isWaiting)   //  ** WAIT STATE ** if we are not already waiting, we will wait
         {
+            Debug.Log("WAITING");
             Wait();
         }
     }
