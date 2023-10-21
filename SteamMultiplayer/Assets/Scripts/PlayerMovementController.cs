@@ -114,7 +114,6 @@ public class PlayerMovementController : NetworkBehaviour
         deathPanel.SetActive(false);
     }
 
-    [Server]
     public void Update()
     {
         if (SceneManager.GetActiveScene().name == "Game")
