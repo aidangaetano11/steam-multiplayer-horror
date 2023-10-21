@@ -145,7 +145,6 @@ public class MonsterAI : NetworkBehaviour
 
     }
 
-    [ClientRpc]
     private void Patrol()  //   ** PATROL STATE **
     {
         agent.speed = walkSpeed;    //set our monster speed to walk speed
@@ -189,7 +188,6 @@ public class MonsterAI : NetworkBehaviour
         walkPointSet = true;
     }
 
-    [ClientRpc]
     private void Wait()
     {
         agent.speed = 0f;    //we will stop monster
@@ -249,7 +247,6 @@ public class MonsterAI : NetworkBehaviour
         }
     }
 
-    [ClientRpc]
     private void ChasePlayer()    //  ** CHASE PLAYER STATE **
     {
         agent.speed = runSpeed;
@@ -285,7 +282,6 @@ public class MonsterAI : NetworkBehaviour
 
     }
 
-    [ClientRpc]
     private void ChasePlayerPos()   //  ** CHASE PLAYER POSITION STATE **
     {
         agent.speed = runSpeed;
