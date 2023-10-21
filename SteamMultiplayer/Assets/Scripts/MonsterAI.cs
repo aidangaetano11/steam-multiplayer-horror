@@ -121,7 +121,6 @@ public class MonsterAI : NetworkBehaviour
         }
     }
 
-    [Server]
     private void Update()
     {
         FindClosestPlayer();  //searches all players and finds the closest one
